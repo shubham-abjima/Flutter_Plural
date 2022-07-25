@@ -14,17 +14,22 @@ class Home extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.blueGrey,
       ),
-      body: Center(
-          child: RaisedButton.icon(
-        onPressed: () {},
-        icon: Icon(Icons.mail),
-        label: Text('Click Me'),
-        color: Colors.grey,
-      )
+      body: Container(
+        padding: EdgeInsets.fromLTRB(10, 20, 30, 40),
+        // padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        color: Colors.grey, child: Text('Hello'),
 
-          // child: Image.network(
-          //     ('https://images.pexels.com/photos/461940/pexels-photo-461940.jpeg')),
-          ),
+        // body: Center(
+        //     child: RaisedButton.icon(
+        //   onPressed: () {},
+        //   icon: Icon(Icons.mail),
+        //   label: Text('Click Me'),
+        //   color: Colors.grey,
+        // )
+
+        // child: Image.network(
+        //     ('https://images.pexels.com/photos/461940/pexels-photo-461940.jpeg')),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: Text('✔'),
