@@ -1,4 +1,4 @@
-name: flutter_diaplay_22_7
+name: flutter25
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -34,7 +34,6 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  sembast: ^3.2.0+1
 
 dev_dependencies:
   flutter_test:
