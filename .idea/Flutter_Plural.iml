@@ -11,6 +11,18 @@
       <excludeFolder url="file://$MODULE_DIR$/flutter_application_1/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/flutter_application_1/build" />
       <excludeFolder url="file://$MODULE_DIR$/flutter_application_1/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_diaplay_22_7/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_diaplay_22_7/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_diaplay_22_7/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_26july/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_26july/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_26july/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_connected_app_25_july/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_connected_app_25_july/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_connected_app_25_july/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter25/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter25/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter25/.pub" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 33, extension level 3 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
