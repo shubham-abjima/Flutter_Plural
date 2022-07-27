@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'quotes.dart';
 
@@ -33,6 +31,7 @@ class QuoteCard extends StatelessWidget {
               SizedBox(
                 height: 8.0,
               ),
+              // ignore: deprecated_member_use
               FlatButton.icon(
                   onPressed: delete(),
                   icon: Icon(
