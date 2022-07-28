@@ -4,16 +4,17 @@ import 'package:intl/intl.dart';
 
 class WorldTime {
   String location; //location name for UI
-  late String time; //the time in location
+  String time; //the time in location
   String flag; //url to an asset flag icon
   String url;
-
-  static var data; //location url for api endpoint
+  bool isDaytime;
+  //location url for api endpoint
   WorldTime(
       {required this.time,
       required this.location,
       required this.flag,
-      required this.url});
+      required this.url,
+      required this.isDaytime});
 
   Future<void> getTime() async {
     try {
@@ -35,7 +36,7 @@ class WorldTime {
       now = now.add(Duration(hours: int.parse(offset)));
 
       // Set the time property
-
+      isDaytime = now.hour > 6 && now.hour < 15 ? true : false;
       time = DateFormat.jm().format(now);
 
       // String Username = await Future.delayed(Duration(seconds: 3), () {
