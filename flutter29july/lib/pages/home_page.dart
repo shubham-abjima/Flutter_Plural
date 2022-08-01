@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter29july/models/catalog.dart';
 import 'package:flutter29july/widgets/drawer.dart';
 
 class Homepage extends StatelessWidget {
@@ -18,7 +19,12 @@ class Homepage extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         )),
       ),
-      body: Center(child: Container(child: Text("Welcome to Hompage $name !"))),
+      body: ListView.builder(
+        itemCount: CatalogModel.items.length,
+        itemBuilder: (context, index) {
+          return ItemWidget();
+        },
+      ),
       drawer: MyDrawer(),
     );
   }
