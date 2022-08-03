@@ -133,7 +133,7 @@ class _$PersonDao extends PersonDao {
 
   @override
   Future<Person?> updatePersonById(int id) async {
-    return _queryAdapter.query('UPDATE FROM Person WHERE id = ?1',
+    return _queryAdapter.query('UPDATE * FROM Person WHERE id = ?1',
         mapper: (Map<String, Object?> row) =>
             Person(row['id'] as int, row['name'] as String),
         arguments: [id]);
