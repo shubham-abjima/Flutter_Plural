@@ -1,10 +1,14 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class CatalogModel {
-  static List<Item> items = [];
+  static List<Item> items;
 
-  getById(int id) {}
+  // Get Item by ID
+  Item getById(int id) =>
+      items.firstWhere((element) => element.id == id, orElse: null);
+
+  // Get Item by position
+  Item getByPosition(int pos) => items[pos];
 }
 
 class Item {
@@ -16,21 +20,21 @@ class Item {
   final String image;
 
   Item({
-    required this.id,
-    required this.name,
-    required this.desc,
-    required this.price,
-    required this.color,
-    required this.image,
+    this.id,
+    this.name,
+    this.desc,
+    this.price,
+    this.color,
+    this.image,
   });
 
   Item copyWith({
-    int? id,
-    String? name,
-    String? desc,
-    num? price,
-    String? color,
-    String? image,
+    int id,
+    String name,
+    String desc,
+    num price,
+    String color,
+    String image,
   }) {
     return Item(
       id: id ?? this.id,
@@ -43,7 +47,7 @@ class Item {
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'id': id,
       'name': name,
       'desc': desc,
@@ -54,20 +58,21 @@ class Item {
   }
 
   factory Item.fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+
     return Item(
-      id: map['id'] as int,
-      name: map['name'] as String,
-      desc: map['desc'] as String,
-      price: map['price'] as num,
-      color: map['color'] as String,
-      image: map['image'] as String,
+      id: map['id'],
+      name: map['name'],
+      desc: map['desc'],
+      price: map['price'],
+      color: map['color'],
+      image: map['image'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Item.fromJson(String source) =>
-      Item.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Item.fromJson(String source) => Item.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -75,15 +80,16 @@ class Item {
   }
 
   @override
-  bool operator ==(covariant Item other) {
-    if (identical(this, other)) return true;
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
 
-    return other.id == id &&
-        other.name == name &&
-        other.desc == desc &&
-        other.price == price &&
-        other.color == color &&
-        other.image == image;
+    return o is Item &&
+        o.id == id &&
+        o.name == name &&
+        o.desc == desc &&
+        o.price == price &&
+        o.color == color &&
+        o.image == image;
   }
 
   @override
