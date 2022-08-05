@@ -63,11 +63,20 @@ class _MyHomePageState extends State<MyHomePage> {
         await $FloorAppDatabase.databaseBuilder('app_database.db').build();
 
     final personDao = database.personDao;
-    final result =
-        personDao.updatePersonById(int.parse(userfindController.value.text));
-    result.then((value) => ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text("${value!.name} Updated"))));
+    final person =
+        personDao.updatePersonById(int.parse(userIdController.value.text));
   }
+
+  // Future<void> _updateUser() async {
+  //   final database =
+  //       await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+
+  //   final personDao = database.personDao;
+  //   final result =
+  //       personDao.updatePersonById(int.parse(userfindController.value.text));
+  //   result.then((value) => ScaffoldMessenger.of(context)
+  //       .showSnackBar(SnackBar(content: Text("${value!.name} Updated"))));
+  // }
 
   Future<void> _getAllUser() async {
     final database =

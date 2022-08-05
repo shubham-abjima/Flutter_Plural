@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_catalog/core/store.dart';
 import 'package:flutter_catalog/utils/routes.dart';
+import 'package:url_launcher/link.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class LoginPage extends StatefulWidget {
@@ -19,7 +23,12 @@ class _LoginPageState extends State<LoginPage> {
         changeButton = true;
       });
       await Future.delayed(Duration(seconds: 1));
-      await Navigator.pushNamed(context, MyRoutes.homeRoute);
+      // await context.vxNav.push(Uri.parse(MyRoutes.homeRoute));
+      (VxState.store as MyStore)
+          .navigator
+          .routeManager
+          .push(Uri.parse(MyRoutes.homeRoute));
+
       setState(() {
         changeButton = false;
       });
@@ -105,19 +114,46 @@ class _LoginPageState extends State<LoginPage> {
                             height: 50,
                             alignment: Alignment.center,
                             child: changeButton
-                                ? Icon(
-                                    Icons.done,
-                                    color: Colors.white,
-                                  )
+                                ? Icon(Icons.done, color: Colors.white)
                                 : Text(
                                     "Login",
                                     style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
                                   ),
                           ),
                         ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          context.vxNav.push(Uri.parse(MyRoutes.signupRoute));
+                        },
+                        style: ButtonStyle(
+                          foregroundColor: MaterialStateProperty.all(
+                            context.accentColor,
+                          ),
+                        ),
+                        child: Text("Sign Up").text.headline6(context).make(),
+                      ),
+                      Link(
+                          // uri: Uri.parse("https://codepur.dev"),
+                          uri: Uri.parse(MyRoutes.cartRoute),
+                          target: LinkTarget.blank,
+                          builder: (context, followLink) {
+                            return TextButton(
+                                onPressed: followLink,
+                                style: ButtonStyle(
+                                    foregroundColor: MaterialStateProperty.all(
+                                        context.accentColor)),
+                                child: Text("Go to codepur"));
+                          }),
+                      SizedBox(
+                        height: 20.0,
                       ),
                     ],
                   ),

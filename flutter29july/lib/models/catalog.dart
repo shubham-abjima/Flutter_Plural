@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter_catalog/core/store.dart';
+import 'package:velocity_x/velocity_x.dart';
+
 class CatalogModel {
   static List<Item> items;
 
@@ -16,8 +19,11 @@ class Item {
   final String name;
   final String desc;
   final num price;
+  int quantity;
   final String color;
   final String image;
+
+  num get totalPrice => price * quantity;
 
   Item({
     this.id,
@@ -26,6 +32,7 @@ class Item {
     this.price,
     this.color,
     this.image,
+    this.quantity = 1,
   });
 
   Item copyWith({
@@ -34,6 +41,7 @@ class Item {
     String desc,
     num price,
     String color,
+    int quantity = 1,
     String image,
   }) {
     return Item(
@@ -43,6 +51,7 @@ class Item {
       price: price ?? this.price,
       color: color ?? this.color,
       image: image ?? this.image,
+      quantity: quantity ?? this.quantity ?? 1,
     );
   }
 
@@ -54,6 +63,7 @@ class Item {
       'price': price,
       'color': color,
       'image': image,
+      'quantity': quantity,
     };
   }
 
@@ -67,6 +77,7 @@ class Item {
       price: map['price'],
       color: map['color'],
       image: map['image'],
+      quantity: map['quantity'] ?? 1,
     );
   }
 
@@ -100,5 +111,32 @@ class Item {
         price.hashCode ^
         color.hashCode ^
         image.hashCode;
+  }
+}
+
+class SearchMutation extends VxMutation<MyStore> {
+  final String query;
+
+  SearchMutation(this.query);
+  @override
+  perform() {
+    if (query.length >= 1) {
+      store.items = CatalogModel.items
+          .where((el) => el.name.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    } else {
+      store.items = CatalogModel.items;
+    }
+  }
+}
+
+class ChangeQuantity extends VxMutation<MyStore> {
+  final Item catalog;
+  final int quantity;
+
+  ChangeQuantity(this.catalog, this.quantity);
+  @override
+  perform() {
+    catalog.quantity = quantity;
   }
 }
