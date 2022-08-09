@@ -104,6 +104,13 @@ class _$PersonDao extends PersonDao {
             'Person',
             (Person item) =>
                 <String, Object?>{'id': item.id, 'name': item.name},
+            changeListener),
+        _personUpdateAdapter = UpdateAdapter(
+            database,
+            'Person',
+            ['id'],
+            (Person item) =>
+                <String, Object?>{'id': item.id, 'name': item.name},
             changeListener);
 
   final sqflite.DatabaseExecutor database;
@@ -113,6 +120,8 @@ class _$PersonDao extends PersonDao {
   final QueryAdapter _queryAdapter;
 
   final InsertionAdapter<Person> _personInsertionAdapter;
+
+  final UpdateAdapter<Person> _personUpdateAdapter;
 
   @override
   Future<List<Person>> findAllPersons() async {
@@ -132,14 +141,6 @@ class _$PersonDao extends PersonDao {
   }
 
   @override
-  Future<Person?> updatePersonById(int id) async {
-    return _queryAdapter.query('UPDATE FROM Person WHERE id = ?1',
-        mapper: (Map<String, Object?> row) =>
-            Person(row['id'] as int, row['name'] as String),
-        arguments: [id]);
-  }
-
-  @override
   Future<void> deleteById(int id) async {
     await _queryAdapter
         .queryNoReturn('DELETE FROM Person WHERE id=?1', arguments: [id]);
@@ -148,5 +149,10 @@ class _$PersonDao extends PersonDao {
   @override
   Future<void> insertPerson(Person person) async {
     await _personInsertionAdapter.insert(person, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> updateUser(Person person) async {
+    await _personUpdateAdapter.update(person, OnConflictStrategy.replace);
   }
 }

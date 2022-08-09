@@ -10,8 +10,11 @@ abstract class PersonDao {
   @Query('SELECT * FROM Person WHERE id = :id')
   Stream<Person?> findPersonById(int id);
 
-  @Query('UPDATE FROM Person WHERE id = :id')
-  Future<Person?> updatePersonById(int id);
+  @Update(onConflict: OnConflictStrategy.replace)
+  Future<void> updateUser(Person person);
+
+  // @Query('UPDATE  Person WHERE id = :id')
+  // Future<Person?> updateUser(int id);
 
   @insert
   Future<void> insertPerson(Person person);
