@@ -33,8 +33,9 @@ class _InputFieldState extends State<InputField> {
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(10.0),
-                    bottomRight: Radius.circular(10.0)),
+                  topRight: Radius.circular(10.0),
+                  bottomRight: Radius.circular(10.0),
+                ),
               ),
               width: 200,
               height: 50,
