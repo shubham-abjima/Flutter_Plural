@@ -59,7 +59,8 @@ class _LoginScreenState extends State<LoginScreen> {
       obscureText: true,
       // keyboardType: TextInputType.emailAddress,
       validator: (value) {
-        RegExp regex = new RegExp();
+        RegExp regex = new RegExp(
+            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
         if (value!.isEmpty) {
           return "Please Enter Your Password";
         }

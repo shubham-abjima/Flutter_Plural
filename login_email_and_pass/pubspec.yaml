@@ -29,8 +29,10 @@ environment:
 dependencies:
   cloud_firestore: ^3.4.4
   cupertino_icons: ^1.0.2
+  firebase: ^9.0.3
   firebase_auth: ^3.6.3
   firebase_core: ^1.20.1
+  firebase_core_web: ^1.7.1
   flutter:
     sdk: flutter
   gesture_x_detector: ^1.1.1
