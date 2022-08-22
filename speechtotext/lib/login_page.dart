@@ -1,0 +1,162 @@
+import 'package:flutter/material.dart';
+import 'package:speechtotext/HomePage.dart';
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    //email field
+    final emailField = TextFormField(
+      autofocus: false,
+      controller: emailController,
+      keyboardType: TextInputType.emailAddress,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return "Please Enter  Your Email";
+        }
+        if (RegExp(
+                r"^ [a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_` {|}~]+@[a-zA-Z0-9]+. [a-zA-Z]+")
+            .hasMatch(value)) {
+          return "Please Enter A Valid Email Address";
+        }
+        return null;
+        //Reg Expresion for email validation
+      },
+      onSaved: (value) {
+        emailController.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.email),
+        contentPadding: EdgeInsets.all(20),
+        hintText: "Email",
+        labelText: "Email",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+
+    // password field
+
+    final passwordField = TextFormField(
+      autofocus: false,
+      controller: passwordController,
+      obscureText: true,
+      // keyboardType: TextInputType.emailAddress,
+      validator: (value) {
+        RegExp regex = new RegExp(
+            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+        if (value!.isEmpty) {
+          return "Please Enter Your Password";
+        }
+        if (!regex.hasMatch(value)) {
+          return "Please Enter Valid Password ";
+        }
+      },
+      onSaved: (value) {
+        passwordController.text = value!;
+      },
+      textInputAction: TextInputAction.done,
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.lock),
+        contentPadding: EdgeInsets.all(20),
+        hintText: "Password",
+        labelText: "Password",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+
+    final loginButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(10),
+      color: Colors.grey,
+      child: MaterialButton(
+        padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+        minWidth: 150,
+        height: 20,
+        onPressed: () {
+          if (_formKey.currentState!.validate()) {
+            print("Validated");
+          } else {
+            print("Not Validated");
+          }
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => MyHomePage()));
+        },
+        child: Text(
+          "Login",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text("Mobile App"),
+        ),
+        backgroundColor: Color.fromARGB(255, 73, 73, 73),
+      ),
+      backgroundColor: Colors.white,
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: NetworkImage("https://wallpapercave.com/wp/q9hLSeh.jpg"),
+              fit: BoxFit.cover),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(100.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: SizedBox(
+                        height: 150,
+                        child: Image.asset(
+                          'assets/images/dice2.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    emailField,
+                    SizedBox(
+                      height: 10,
+                    ),
+                    passwordField,
+                    SizedBox(
+                      height: 10,
+                    ),
+                    loginButton,
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
