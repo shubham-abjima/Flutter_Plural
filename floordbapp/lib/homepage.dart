@@ -36,16 +36,18 @@ class _MyHomePageState extends State<MyHomePage> {
     result.first.then((value) => ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(value!.name.toString() + " found"))));
   }
+
   Future<void> _updateUser() async {
     final database =
-    await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+        await $FloorAppDatabase.databaseBuilder('app_database.db').build();
     final personDao = database.personDao;
     Person person =
-    Person(int.parse(userIdController.value.text), userInput.value.text);
+        Person(int.parse(userIdController.value.text), userInput.value.text);
     personDao.updateUser(person);
 
     _getAllUser();
   }
+
   Future<void> _getAllUser() async {
     final database =
         await $FloorAppDatabase.databaseBuilder('app_database.db').build();
@@ -68,14 +70,16 @@ class _MyHomePageState extends State<MyHomePage> {
     _getAllUser();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text("Floor Demo",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
+        title: Center(
+            child: const Text(
+          "Floor Demo",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+        )),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -89,10 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   autofocus: false,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                    labelText: '`User Id',
-                    border: OutlineInputBorder(
-
-                    ),
+                    labelText: 'User Id',
+                    border: OutlineInputBorder(),
                   ),
                 ),
               ),
@@ -117,10 +119,18 @@ class _MyHomePageState extends State<MyHomePage> {
               const Divider(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(color: Colors.blueGrey,
+                child: Container(
+                  color: Colors.blueGrey,
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Center(child: Text("Get User By ID",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),)),
+                    child: Center(
+                        child: Text(
+                      "Get User By ID",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    )),
                   ),
                 ),
               ),
@@ -136,7 +146,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
-
               const Divider(),
               ElevatedButton(
                 onPressed: () {
@@ -164,14 +173,21 @@ class _MyHomePageState extends State<MyHomePage> {
               const Divider(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(color: Colors.blueGrey,
+                child: Container(
+                  color: Colors.blueGrey,
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Center(child: Text("Inserted Data",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),)),
+                    child: Center(
+                        child: Text(
+                      "Inserted Data",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    )),
                   ),
                 ),
               ),
-
               ListView.builder(
                   shrinkWrap: true,
                   itemCount: items.length,

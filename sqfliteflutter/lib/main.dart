@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Sqflite App',
       theme: ThemeData(primarySwatch: Colors.teal),
-      home: routes,
+      routes: routes,
     );
   }
 }

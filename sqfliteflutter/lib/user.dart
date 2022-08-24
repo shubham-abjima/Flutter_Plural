@@ -1,6 +1,6 @@
 class User {
-  String _username;
-  String _password;
+  late String _username;
+  late String _password;
 
   User(this._username, this._password);
 
