@@ -38,9 +38,9 @@ class _StartupState extends State<Startup> {
             // backgroundColor: Colors.grey,
             flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.parallax,
-              title: Text("Books"),
+              title: Text("Movies"),
               background: Image.network(
-                "https://miro.medium.com/max/4000/1*-T8oo_JoKkMxfnPKLt_Ciw.jpeg",
+                "https://th.bing.com/th/id/OIP.d3IiScFL5U_vKIJfvekbFQHaEK?pid=ImgDet&rs=1",
                 fit: BoxFit.cover,
               ),
             ),
@@ -72,7 +72,7 @@ class _StartupState extends State<Startup> {
                           ),
                       itemBuilder: (context, index) => ListTile(
                             title: Text(
-                              "Book $index",
+                              "Movie $index",
                               style: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 17),
                             ),

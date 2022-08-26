@@ -33,7 +33,7 @@ class CustomAppBar extends StatelessWidget {
           title: Row(
             children: [
               Text(
-                "BOOKS",
+                "MOVIES",
                 style: TextStyle(
                     color: homeTween.value,
                     fontWeight: FontWeight.bold,

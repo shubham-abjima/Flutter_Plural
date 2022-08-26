@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                               ),
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 25),
+                                    const EdgeInsets.symmetric(horizontal: 20),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -102,11 +102,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                     ),
                                     Column(
                                       children: [
-                                        Text("3",
+                                        Text("1",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 20)),
-                                        Text("Books Read",
+                                        Text("Movies Watched",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 15))
@@ -114,11 +114,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                     ),
                                     Column(
                                       children: [
-                                        Text("115",
+                                        Text("35 Min.",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 20)),
-                                        Text("Minutes",
+                                        Text("Watch Time",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 15))
@@ -136,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                     padding: EdgeInsets.only(bottom: 15),
                                     width: MediaQuery.of(context).size.width,
                                     child: Text(
-                                      "Books For All",
+                                      "Movies For All",
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -175,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                         right: 2,
                                         left: 5,
                                         child: Text(
-                                          "Yoga For Beginners",
+                                          "Avengers: Infinity War",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
@@ -187,7 +187,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                         right: 2,
                                         left: 5,
                                         child: Text(
-                                          "Last Time: Aug 22",
+                                          "Last Watched: Aug 15",
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),
@@ -206,7 +206,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
                                             image: NetworkImage(
-                                                "https://th.bing.com/th/id/OIP.mqzgdb5nsuo02TDvYlHz4QHaE6?pid=ImgDet&rs=1"),
+                                                "https://www.macxdvd.com/mac-dvd-video-converter-how-to/article-image/hollywood-movie-2.png"),
                                           ),
                                         ),
                                       ),
@@ -218,7 +218,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                         right: 2,
                                         left: 5,
                                         child: Text(
-                                          "Yoga For Beginners",
+                                          "Deadpool",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
@@ -230,7 +230,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                         right: 2,
                                         left: 5,
                                         child: Text(
-                                          "Last Time: Aug 22",
+                                          "Last Watched: Jul 22",
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),
@@ -249,7 +249,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
                                             image: NetworkImage(
-                                                "https://th.bing.com/th/id/OIP.mqzgdb5nsuo02TDvYlHz4QHaE6?pid=ImgDet&rs=1"),
+                                                "https://www.macxdvd.com/mac-dvd-video-converter-how-to/article-image/hollywood-movie-6.png"),
                                           ),
                                         ),
                                       ),
@@ -261,7 +261,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                         right: 2,
                                         left: 5,
                                         child: Text(
-                                          "Yoga For Beginners",
+                                          "Avatar",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
@@ -273,7 +273,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                         right: 2,
                                         left: 5,
                                         child: Text(
-                                          "Last Time: Aug 22",
+                                          "Last Watched: Aug 04",
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),
@@ -292,7 +292,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                     padding: EdgeInsets.only(bottom: 15),
                                     width: MediaQuery.of(context).size.width,
                                     child: Text(
-                                      "Books For Students",
+                                      "Movies For Students",
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -309,7 +309,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
                                             image: NetworkImage(
-                                                "https://th.bing.com/th/id/OIP.mqzgdb5nsuo02TDvYlHz4QHaE6?pid=ImgDet&rs=1"),
+                                                "https://befinexpert.files.wordpress.com/2019/06/pursuit-of-happiness.jpeg?w=525"),
                                           ),
                                         ),
                                       ),
@@ -321,7 +321,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                         right: 2,
                                         left: 5,
                                         child: Text(
-                                          "Yoga For Beginners",
+                                          "The Pursuit Of Happyness",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
@@ -333,7 +333,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                         right: 2,
                                         left: 5,
                                         child: Text(
-                                          "Last Time: Aug 22",
+                                          "Last Watched: Yesterday",
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),
@@ -352,7 +352,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
                                             image: NetworkImage(
-                                                "https://th.bing.com/th/id/OIP.mqzgdb5nsuo02TDvYlHz4QHaE6?pid=ImgDet&rs=1"),
+                                                "https://image.tmdb.org/t/p/w780/93bOh3zmzqqHD9ZUSQjEmyeLXc0.jpg"),
                                           ),
                                         ),
                                       ),
@@ -364,7 +364,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                         right: 2,
                                         left: 5,
                                         child: Text(
-                                          "Yoga For Beginners",
+                                          "Pirates Of The Silicon Valley",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
@@ -376,7 +376,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                         right: 2,
                                         left: 5,
                                         child: Text(
-                                          "Last Time: Aug 22",
+                                          "Last Watched: Aug 22",
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),
@@ -395,7 +395,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
                                             image: NetworkImage(
-                                                "https://th.bing.com/th/id/OIP.mqzgdb5nsuo02TDvYlHz4QHaE6?pid=ImgDet&rs=1"),
+                                                "https://i.ytimg.com/vi/Y5SjV6SweGY/maxresdefault.jpg"),
                                           ),
                                         ),
                                       ),
@@ -407,9 +407,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                         right: 2,
                                         left: 5,
                                         child: Text(
-                                          "Yoga For Beginners",
+                                          "Taare Zameen Par",
                                           style: TextStyle(
-                                              color: Colors.white,
+                                              color:
+                                                  Color.fromARGB(255, 0, 0, 0),
                                               fontWeight: FontWeight.bold,
                                               fontSize: 15),
                                         ),
@@ -419,9 +420,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                         right: 2,
                                         left: 5,
                                         child: Text(
-                                          "Last Time: Aug 22",
+                                          "Last Watched: Aug 24",
                                           style: TextStyle(
-                                            color: Colors.white,
+                                            color: Color.fromARGB(255, 0, 0, 0),
                                           ),
                                         ),
                                       )

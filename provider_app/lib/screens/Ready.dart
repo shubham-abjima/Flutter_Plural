@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
+import 'package:provider_app/screens/Movies.dart';
 
 class Ready extends StatelessWidget {
   const Ready({Key? key}) : super(key: key);
@@ -23,15 +24,19 @@ class Ready extends StatelessWidget {
                 ),
                 Text(
                   "ARE YOU READY?",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 40,
                 ),
                 Consumer<TimerModel>(builder: (context, myModel, child) {
-                  return Text(
-                    myModel.countdown.toString(),
-                    style: TextStyle(fontSize: 48),
+                  return CircleAvatar(
+                    radius: 80,
+                    backgroundColor: Colors.red,
+                    child: Text(
+                      myModel.countdown.toString(),
+                      style: TextStyle(fontSize: 40),
+                    ),
                   );
                 }),
                 Spacer(),
@@ -39,10 +44,10 @@ class Ready extends StatelessWidget {
                   thickness: 2,
                 ),
                 Align(
-                    alignment: Alignment.bottomLeft,
+                    alignment: Alignment.bottomRight,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 15),
+                          vertical: 10, horizontal: 18),
                       child: Text(
                         "Next: Harry Potter",
                         style: TextStyle(
@@ -69,12 +74,11 @@ class TimerModel with ChangeNotifier {
       countdown--;
       if (countdown == 0) {
         timer.cancel();
-        timer.cancel();
+        // timer.cancel();
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => WorkOutDet()));
+            context, MaterialPageRoute(builder: (context) => Movies()));
       }
       notifyListeners();
     });
   }
 }
- 

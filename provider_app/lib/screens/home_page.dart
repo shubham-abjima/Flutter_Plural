@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Yoga App"),
+        title: Text("Movies App"),
         backgroundColor: Color.fromARGB(255, 69, 68, 68),
       ),
       body: SingleChildScrollView(
