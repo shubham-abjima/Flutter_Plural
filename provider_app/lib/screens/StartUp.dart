@@ -1,14 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:provider_app/DatabaseServices/Moviedb.dart';
+import 'package:provider_app/Model/model.dart';
 import 'package:provider_app/screens/Ready.dart';
 
 class Startup extends StatefulWidget {
-  const Startup({Key? key}) : super(key: key);
+  String Moviekey;
+  AllMovies allMovies;
+  Startup({required this.Moviekey, required this.allMovies});
 
   @override
   _StartupState createState() => _StartupState();
 }
 
 class _StartupState extends State<Startup> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ReadAllMovies();
+  }
+
+  late List<Movie> AllYogaWorkOuts;
+  bool isLoading = true;
+  Future ReadAllMovies() async {
+    this.AllYogaWorkOuts = await MoviesDatabase.instance
+        .readAllMovie(widget.allMovies.MovieKey_all);
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +79,7 @@ class _StartupState extends State<Startup> {
                 children: [
                   Row(
                     children: [
-                      Text("16 Mins || 26 Workouts"),
+                      Text("60 Mins || 5 Short Movies"),
                     ],
                   ),
                   Divider(
@@ -82,7 +103,7 @@ class _StartupState extends State<Startup> {
                             leading: Container(
                               margin: EdgeInsets.only(right: 20),
                               child: Image.network(
-                                "https://gifimage.net/wp-content/uploads/2017/07/books-gif-21.gif",
+                                "https://media4.giphy.com/media/b8RfbQFaOs1rO10ren/200.webp",
                                 fit: BoxFit.cover,
                               ),
                             ),

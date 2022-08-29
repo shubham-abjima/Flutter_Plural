@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider_app/DatabaseServices/Moviedb.dart';
+import 'package:provider_app/Model/model.dart';
 import 'package:provider_app/Widgets/CustomAppBar.dart';
 import 'package:provider_app/Widgets/Drawer.dart';
 import 'package:provider_app/screens/StartUp.dart';
@@ -18,6 +20,25 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   late Animation _colorTween, _homeTween, _yogaTween, _iconTween, _drawerTween;
   late AnimationController _textAnimationController;
+
+  Future makeMovieEntry(Movie movie, String TableName) async {
+    await MoviesDatabase.instance.Insert(movie, MoviesModel.Moviesforall1);
+  }
+
+  Future makeMovieSumEntry(AllMovies allMovies) async {
+    await MoviesDatabase.instance.InsertMovieSum(allMovies);
+  }
+
+  bool isLoading = true;
+  late List<AllMovies> moviessumlst;
+  Future readMovieSumEntry() async {
+    this.moviessumlst = await MoviesDatabase.instance.readAllMovieSum();
+
+    print(moviessumlst);
+    setState(() {
+      isLoading = false;
+    });
+  }
 
   @override
   void initState() {
@@ -38,6 +59,135 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     _textAnimationController =
         AnimationController(vsync: this, duration: Duration(seconds: 0));
     super.initState();
+
+    // Creating One Movie Pack
+    makeMovieSumEntry(AllMovies(
+        MovieKey_all: MoviesModel.Moviesforall1,
+        BackImg:
+            "https://th.bing.com/th/id/OIP.wJQUMOYcJjuYBN9Oem1bTwHaEK?pid=ImgDet&rs=1",
+        TimeTaken: "36",
+        TotalNoOfMovies: "25",
+        MovieKey: 1));
+    makeMovieEntry(
+        Movie(
+            MovieKey_all: 1,
+            Seconds: true,
+            MovieTitle: "Avengers: The End Game",
+            MovieImageUrl:
+                "https://www.macxdvd.com/mac-dvd-video-converter-how-to/article-image/hollywood-movie-2.png",
+            SecondsOrTimes: " 50"),
+        MoviesModel.Moviesforall1);
+    makeMovieEntry(
+        Movie(
+            MovieKey_all: 1,
+            Seconds: true,
+            MovieTitle: "Avatar",
+            MovieImageUrl:
+                "https://www.macxdvd.com/mac-dvd-video-converter-how-to/article-image/hollywood-movie-2.png",
+            SecondsOrTimes: " 30"),
+        MoviesModel.Moviesforall1);
+    makeMovieEntry(
+        Movie(
+            MovieKey_all: 1,
+            Seconds: true,
+            MovieTitle: "Darknight",
+            MovieImageUrl:
+                "https://www.macxdvd.com/mac-dvd-video-converter-how-to/article-image/hollywood-movie-2.png",
+            SecondsOrTimes: " 30"),
+        MoviesModel.Moviesforall1);
+    makeMovieEntry(
+        Movie(
+            MovieKey_all: 1,
+            Seconds: true,
+            MovieTitle: "Batman",
+            MovieImageUrl:
+                "https://www.macxdvd.com/mac-dvd-video-converter-how-to/article-image/hollywood-movie-2.png",
+            SecondsOrTimes: " 20"),
+        MoviesModel.Moviesforall1);
+    makeMovieEntry(
+        Movie(
+            MovieKey_all: 1,
+            Seconds: true,
+            MovieTitle: "Superman",
+            MovieImageUrl:
+                "https://www.macxdvd.com/mac-dvd-video-converter-how-to/article-image/hollywood-movie-2.png",
+            SecondsOrTimes: " 40"),
+        MoviesModel.Moviesforall1);
+    makeMovieEntry(
+        Movie(
+            MovieKey_all: 1,
+            Seconds: true,
+            MovieTitle: "Hulk",
+            MovieImageUrl:
+                "https://www.macxdvd.com/mac-dvd-video-converter-how-to/article-image/hollywood-movie-2.png",
+            SecondsOrTimes: " 30"),
+        MoviesModel.Moviesforall1);
+    makeMovieEntry(
+        Movie(
+            MovieKey_all: 1,
+            Seconds: true,
+            MovieTitle: "Black Panther",
+            MovieImageUrl:
+                "https://www.macxdvd.com/mac-dvd-video-converter-how-to/article-image/hollywood-movie-2.png",
+            SecondsOrTimes: " 60"),
+        MoviesModel.Moviesforall1);
+    // makeMovieSumEntry(AllMovies(
+    //     AllName: MoviesModel.Moviesforall2,
+    //     BackImg: "BACKIMAGEURL",
+    //     TimeTaken: "36",
+    //     TotalNoOfMovies: "25"));
+
+    // makeMovieEntry(
+    //     Movie(
+    //         Seconds: true,
+    //         MovieTitle: "Avengers: The End Game",
+    //         MovieImageUrl: "DUMMYURL1",
+    //         SecondsOrTimes: " 30"),
+    //     MoviesModel.Moviesforall2);
+    // makeMovieEntry(
+    //     Movie(
+    //         Seconds: true,
+    //         MovieTitle: "Avatar",
+    //         MovieImageUrl: "DUMMYURL2",
+    //         SecondsOrTimes: " 30"),
+    //     MoviesModel.Moviesforall2);
+    // makeMovieEntry(
+    //     Movie(
+    //         Seconds: true,
+    //         MovieTitle: "Darknight",
+    //         MovieImageUrl: "DUMMYURL3",
+    //         SecondsOrTimes: " 70"),
+    //     MoviesModel.Moviesforall2);
+    // makeMovieEntry(
+    //     Movie(
+    //         Seconds: true,
+    //         MovieTitle: "Batman",
+    //         MovieImageUrl: "DUMMYURL4",
+    //         SecondsOrTimes: " 30"),
+    //     MoviesModel.Moviesforall2);
+    // makeMovieEntry(
+    //     Movie(
+    //         Seconds: true,
+    //         MovieTitle: "Superman",
+    //         MovieImageUrl: "DUMMYURL5",
+    //         SecondsOrTimes: " 70"),
+    //     MoviesModel.Moviesforall2);
+    // makeMovieEntry(
+    //     Movie(
+    //         Seconds: true,
+    //         MovieTitle: "Hulk",
+    //         MovieImageUrl: "DUMMYURL6",
+    //         SecondsOrTimes: " 30"),
+    //     MoviesModel.Moviesforall2);
+    // makeMovieEntry(
+    //     Movie(
+    //         Seconds: true,
+    //         MovieTitle: "Black Panther",
+    //         MovieImageUrl: "DUMMYURL7",
+    //         SecondsOrTimes: " 30"),
+    //     MoviesModel.Moviesforall2);
+
+    readMovieSumEntry();
   }
 
   bool scrollListner(ScrollNotification scrollNotification) {
@@ -58,6 +208,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       drawer: CustomDrawer(),
       backgroundColor: Colors.white,
       body: NotificationListener(
+        // ignore: sort_child_properties_last
         child: Stack(
           children: [
             Container(
@@ -145,55 +296,113 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  Stack(
-                                    children: [
-                                      InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => Startup(),
-                                            ),
-                                          );
-                                        },
-                                        child: Container(
-                                          height: 175,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: NetworkImage(
-                                                  "https://th.bing.com/th/id/OIP.wJQUMOYcJjuYBN9Oem1bTwHaEK?pid=ImgDet&rs=1"),
+                                  ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: moviessumlst.length,
+                                      itemBuilder: (context, index) {
+                                        return InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => Startup(
+                                                        allMovies:
+                                                            moviessumlst[index],
+                                                        Moviekey:
+                                                            moviessumlst[index]
+                                                                .MovieKey
+                                                                .toString())));
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.only(bottom: 20),
+                                            child: Stack(
+                                              children: [
+                                                Container(
+                                                  height: 150,
+                                                  decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                      fit: BoxFit.cover,
+                                                      image: NetworkImage(
+                                                        moviessumlst[index]
+                                                            .BackImg
+                                                            .toString(),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Container(
+                                                  height: 150,
+                                                  color: Colors.black26,
+                                                ),
+                                                Positioned(
+                                                  right: 20,
+                                                  left: 10,
+                                                  top: 10,
+                                                  child: Text(
+                                                    moviessumlst[index]
+                                                        .MovieKey_all,
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 18),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  right: 30,
+                                                  left: 12,
+                                                  top: 38,
+                                                  child: Text(
+                                                    moviessumlst[index]
+                                                        .TimeTaken,
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 10),
+                                                  ),
+                                                )
+                                              ],
                                             ),
                                           ),
+                                        );
+                                      }),
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Container(
+                                      height: 175,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: NetworkImage(
+                                              "https://th.bing.com/th/id/OIP.wJQUMOYcJjuYBN9Oem1bTwHaEK?pid=ImgDet&rs=1"),
                                         ),
                                       ),
-                                      Container(
-                                        height: 150,
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 150,
+                                  ),
+                                  Positioned(
+                                    top: 5,
+                                    right: 2,
+                                    left: 5,
+                                    child: Text(
+                                      "Avengers: Infinity War",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    top: 25,
+                                    right: 2,
+                                    left: 5,
+                                    child: Text(
+                                      "Last Watched: Aug 15",
+                                      style: TextStyle(
+                                        color: Colors.white,
                                       ),
-                                      Positioned(
-                                        top: 5,
-                                        right: 2,
-                                        left: 5,
-                                        child: Text(
-                                          "Avengers: Infinity War",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 25,
-                                        right: 2,
-                                        left: 5,
-                                        child: Text(
-                                          "Last Watched: Aug 15",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      )
-                                    ],
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 10,

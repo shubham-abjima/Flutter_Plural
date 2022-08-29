@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:provider_app/screens/Movies.dart';
 
 class Ready extends StatelessWidget {
-  const Ready({Key? key}) : super(key: key);
+  const Ready(movieKey, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
