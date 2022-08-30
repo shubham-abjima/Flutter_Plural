@@ -20,11 +20,13 @@ class _StartupState extends State<Startup> {
     ReadAllMovies();
   }
 
-  late List<Movie> AllYogaWorkOuts;
+  late List<Movie> AllMovies;
   bool isLoading = true;
   Future ReadAllMovies() async {
-    this.AllYogaWorkOuts = await MoviesDatabase.instance
-        .readAllMovie(widget.allMovies.MovieKey_all);
+    this.AllMovies = (await MoviesDatabase.instance
+            .readAllMovie(widget.allMovies.MovieKey_all))
+        .cast<Movie>();
+
     setState(() {
       isLoading = false;
     });
@@ -39,7 +41,9 @@ class _StartupState extends State<Startup> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => Ready(),
+              builder: (context) => Ready(
+                MovieTableName: widget.allMovies.MovieKey_all,
+              ),
             ),
           );
         },
@@ -60,17 +64,17 @@ class _StartupState extends State<Startup> {
             flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.parallax,
               title: Text("Movies"),
-              background: Image.network(
-                "https://th.bing.com/th/id/OIP.d3IiScFL5U_vKIJfvekbFQHaEK?pid=ImgDet&rs=1",
+              background: Image.asset(
+                widget.allMovies.BackImg.toString(),
                 fit: BoxFit.cover,
               ),
             ),
-            actions: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.thumb_up_alt_rounded),
-              )
-            ],
+            // actions: [
+            //   IconButton(
+            //     onPressed: () {},
+            //     icon: Icon(Icons.thumb_up_alt_rounded),
+            //   )
+            // ],
           ),
           SliverToBoxAdapter(
             child: Container(
@@ -79,7 +83,10 @@ class _StartupState extends State<Startup> {
                 children: [
                   Row(
                     children: [
-                      Text("60 Mins || 5 Short Movies"),
+                      Text(
+                        "${widget.allMovies.TimeTaken} Mins || ${widget.allMovies.MovieKey_all} Workouts",
+                        style: TextStyle(fontWeight: FontWeight.w400),
+                      ),
                     ],
                   ),
                   Divider(
@@ -92,23 +99,25 @@ class _StartupState extends State<Startup> {
                             thickness: 2,
                           ),
                       itemBuilder: (context, index) => ListTile(
+                            leading: Container(
+                                margin: EdgeInsets.only(right: 20),
+                                child: Image.asset(
+                                  AllMovies[index].MovieImageUrl,
+                                  fit: BoxFit.cover,
+                                )),
                             title: Text(
-                              "Movie $index",
+                              AllMovies[index].MovieTitle,
                               style: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 17),
                             ),
-                            subtitle: Text((index % 2 == 0) ? "00:30" : "x30",
+                            subtitle: Text(
+                                AllMovies[index].Seconds
+                                    ? "00:${AllMovies[index].SecondsOrTimes}"
+                                    : "x${AllMovies[index].SecondsOrTimes}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400, fontSize: 15)),
-                            leading: Container(
-                              margin: EdgeInsets.only(right: 20),
-                              child: Image.network(
-                                "https://media4.giphy.com/media/b8RfbQFaOs1rO10ren/200.webp",
-                                fit: BoxFit.cover,
-                              ),
-                            ),
                           ),
-                      itemCount: 9)
+                      itemCount: AllMovies.length)
                 ],
               ),
             ),

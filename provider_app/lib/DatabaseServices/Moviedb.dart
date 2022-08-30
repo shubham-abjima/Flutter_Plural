@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider_app/Model/model.dart';
-import 'package:provider_app/screens/Movies.dart';
+
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -39,29 +39,29 @@ CREATE TABLE ${MoviesModel.Moviesforall1}(
   ${MoviesModel.IDName} $idType,
   ${MoviesModel.MovieName} $textType,
   ${MoviesModel.ImageName} $textType,
-  ${MoviesModel.MovieKey_all} $intType
-  ${MoviesModel.SecondsOrNot} $boolType,
-  ${MoviesModel.SecondsOrTimes} $textType)''');
-    await db.execute('''
-CREATE TABLE ${MoviesModel.Moviesforall2}(
-  ${MoviesModel.IDName} $idType,
-  ${MoviesModel.MovieName} $textType,
   ${MoviesModel.MovieKey_all} $intType,
-  ${MoviesModel.ImageName} $textType,
   ${MoviesModel.SecondsOrNot} $boolType,
   ${MoviesModel.SecondsOrTimes} $textType)''');
-    await db.execute('''
-CREATE TABLE ${MoviesModel.Moviesforall3}(
-  ${MoviesModel.IDName} $idType,
-  ${MoviesModel.MovieName} $textType,
-  ${MoviesModel.ImageName} $textType,
-  ${MoviesModel.MovieKey_all} $intType
-  ${MoviesModel.SecondsOrNot} $boolType,
-  ${MoviesModel.SecondsOrTimes} $textType)''');
+//     await db.execute('''
+// CREATE TABLE ${MoviesModel.Moviesforall2}(
+//   ${MoviesModel.IDName} $idType,
+//   ${MoviesModel.MovieName} $textType,
+//   ${MoviesModel.MovieKey_all} $intType,
+//   ${MoviesModel.ImageName} $textType,
+//   ${MoviesModel.SecondsOrNot} $boolType,
+//   ${MoviesModel.SecondsOrTimes} $textType)''');
+//     await db.execute('''
+// CREATE TABLE ${MoviesModel.Moviesforall3}(
+//   ${MoviesModel.IDName} $idType,
+//   ${MoviesModel.MovieName} $textType,
+//   ${MoviesModel.ImageName} $textType,
+//   ${MoviesModel.MovieKey_all} $intType,
+//   ${MoviesModel.SecondsOrNot} $boolType,
+//   ${MoviesModel.SecondsOrTimes} $textType)''');
     await db.execute('''
 CREATE TABLE ${MoviesModel.AllMovies}(
   ${MoviesModel.IDName} $idType,
-  ${MoviesModel.MovieKey_all} $intType
+  ${MoviesModel.MovieKey_all} $intType,
   ${MoviesModel.MovieKey} $intType,
   ${MoviesModel.AllName} $textType,
   ${MoviesModel.BackImg} $textType,
@@ -82,11 +82,11 @@ CREATE TABLE ${MoviesModel.AllMovies}(
     return allMovies.copy(id: id);
   }
 
-  Future<List<Movie>> readAllMovie(String TableName) async {
+  Future<List<AllMovies>> readAllMovie(String TableName) async {
     final db = await instance.database;
     final orderBy = "${MoviesModel.IDName} ASC ";
     final query_res = await db!.query(TableName, orderBy: orderBy);
-    return query_res.map((json) => Movie.fromJson(json)).toList();
+    return query_res.map((json) => AllMovies.fromJson(json)).toList();
   }
 
   Future<List<AllMovies>> readAllMovieSum() async {

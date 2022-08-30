@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:provider_app/DatabaseServices/localdb.dart';
+import 'package:intl/intl.dart';
 
 class Complete extends StatelessWidget {
   const Complete({Key? key}) : super(key: key);
@@ -110,10 +113,63 @@ class Complete extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               height: 125,
               color: Color.fromARGB(255, 207, 205, 205),
+            ),
+            Consumer<UpdateMovieModel>(
+              builder: (context, myModel, child) {
+                return Container();
+              },
             )
           ],
         ),
       ),
     );
   }
+}
+
+class UpdateMovieModel with ChangeNotifier {
+  UpdateMovieModel() {
+    print("IT WORKS");
+    SetMovieTime();
+    LastMovieDoneOn();
+    SetWatchTime(13);
+  }
+
+  int a = 1;
+
+  void SetMovieTime() async {
+    print("SetMovieTime");
+    String? StartTime = await LocalDB.getStartTime();
+    DateTime tempDate = new DateFormat("yyyy-MM-dd hh:mm:ss")
+        .parse(StartTime ?? "2022-05-24 19:31:15.182");
+    int difference = DateTime.now().difference(tempDate).inMinutes;
+    int? mywotime = await LocalDB.getMovieTime();
+    print(mywotime);
+// LocalDB.setWorkOutTime( mywotime! + 59);
+    LocalDB.setMovieTime(mywotime! + difference);
+  }
+
+  void LastMovieDoneOn() async {
+    print("LAST MOVIE DONE");
+
+    DateTime tempDate = new DateFormat("yyyy-MM-dd hh:mm:ss")
+        .parse(await LocalDB.getLastDoneOn() ?? "2022-05-24 19:31:15.182");
+    int difference = DateTime.now().difference(tempDate).inDays;
+    if (difference == 0) {
+      print("GOOD JOB");
+    } else {
+      int? streaknow = await LocalDB.getStreak();
+      LocalDB.setStreak(streaknow! + 1);
+    }
+
+    await LocalDB.setLastDoneOn(DateTime.now().toString());
+  }
+
+  void SetWatchTime(int mymovietime) async {
+    print("SetMovieTime");
+    int? MovieTime = await LocalDB.getWatchTime();
+    print(MovieTime);
+    LocalDB.setWatchTime(
+        MovieTime.toString() == "null" ? 0 : MovieTime! + mymovietime);
+  }
+//TODO: Set the initial value of straek and lastdone on in starting of app
 }

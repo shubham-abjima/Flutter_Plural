@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class MoviesModel {
   static String Moviesforall1 = "Moviesforall";
   static String Moviesforall2 = "Moviesforchild";
@@ -46,24 +45,25 @@ class Movie {
       {int? id,
       bool? Seconds,
       String? MovieTitle,
-      String? YogaImage,
+      int? MovieKey_all,
+      String? MovieImageUrl,
       String? SecondsOrTimes}) {
     return Movie(
       id: id ?? this.id,
       Seconds: Seconds ?? this.Seconds,
       MovieTitle: MovieTitle ?? this.MovieTitle,
       MovieKey_all: MovieKey_all ?? this.MovieKey_all,
-      MovieImageUrl: MovieImageUrl,
+      MovieImageUrl: MovieImageUrl ?? this.MovieImageUrl,
       SecondsOrTimes: SecondsOrTimes ?? this.SecondsOrTimes,
     );
   }
 
   static Movie fromJson(Map<String, Object?> json) {
     return Movie(
-        id: json[MoviesModel.IDName] as int,
+        id: json[MoviesModel.IDName] as int?,
         Seconds: json[MoviesModel.SecondsOrNot] == 1,
         MovieTitle: json[MoviesModel.ImageName] as String,
-        MovieKey_all: json[MoviesModel.MovieKey_all] as int,
+        MovieKey_all: json[MoviesModel.MovieKey_all] as int?,
         MovieImageUrl: json[MoviesModel.MovieName] as String,
         SecondsOrTimes: json[MoviesModel.SecondsOrTimes] as String);
   }
@@ -90,7 +90,7 @@ class AllMovies {
   final String TimeTaken;
   final String TotalNoOfMovies;
 
-  AllMovies(
+  const AllMovies(
       {this.id,
       required this.MovieKey,
       required this.MovieKey_all,
@@ -100,7 +100,7 @@ class AllMovies {
 
   AllMovies copy(
       {int? id,
-      String? AllName,
+      int? MovieKey,
       String? MovieKey_all,
       String? BackImg,
       String? TimeTaken,
@@ -117,8 +117,8 @@ class AllMovies {
 
   static AllMovies fromJson(Map<String, Object?> json) {
     return AllMovies(
-      MovieKey: json[MoviesModel.MovieKey] as int,
-      id: json[MoviesModel.IDName] as int,
+      id: json[MoviesModel.IDName] as int?,
+      MovieKey: json[MoviesModel.MovieKey] as int?,
       MovieKey_all: json[MoviesModel.MovieKey_all] as String,
       BackImg: json[MoviesModel.BackImg] as String,
       TimeTaken: json[MoviesModel.TimeTaken] as String,
