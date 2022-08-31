@@ -202,16 +202,19 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                               return InkWell(
                                                 onTap: () {
                                                   Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) => Startup(
-                                                              allMovies:
-                                                                  moviessumlst[
-                                                                      index],
-                                                              Moviekey: moviessumlst[
-                                                                      index]
-                                                                  .MovieKey_all
-                                                                  .toString())));
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Startup(
+                                                        allMovies:
+                                                            moviessumlst[index],
+                                                        Moviekey:
+                                                            moviessumlst[index]
+                                                                .MovieKey_all
+                                                                .toString(),
+                                                      ),
+                                                    ),
+                                                  );
                                                 },
                                                 child: Container(
                                                   margin: EdgeInsets.only(

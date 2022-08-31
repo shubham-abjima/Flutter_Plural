@@ -281,7 +281,7 @@ class TimerModelSec with ChangeNotifier {
 
   void hide() {
     visible = false;
-    notifyListeners();
+    notifyListeners(); 
   }
 
   void Pass() {
