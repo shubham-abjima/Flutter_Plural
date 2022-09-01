@@ -44,37 +44,37 @@ class CommentsModel {
   Map<String, dynamic> toJson() => _$CommentsModelToJson(this);
 }
 
-@JsonSerializable()
-class albumsModel {
-  int userId;
-  int id;
-  String title;
-  albumsModel({
-    required this.userId,
-    required this.id,
-    required this.title,
-  });
-  factory albumsModel.fromJson(Map<String, dynamic> json) =>
-      _$albumsModelFromJson(json);
-  Map<String, dynamic> toJson() => _$albumsModelToJson(this);
-}
+// @JsonSerializable()
+// class albumsModel {
+//   int userId;
+//   int id;
+//   String title;
+//   albumsModel({
+//     required this.userId,
+//     required this.id,
+//     required this.title,
+//   });
+//   factory albumsModel.fromJson(Map<String, dynamic> json) =>
+//       _$albumsModelFromJson(json);
+//   Map<String, dynamic> toJson() => _$albumsModelToJson(this);
+// }
 
-@JsonSerializable()
-class usersModel {
-  int id;
-  String name;
-  String username;
-  String email;
-  String address;
-  usersModel({
-    required this.id,
-    required this.name,
-    required this.username,
-    required this.email,
-    required this.address,
-  });
+// @JsonSerializable()
+// class usersModel {
+//   int id;
+//   String name;
+//   String username;
+//   String email;
+//   String address;
+//   usersModel({
+//     required this.id,
+//     required this.name,
+//     required this.username,
+//     required this.email,
+//     required this.address,
+//   });
 
-  factory usersModel.fromJson(Map<String, dynamic> json) =>
-      _$usersModelFromJson(json);
-  Map<String, dynamic> toJson() => _$usersModelToJson(this);
-}
+//   factory usersModel.fromJson(Map<String, dynamic> json) =>
+//       _$usersModelFromJson(json);
+//   Map<String, dynamic> toJson() => _$usersModelToJson(this);
+// }

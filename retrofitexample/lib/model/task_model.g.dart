@@ -39,33 +39,3 @@ Map<String, dynamic> _$CommentsModelToJson(CommentsModel instance) =>
       'email': instance.email,
       'body': instance.body,
     };
-
-albumsModel _$albumsModelFromJson(Map<String, dynamic> json) => albumsModel(
-      userId: json['userId'] as int,
-      id: json['id'] as int,
-      title: json['title'] as String,
-    );
-
-Map<String, dynamic> _$albumsModelToJson(albumsModel instance) =>
-    <String, dynamic>{
-      'userId': instance.userId,
-      'id': instance.id,
-      'title': instance.title,
-    };
-
-usersModel _$usersModelFromJson(Map<String, dynamic> json) => usersModel(
-      id: json['id'] as int,
-      name: json['name'] as String,
-      username: json['username'] as String,
-      email: json['email'] as String,
-      address: json['address'] as String,
-    );
-
-Map<String, dynamic> _$usersModelToJson(usersModel instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'username': instance.username,
-      'email': instance.email,
-      'address': instance.address,
-    };

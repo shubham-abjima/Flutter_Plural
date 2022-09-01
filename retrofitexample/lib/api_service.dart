@@ -22,11 +22,11 @@ abstract class ApiService {
   @GET("/comments")
   Future<List<CommentsModel>> getAllComments();
 
-  @GET("/albums")
-  Future<List<albumsModel>> getAllalbums();
+  // @GET("/albums")
+  // Future<List<albumsModel>> getAllalbums();
 
-  @GET("/users")
-  Future<List<usersModel>> getAllusers();
+  // @GET("/users")
+  // Future<List<usersModel>> getAllusers();
 
   // @Path- To update the URL dynamically replacement block surrounded by { } must be annotated with @Path using the same string.
   // @GET("/posts/{id}")
