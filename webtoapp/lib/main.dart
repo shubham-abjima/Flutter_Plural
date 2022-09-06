@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           title: Text("WebView"),
         ),
         body: WebView(
-          initialUrl: "https://www.geeksforgeeks.org/",
+          initialUrl: "https://www.centerforvein.com/",
           javascriptMode: JavascriptMode.unrestricted,
         ),
       ),
