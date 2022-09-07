@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,11 +21,18 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("WebView"),
+          title: Text("Center For Vein Restoration"),
+          centerTitle: true,
         ),
         body: WebView(
+          onWebResourceError: (error) {},
+          backgroundColor: Colors.red,
+          allowsInlineMediaPlayback: true,
+          debuggingEnabled: true,
+          initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
           initialUrl: "https://www.centerforvein.com/",
           javascriptMode: JavascriptMode.unrestricted,
+          zoomEnabled: true,
         ),
       ),
     );
