@@ -125,12 +125,30 @@ class _HomeFormState extends State<ForgotPassword> {
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(
-            margin: EdgeInsets.only(top: 20.0),
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/blur.jpg"),
+                fit: BoxFit.none,
+              ),
+            ),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  genLoginSignupHeader("Forgot Password ?"),
+                  Image.asset(
+                    "assets/images/333.png",
+                    height: 200.0,
+                    width: 200.0,
+                  ),
+                  TextButton(
+                    child: Text(
+                      "EasyPic",
+                      style: TextStyle(color: Colors.white, fontSize: 30),
+                    ),
+                  ),
+                  // genLoginSignupHeader("Forgot Password ?"),
 
                   //Update
                   // getTextFormField(
@@ -172,7 +190,7 @@ class _HomeFormState extends State<ForgotPassword> {
                       onPressed: update,
                     ),
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 1, 53, 96),
+                      color: Color.fromARGB(255, 79, 168, 85),
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                   ),

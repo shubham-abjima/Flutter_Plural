@@ -76,7 +76,7 @@ class HomeScreenState extends State<HomeScreen> {
                     Container(
                       width: 120,
                       height: 50,
-                      child: RaisedButton(
+                      child: outlined(
                         //Raised Button
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(

@@ -23,6 +23,7 @@ class getTextFormField extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: TextFormField(
+        cursorColor: Colors.white,
         controller: controller,
         obscureText: isObscureText,
         enabled: isEnable,
@@ -37,21 +38,24 @@ class getTextFormField extends StatelessWidget {
           return null;
         },
         decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(30.0)),
-            borderSide: BorderSide(color: Colors.transparent),
+          enabledBorder: UnderlineInputBorder(
+            // borderRadius: BorderRadius.all(Radius.circular(30.0)),
+            borderSide: BorderSide(color: Colors.white),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(30.0)),
-            borderSide: BorderSide(color: Color.fromARGB(255, 1, 53, 96)),
+          focusedBorder: UnderlineInputBorder(
+            // borderRadius: BorderRadius.all(Radius.circular(30.0)),
+            borderSide: BorderSide(color: Colors.white),
           ),
           prefixIcon: Icon(
             icon,
-            color: Color.fromARGB(255, 1, 53, 96),
+            color: Colors.white,
           ),
-          hintText: hintName,
+          labelText: hintName,
+          // hintText: hintName,
+          focusColor: Colors.white,
+
           // labelText: hintName,
-          fillColor: Colors.grey[200],
+          fillColor: Colors.transparent,
           filled: true,
         ),
       ),

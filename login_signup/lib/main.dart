@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Login with Signup',
       theme: ThemeData(
         useMaterial3: true,
-        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+        textTheme: GoogleFonts.arvoTextTheme(Theme.of(context).textTheme),
         primarySwatch: Colors.grey,
       ),
       home: Splash2(),
