@@ -1,6 +1,3 @@
-import 'dart:ffi';
-import 'dart:ui';
-
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:login_with_signup/Comm/genTextFormField.dart';
@@ -14,21 +11,28 @@ class Filter extends StatefulWidget {
   State<Filter> createState() => _FilterState();
 }
 
-List<String> localData = [
-  'One',
-  'Two',
-  'Three',
-  'Four',
-  'Five',
-  'Six',
-  'Seven',
-  'Eight',
-  'Nine',
-  'Ten',
-];
-
 class _FilterState extends State<Filter> {
   Map<String, String> selectedValueMap = Map();
+  DateTimeRange _selectedDateRange;
+
+  // This function will be triggered when the floating button is pressed
+  void _show() async {
+    final DateTimeRange result = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(2022, 1, 1),
+      lastDate: DateTime(2030, 12, 31),
+      currentDate: DateTime.now(),
+      saveText: 'Done',
+    );
+
+    if (result != null) {
+      // Rebuild the UI
+      print(result.start.toString());
+      setState(() {
+        _selectedDateRange = result;
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -57,130 +61,211 @@ class _FilterState extends State<Filter> {
           ),
         ),
         body: SingleChildScrollView(
-            child: InkWell(
-          child: Container(
-            child: Column(children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 20, 20, 0),
+            child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/blur.jpg"),
+              fit: BoxFit.none,
+            ),
+          ),
+          child: Column(children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 20, 20, 0),
+                  child: Text(
+                    "SEARCH BY LOCATION",
+                    style: TextStyle(fontSize: 12, color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              height: 30,
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: TextField(
+                onChanged: (value) {},
+                decoration: InputDecoration(
+                    // hintText: 'Enter your name',
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    border: OutlineInputBorder(
+                        // borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                        ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      // borderRadius: BorderRadius.all(Radius.elliptical(20.0)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      // borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    ),
+                    fillColor: Colors.white),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 10, 20, 0),
+                  child: Text(
+                    "DATE RANGE",
+                    style: TextStyle(fontSize: 12, color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(11, 5, 10, 0),
+              height: 30,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  FlatButton(
+                    color: Color.fromARGB(255, 225, 223, 223),
+                    minWidth: 5,
+                    onPressed: () => {},
                     child: Text(
-                      "SEARCH BY LOCATION",
+                      "TODAY",
                       style: TextStyle(fontSize: 12),
                     ),
+                    splashColor: Colors.redAccent,
                   ),
+                  FlatButton(
+                    color: Color.fromARGB(255, 225, 223, 223),
+                    minWidth: 5,
+                    onPressed: () {},
+                    child: Text(
+                      "7 DAYS",
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    splashColor: Colors.redAccent,
+                  ),
+                  FlatButton(
+                    color: Color.fromARGB(255, 225, 223, 223),
+                    minWidth: 5,
+                    onPressed: () {},
+                    child: Text(
+                      "LAST MONTH",
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    splashColor: Colors.redAccent,
+                  ),
+                  FlatButton(
+                    color: Color.fromARGB(255, 225, 223, 223),
+                    minWidth: 5,
+                    onPressed: () {
+                      _show();
+                    },
+                    child: Text(
+                      "CUSTOM",
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    splashColor: Colors.redAccent,
+                  )
                 ],
               ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                // Start date
+                Container(
+                  width: 150,
+                  height: 30,
+                  child: FlatButton(
+                    color: Color.fromARGB(255, 225, 223, 223),
+                    onPressed: () {
+                      _show();
+                    },
+                    child: Text(
+                      "${_selectedDateRange?.start.toString().split(' ')[0]}",
+                      style: const TextStyle(fontSize: 12, color: Colors.black),
+                    ),
+                  ),
+                ),
 
-              // DropdownSearch(
-              //   items: ["Brazil", "France", "Tunisia", "Canada"],
-              //   onChanged: print,
-              //   selectedItem: "Tunisia",
-              //   validator: (String item) {
-              //     if (item == null)
-              //       return "Required field";
-              //     else if (item == "Brazil")
-              //       return "Invalid item";
-              //     else
-              //       return null;
-              //   },
-              // ),
-              Container(),
-              Container(
-                child: Text("Hello"),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 20, 20, 0),
+                // End date
+                Container(
+                  width: 150,
+                  height: 30,
+                  child: FlatButton(
+                    color: Color.fromARGB(255, 225, 223, 223),
+                    onPressed: () {
+                      _show();
+                    },
                     child: Text(
-                      "DATE RANGE",
-                      style: TextStyle(fontSize: 12),
+                        "${_selectedDateRange?.end.toString().split(' ')[0]}",
+                        style:
+                            const TextStyle(fontSize: 12, color: Colors.black)),
+                  ),
+                ),
+
+                Container(
+                  child: Icon(Icons.calendar_month_rounded),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 10, 20, 0),
+                  child: Text(
+                    "SEARCH BY NAME",
+                    style: TextStyle(fontSize: 12, color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              height: 30,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: TextField(
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {},
+                  decoration: InputDecoration(
+                    hintText: 'First & Last Name',
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    border: OutlineInputBorder(
+                        // borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                        ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      // borderRadius: BorderRadius.all(Radius.elliptical(20.0)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white, width: 2.0),
+                      // borderRadius: BorderRadius.all(Radius.circular(20.0)),
                     ),
                   ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlatButton(
-                      color: Color.fromARGB(255, 225, 223, 223),
-                      minWidth: 5,
-                      onPressed: () => {},
-                      child: Text(
-                        "TODAY",
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      splashColor: Colors.redAccent,
-                    ),
-                    FlatButton(
-                      color: Color.fromARGB(255, 225, 223, 223),
-                      minWidth: 5,
-                      onPressed: () {},
-                      child: Text(
-                        "7 DAYS",
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      splashColor: Colors.redAccent,
-                    ),
-                    FlatButton(
-                      color: Color.fromARGB(255, 225, 223, 223),
-                      minWidth: 5,
-                      onPressed: () {},
-                      child: Text(
-                        "LAST MONTH",
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      splashColor: Colors.redAccent,
-                    ),
-                    FlatButton(
-                      color: Color.fromARGB(255, 225, 223, 223),
-                      minWidth: 5,
-                      onPressed: () {},
-                      child: Text(
-                        "CUSTOM",
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      splashColor: Colors.redAccent,
-                    )
-                  ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 20, 20, 0),
-                    child: Text(
-                      "SEARCH BY NAME",
-                      style: TextStyle(fontSize: 12),
-                    ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 10, 20, 0),
+                  child: Text(
+                    "SEARCH BY GENDER",
+                    style: TextStyle(fontSize: 12, color: Colors.white),
                   ),
-                ],
-              ),
-              TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'First Name',
-                  ),
-                  textAlign: TextAlign.left),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 20, 20, 0),
-                    child: Text(
-                      "SEARCH BY GENDER",
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
+                ),
+              ],
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+              height: 35,
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   RaisedButton.icon(
@@ -214,36 +299,40 @@ class _FilterState extends State<Filter> {
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 20, 20, 0),
-                    child: Text(
-                      "SORT BY",
-                      style: TextStyle(fontSize: 12),
-                    ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 10, 20, 0),
+                  child: Text(
+                    "SORT BY",
+                    style: TextStyle(fontSize: 12, color: Colors.white),
                   ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 12),
+              child: Row(mainAxisAlignment: MainAxisAlignment.start,
                   // mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     DecoratedBox(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.transparent,
                       ),
                       child: DropdownButton(
-                        isDense: true,
-                        iconEnabledColor: Color.fromARGB(255, 96, 8, 1),
+                        alignment: Alignment.center,
+                        iconSize: 30,
+                        isDense: false,
+                        iconEnabledColor: Colors.black,
                         dropdownColor: Color.fromARGB(255, 225, 223, 223),
                         value: selectedValue,
                         items: [
                           DropdownMenuItem(
-                            child: Text("None"),
+                            child: Text(
+                              "None",
+                            ),
                             value: 0,
                           ),
                           DropdownMenuItem(
@@ -275,46 +364,42 @@ class _FilterState extends State<Filter> {
                       width: 10,
                     ),
                     Container(
-                      color: Color.fromARGB(255, 225, 223, 223),
-                      height: 38,
-                      width: 40,
-                      child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.sort,
-                            size: 27,
-                          )),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                height: 20,
-              ),
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(mainAxisSize: MainAxisSize.max, children: [
-                    FlatButton(
-                      color: Colors.black,
-                      onPressed: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (_) => MyHomePage()),
-                            (Route<dynamic> route) => false);
-                      },
-                      child: Text(
-                        "FILTER",
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ),
-                    )
+                        color: Colors.transparent,
+                        height: 38,
+                        width: 38,
+                        child: Icon(
+                          Icons.sort,
+                          color: Colors.white,
+                          size: 25,
+                        )),
                   ]),
-                ),
-                height: 50,
-                color: Color.fromARGB(255, 225, 223, 223),
+            ),
+            Container(
+              height: 20,
+            ),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(mainAxisSize: MainAxisSize.max, children: [
+                  FlatButton(
+                    color: Colors.black,
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (_) => MyHomePage()),
+                          (Route<dynamic> route) => false);
+                    },
+                    child: Text(
+                      "FILTER",
+                      style: TextStyle(color: Colors.white, fontSize: 15),
+                    ),
+                  )
+                ]),
               ),
-            ]),
-          ),
+              height: 50,
+              color: Color.fromARGB(255, 225, 223, 223),
+            ),
+          ]),
         )));
   }
 }
