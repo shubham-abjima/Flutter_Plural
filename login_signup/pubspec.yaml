@@ -39,6 +39,15 @@ dependencies:
   animated_toggle_switch: ^0.5.2
   table_calendar: ^2.2.1
   dropdown_search: ^0.6.3
+  http: ^0.12.2
+  modal_progress_hud_nsn: ^0.3.0
+  image_picker: ^0.6.7+22
+  intl: ^0.17.0
+  calendar_timeline: ^1.0.5
+  animated_horizontal_calendar: ^0.0.3
+  event_calendar: ^0.0.14
+  flutter_event_calendar: ^0.0.8
+  calendar_appbar: ^0.0.6
 
 dev_dependencies:
   flutter_test:

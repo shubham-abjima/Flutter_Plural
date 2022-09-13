@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_with_signup/Screens/HomePage.dart';
+import 'package:login_with_signup/Screens/Upload_file.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 import 'Screens/LoginForm.dart';
@@ -29,7 +31,7 @@ class Splash2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return SplashScreen(
         seconds: 6,
-        navigateAfterSeconds: new LoginForm(),
+        navigateAfterSeconds: new UploadImageScreen(),
         // title: new Text(
         //   'GeeksForGeeks',
         //   textScaleFactor: 2,

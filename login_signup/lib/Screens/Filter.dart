@@ -43,6 +43,7 @@ class _FilterState extends State<Filter> {
 
   @override
   int selectedValue = 1;
+  var selectedDate;
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(

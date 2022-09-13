@@ -1,3 +1,4 @@
+import 'package:animated_horizontal_calendar/animated_horizontal_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:login_with_signup/Screens/Filter.dart';
 import 'package:login_with_signup/Screens/HomeForm.dart';
@@ -12,6 +13,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int selectedValue = 1;
+  var selectedDate;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +44,63 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Text("CVR-AK-Fairbanks"),
                         value: 2,
                       ),
-                      DropdownMenuItem(child: Text("Others"), value: 3),
+                      DropdownMenuItem(
+                        child: Text("CVR-AK-Anchorage"),
+                        value: 3,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AK-Anchorage"),
+                        value: 4,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AK-Anchorage"),
+                        value: 5,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AK-Anchorage"),
+                        value: 6,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AK-Anchorage"),
+                        value: 7,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AK-Anchorage"),
+                        value: 8,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AK-Anchorage"),
+                        value: 9,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AK-Anchorage"),
+                        value: 10,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AK-Anchorage"),
+                        value: 11,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AK-Anchorage"),
+                        value: 12,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AK-Anchorage"),
+                        value: 13,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AK-Anchorage"),
+                        value: 14,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AK-Anchorage"),
+                        value: 15,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AK-Anchorage"),
+                        value: 16,
+                      ),
+                      DropdownMenuItem(child: Text("Others"), value: 17),
                     ],
                     onChanged: (value) {
                       setState(() {
@@ -69,47 +127,77 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      body: Container(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Text(
-                  "September 2022",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+      body: Column(
+        children: [
+          Container(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      "Calendar",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+                      textDirection: TextDirection.ltr,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 175,
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.restore,
+                      size: 25,
+                      color: Colors.black,
+                    ),
+                    onPressed: () => Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (_) => MyHomePage()),
+                        (Route<dynamic> route) => false),
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.filter_list_alt,
+                      color: Colors.black,
+                      size: 25,
+                    ),
+                    onPressed: () => Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (_) => Filter()),
+                        (Route<dynamic> route) => false),
+                  ),
+                ],
               ),
-              SizedBox(
-                width: 175,
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.restore,
-                  size: 25,
-                  color: Colors.black,
-                ),
-                onPressed: () => Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (_) => MyHomePage()),
-                    (Route<dynamic> route) => false),
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.filter_list_alt,
-                  color: Colors.black,
-                  size: 25,
-                ),
-                onPressed: () => Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (_) => Filter()),
-                    (Route<dynamic> route) => false),
-              ),
-            ],
+            ),
           ),
-        ),
+          Container(
+            height: 85,
+            child: AnimatedHorizontalCalendar(
+                curve: Curves.easeInOutCubic,
+                tableCalenderButtonColor: Colors.redAccent,
+                tableCalenderIcon: Icon(
+                  Icons.calendar_today,
+                  color: Colors.white,
+                ),
+                date: DateTime.now(),
+                textColor: Colors.black45,
+                backgroundColor: Colors.white,
+                tableCalenderThemeData: ThemeData.light().copyWith(
+                  primaryColor: Colors.green,
+                  buttonTheme:
+                      ButtonThemeData(textTheme: ButtonTextTheme.primary),
+                  colorScheme: ColorScheme.light(primary: Colors.redAccent)
+                      .copyWith(secondary: Colors.red),
+                ),
+                selectedColor: Colors.redAccent,
+                onDateSelected: (date) {
+                  selectedDate = date;
+                }),
+          ),
+        ],
       ),
     );
   }
