@@ -1,8 +1,10 @@
 import 'package:animated_horizontal_calendar/animated_horizontal_calendar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login_with_signup/Screens/Filter.dart';
 import 'package:login_with_signup/Screens/HomeForm.dart';
 import 'package:login_with_signup/Screens/LoginForm.dart';
+import 'package:login_with_signup/Screens/Upload_file.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key key}) : super(key: key);
@@ -38,6 +40,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     items: [
                       DropdownMenuItem(
                         child: Text("CVR-AK-Anchorage"),
+                        onTap: () {
+                          UploadImageScreen();
+                        },
                         value: 1,
                       ),
                       DropdownMenuItem(
@@ -149,8 +154,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   IconButton(
                     icon: Icon(
-                      Icons.restore,
-                      size: 25,
+                      CupertinoIcons.refresh_circled,
+                      size: 30,
                       color: Colors.black,
                     ),
                     onPressed: () => Navigator.pushAndRemoveUntil(
@@ -174,9 +179,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Container(
-            height: 85,
+            height: 82,
             child: AnimatedHorizontalCalendar(
-                curve: Curves.easeInOutCubic,
                 tableCalenderButtonColor: Colors.redAccent,
                 tableCalenderIcon: Icon(
                   Icons.calendar_today,
@@ -197,6 +201,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   selectedDate = date;
                 }),
           ),
+          Text("No Records Found")
         ],
       ),
     );

@@ -16,7 +16,7 @@ class UploadImageScreen extends StatefulWidget {
 class _UploadImageScreenState extends State<UploadImageScreen> {
   File image;
   final _picker = ImagePicker();
-  var selectedValue;
+  int selectedValue = 1;
   bool showSpinner = false;
 
   Future getImage() async {
@@ -182,50 +182,70 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
             )
           ],
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: () {
-                getImage();
-              },
-              child: Container(
-                child: image == null
-                    ? Center(
-                        child: TextButton(
-                          child: Text("Pick Image"),
-                        ),
-                      )
-                    : Container(
-                        child: Center(
-                          child: Image.file(
-                            File(image.path).absolute,
-                            height: 100,
-                            width: 100,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
+        body: ListView.builder(
+          itemCount: 20,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              trailing: CircleAvatar(
+                backgroundColor: Color.fromARGB(255, 202, 199, 199),
+                child: IconButton(
+                  icon: GestureDetector(
+                    child: Icon(Icons.camera_alt_outlined),
+                  ),
+                  onPressed: () {
+                    getImage();
+                  },
+                ),
               ),
-            ),
-            SizedBox(
-              height: 150,
-            ),
-            GestureDetector(
-              onTap: () {
-                uploadImage();
-              },
-              child: Container(
-                height: 50,
-                width: 200,
-                color: Colors.green,
-                child: Center(child: Text('Upload')),
-              ),
-            )
-          ],
+              iconColor: Colors.black,
+              title: Text("List item $index "),
+            );
+          },
         ),
       ),
     );
   }
 }
+// Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           crossAxisAlignment: CrossAxisAlignment.center,
+//           children: [
+//             GestureDetector(
+//               onTap: () {
+//                 getImage();
+//               },
+//               child: Container(
+//                 child: image == null
+//                     ? Center(
+//                         child: TextButton(
+//                           child: Text("Pick Image"),
+//                         ),
+//                       )
+//                     : Container(
+//                         child: Center(
+//                           child: Image.file(
+//                             File(image.path).absolute,
+//                             height: 100,
+//                             width: 100,
+//                             fit: BoxFit.cover,
+//                           ),
+//                         ),
+//                       ),
+//               ),
+//             ),
+//             SizedBox(
+//               height: 150,
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 uploadImage();
+//               },
+//               child: Container(
+//                 height: 50,
+//                 width: 200,
+//                 color: Colors.green,
+//                 child: Center(child: Text('Upload')),
+//               ),
+//             )
+//           ],
+//         ),
