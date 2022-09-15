@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:login_with_signup/Comm/comHelper.dart';
 import 'package:login_with_signup/Comm/genLoginSignupHeader.dart';
 import 'package:login_with_signup/Comm/genTextFormField.dart';
@@ -19,6 +20,7 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  bool status1 = false;
   Future<SharedPreferences> _pref = SharedPreferences.getInstance();
   final _formKey = new GlobalKey<FormState>();
 
@@ -126,18 +128,29 @@ class _LoginFormState extends State<LoginForm> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    GFToggle(
-                      enabledTrackColor: Color.fromARGB(255, 79, 168, 85),
-                      disabledTrackColor: Colors.grey,
-                      enabledText: "✔",
-                      disabledText: "✘",
-                      type: GFToggleType.android,
-                      // boxShape: BoxShape.rectangle,
-                      onChanged: (value) {
-                        LoginForm();
+                    FlutterSwitch(
+                      width: 50.0,
+                      height: 25.0,
+                      toggleSize: 20.0,
+                      toggleColor: Colors.white,
+                      padding: 0,
+                      // borderRadius: 50.0,
+
+                      toggleBorder: Border.all(
+                        color: Colors.white,
+                        width: 5.0,
+                      ),
+                      activeColor: Colors.green,
+
+                      value: status1,
+                      onToggle: (val) {
+                        setState(() {
+                          status1 = val;
+                        });
                       },
-                      borderRadius: BorderRadius.circular(50),
-                      value: true,
+                    ),
+                    Container(
+                      alignment: Alignment.centerRight,
                     ),
                     SizedBox(
                       width: 10,
@@ -154,21 +167,7 @@ class _LoginFormState extends State<LoginForm> {
                   ],
                 ),
               ),
-              // Container(
-              //   margin: EdgeInsets.only(
-              //     top: 7,
-              //     left: 25,
-              //   ),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.start,
-              //     children: [
-              //       Text(
-              //         "Remember Me",
-              //         style: TextStyle(color: Colors.white),
-              //       ),
-              //     ],
-              //   ),
-              // ),
+
               SizedBox(height: 7),
               SizedBox(
                 height: 50,

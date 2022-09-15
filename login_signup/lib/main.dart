@@ -31,16 +31,11 @@ class Splash2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return SplashScreen(
         seconds: 6,
-        navigateAfterSeconds: new UploadImageScreen(),
-        // title: new Text(
-        //   'GeeksForGeeks',
-        //   textScaleFactor: 2,
-        // ),
+        navigateAfterSeconds: new MyHomePage(),
         image: new Image.asset(
           'assets/images/CVR.jpg',
           fit: BoxFit.cover,
         ),
-        // loadingText: Text("Loading"),
         photoSize: 150.0,
         useLoader: true,
         loaderColor: Color.fromARGB(255, 1, 53, 96));

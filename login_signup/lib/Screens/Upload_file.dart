@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:login_with_signup/Screens/LoginForm.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:splashscreen/splashscreen.dart';
+
+import 'User.dart';
 
 class UploadImageScreen extends StatefulWidget {
   const UploadImageScreen({Key key}) : super(key: key);
@@ -14,6 +17,28 @@ class UploadImageScreen extends StatefulWidget {
 }
 
 class _UploadImageScreenState extends State<UploadImageScreen> {
+  int i = 1;
+  Future<List<User>> listUsers;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    listUsers = fetchUsers();
+  }
+
+  Future<List<User>> fetchUsers() async {
+    final response =
+        await http.get('https://jsonplaceholder.typicode.com/users');
+    if (response.statusCode == 200) {
+      var getUsersData = json.decode(response.body) as List;
+      var listUsers = getUsersData.map((i) => User.fromJSON(i)).toList();
+      return listUsers;
+    } else {
+      throw Exception('Failed to load users');
+    }
+  }
+
   File image;
   final _picker = ImagePicker();
   int selectedValue = 1;
@@ -84,7 +109,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
               children: [
                 Icon(Icons.location_on, color: Color.fromARGB(255, 96, 8, 1)),
                 DecoratedBox(
-                  decoration: BoxDecoration(color: Colors.white),
+                  decoration: BoxDecoration(color: Colors.transparent),
                   child: DropdownButton(
                       isDense: true,
                       iconEnabledColor: Color.fromARGB(255, 96, 8, 1),
@@ -182,24 +207,84 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
             )
           ],
         ),
-        body: ListView.builder(
-          itemCount: 20,
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              trailing: CircleAvatar(
-                backgroundColor: Color.fromARGB(255, 202, 199, 199),
-                child: IconButton(
-                  icon: GestureDetector(
-                    child: Icon(Icons.camera_alt_outlined),
-                  ),
-                  onPressed: () {
-                    getImage();
-                  },
-                ),
-              ),
-              iconColor: Colors.black,
-              title: Text("List item $index "),
-            );
+        body: FutureBuilder<List<User>>(
+          future: listUsers,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      var user = (snapshot.data as List<User>)[index];
+                      return Container(
+                        padding: EdgeInsets.all(10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              user.name,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 22),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Icon(Icons.man_outlined),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                CircleAvatar(
+                                  maxRadius: 20,
+                                  backgroundColor:
+                                      Color.fromARGB(255, 210, 208, 208),
+                                  child: IconButton(
+                                      onPressed: () {
+                                        getImage();
+                                      },
+                                      icon: Icon(Icons.camera_alt_rounded)),
+                                ),
+                              ],
+                            ),
+
+                            Text(
+                              user.phone,
+                            ),
+
+                            Text(user.email
+                                // " " +
+                                // user.address.suite +
+                                // " " +
+                                // user.address.city +
+                                // " " +
+                                // user.address.zipcode
+                                ),
+
+                            // SizedBox(height: 5),
+                            // Text(user.phone),
+                            // SizedBox(height: 5),
+                            // Text(user.website),
+                            // SizedBox(height: 5),
+                            // Text(user.company.name),
+                            // SizedBox(height: 5),
+                            // Text(user.company.catchPhrase),
+                          ],
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return Divider();
+                    },
+                    itemCount: (snapshot.data as List<User>).length),
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text("${snapshot.error}"),
+              );
+            }
+            return SplashScreen(
+                seconds: 2,
+                useLoader: true,
+                loaderColor: Color.fromARGB(255, 1, 53, 96));
           },
         ),
       ),

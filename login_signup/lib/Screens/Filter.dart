@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:login_with_signup/Comm/genTextFormField.dart';
@@ -8,7 +10,7 @@ class Filter extends StatefulWidget {
   const Filter({Key key}) : super(key: key);
 
   @override
-  State<Filter> createState() => _FilterState();
+  _FilterState createState() => _FilterState();
 }
 
 class _FilterState extends State<Filter> {
@@ -34,11 +36,56 @@ class _FilterState extends State<Filter> {
     }
   }
 
+  var _searchview = new TextEditingController();
+
+  bool _firstSearch = true;
+  String _query = "";
+
+  List<String> _nebulae;
+  List<String> _filterList;
+
   @override
   void initState() {
     selectedValueMap["local"] = null;
     selectedValueMap["server"] = null;
+
     super.initState();
+    _nebulae = new List<String>();
+    _nebulae = [
+      "Orion",
+      "Boomerang",
+      "Cat's Eye",
+      "Pelican",
+      "Ghost Head",
+      "Witch Head",
+      "Snake",
+      "Ant",
+      "Bernad 68",
+      "Flame",
+      "Eagle",
+      "Horse Head",
+      "Elephant's Trunk",
+      "Butterfly"
+    ];
+    _nebulae.sort();
+  }
+
+  _HomeState() {
+    //Register a closure to be called when the object changes.
+    _searchview.addListener(() {
+      if (_searchview.text.isEmpty) {
+        //Notify the framework that the internal state of this object has changed.
+        setState(() {
+          _firstSearch = true;
+          _query = "";
+        });
+      } else {
+        setState(() {
+          _firstSearch = false;
+          _query = _searchview.text;
+        });
+      }
+    });
   }
 
   @override
@@ -64,7 +111,6 @@ class _FilterState extends State<Filter> {
         body: SingleChildScrollView(
             child: Container(
           height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/blur.jpg"),
@@ -84,27 +130,20 @@ class _FilterState extends State<Filter> {
                 ),
               ],
             ),
-            Container(
-              height: 30,
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: TextField(
-                onChanged: (value) {},
-                decoration: InputDecoration(
-                    // hintText: 'Enter your name',
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                    border: OutlineInputBorder(
-                        // borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                        ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
-                      // borderRadius: BorderRadius.all(Radius.elliptical(20.0)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 1.0),
-                      // borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    ),
-                    fillColor: Colors.white),
+            SizedBox(
+              height: 5,
+            ),
+            SingleChildScrollView(
+              child: Container(
+                color: Colors.transparent,
+                height: 50,
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: new Column(
+                  children: <Widget>[
+                    _createSearchView(),
+                    _firstSearch ? _createListView() : _performSearch()
+                  ],
+                ),
               ),
             ),
             Row(
@@ -128,7 +167,7 @@ class _FilterState extends State<Filter> {
                   FlatButton(
                     color: Color.fromARGB(255, 225, 223, 223),
                     minWidth: 5,
-                    onPressed: () => {},
+                    onPressed: () {},
                     child: Text(
                       "TODAY",
                       style: TextStyle(fontSize: 12),
@@ -138,7 +177,9 @@ class _FilterState extends State<Filter> {
                   FlatButton(
                     color: Color.fromARGB(255, 225, 223, 223),
                     minWidth: 5,
-                    onPressed: () {},
+                    onPressed: () {
+                      _show();
+                    },
                     child: Text(
                       "7 DAYS",
                       style: TextStyle(fontSize: 12),
@@ -148,7 +189,9 @@ class _FilterState extends State<Filter> {
                   FlatButton(
                     color: Color.fromARGB(255, 225, 223, 223),
                     minWidth: 5,
-                    onPressed: () {},
+                    onPressed: () {
+                      _show();
+                    },
                     child: Text(
                       "LAST MONTH",
                       style: TextStyle(fontSize: 12),
@@ -230,10 +273,43 @@ class _FilterState extends State<Filter> {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: TextField(
+                  style: TextStyle(color: Colors.white),
                   textAlign: TextAlign.center,
                   onChanged: (value) {},
                   decoration: InputDecoration(
-                    hintText: 'First & Last Name',
+                    hintText: 'First Name',
+                    hintStyle: new TextStyle(color: Colors.grey[300]),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    border: OutlineInputBorder(
+                        // borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                        ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      // borderRadius: BorderRadius.all(Radius.elliptical(20.0)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white, width: 2.0),
+                      // borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Container(
+              height: 30,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: TextField(
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white),
+                  onChanged: (value) {},
+                  decoration: InputDecoration(
+                    hintText: 'Last Name',
+                    hintStyle: new TextStyle(color: Colors.grey[300]),
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                     border: OutlineInputBorder(
@@ -271,7 +347,7 @@ class _FilterState extends State<Filter> {
                 children: [
                   RaisedButton.icon(
                     icon: Icon(
-                      Icons.male,
+                      Icons.man_outlined,
                       color: Colors.black,
                     ), // Your icon here
                     label: Text(
@@ -282,7 +358,7 @@ class _FilterState extends State<Filter> {
                   ),
                   RaisedButton.icon(
                     icon: Icon(
-                      Icons.female,
+                      Icons.woman_outlined,
                       color: Colors.orange,
                     ), // Your icon here
                     label: Text(
@@ -402,5 +478,64 @@ class _FilterState extends State<Filter> {
             ),
           ]),
         )));
+  }
+
+  Widget _createSearchView() {
+    return new Container(
+      decoration: BoxDecoration(
+          border: Border.all(width: 1.0),
+          borderRadius: BorderRadius.circular(5)),
+      child: new TextField(
+        style: TextStyle(color: Colors.white),
+        controller: _searchview,
+        decoration: InputDecoration(),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+
+  //Create a ListView widget
+  Widget _createListView() {
+    return new Flexible(
+      child: new ListView.builder(
+          itemCount: _nebulae.length,
+          itemBuilder: (BuildContext context, int index) {
+            return new Card(
+              color: Colors.transparent,
+              child: new Container(
+                child: new Text("${_nebulae[index]}"),
+              ),
+            );
+          }),
+    );
+  }
+
+  //Perform actual search
+  Widget _performSearch() {
+    _filterList = new List<String>();
+    for (int i = 0; i < _nebulae.length; i++) {
+      var item = _nebulae[i];
+
+      if (item.toLowerCase().contains(_query.toLowerCase())) {
+        _filterList.add(item);
+      }
+    }
+    return _createFilteredListView();
+  }
+
+  //Create the Filtered ListView
+  Widget _createFilteredListView() {
+    return new Flexible(
+      child: new ListView.builder(
+          itemCount: _filterList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return new Card(
+              color: Colors.white,
+              child: new Container(
+                child: new Text("${_filterList[index]}"),
+              ),
+            );
+          }),
+    );
   }
 }
