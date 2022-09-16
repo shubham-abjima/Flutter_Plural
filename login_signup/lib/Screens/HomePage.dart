@@ -1,7 +1,7 @@
 import 'package:animated_horizontal_calendar/animated_horizontal_calendar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:login_with_signup/Screens/Data.dart';
+
 import 'package:login_with_signup/Screens/Filter.dart';
 import 'package:login_with_signup/Screens/HomeForm.dart';
 import 'package:login_with_signup/Screens/LoginForm.dart';
@@ -17,6 +17,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int selectedValue = 1;
   var selectedDate;
+
+  var value;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,11 +43,27 @@ class _MyHomePageState extends State<MyHomePage> {
                       value: selectedValue,
                       items: [
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
+                          child: InkWell(
+                            child: Text("CVR-AK-Anchorage"),
+                            onTap: () {
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (_) => UploadImageScreen()));
+                            },
+                          ),
                           value: 1,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Fairbanks"),
+                          child: InkWell(
+                            child: Text("CVR-AK-FairBanks"),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => UploadImageScreen()));
+                            },
+                          ),
                           value: 2,
                         ),
                         DropdownMenuItem(

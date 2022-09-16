@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:login_with_signup/Screens/HomePage.dart';
 import 'package:login_with_signup/Screens/LoginForm.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:splashscreen/splashscreen.dart';
@@ -17,7 +18,7 @@ class UploadImageScreen extends StatefulWidget {
 }
 
 class _UploadImageScreenState extends State<UploadImageScreen> {
-  int i = 1;
+  var i = 18;
   Future<List<User>> listUsers;
 
   @override
@@ -50,7 +51,21 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
 
     if (pickedFile != null) {
       image = File(pickedFile.path);
-      setState(() {});
+
+      GestureDetector(
+          onTap: () {
+            getImage();
+          },
+          child: Container(
+            child: image == null
+                ? Text("Pick Image")
+                : Image.file(
+                    File(image.path).absolute,
+                    height: 100,
+                    width: 100,
+                    fit: BoxFit.cover,
+                  ),
+          ));
     } else {
       print('no image selected');
     }
@@ -80,10 +95,11 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
 
     print(response.stream.toString());
     if (response.statusCode == 200) {
-      setState(() {
-        showSpinner = false;
-      });
-      print('image uploaded');
+      GestureDetector(
+          onTap: () {
+            uploadImage();
+          },
+          child: Center(child: Text('Upload')));
     } else {
       print('failed');
       setState(() {
@@ -100,8 +116,14 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
         appBar: AppBar(
           leading: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              "assets/images/123.png",
+            child: InkWell(
+              child: Image.asset(
+                "assets/images/123.png",
+              ),
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => MyHomePage()));
+              },
             ),
           ),
           actions: <Widget>[
@@ -212,26 +234,27 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                 child: ListView.separated(
                     itemBuilder: (context, index) {
                       var user = (snapshot.data as List<User>)[index];
                       return Container(
-                        padding: EdgeInsets.all(10),
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.all(8),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
                               user.name,
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 22),
+                                  fontWeight: FontWeight.bold, fontSize: 20),
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Icon(Icons.man_outlined),
                                 SizedBox(
-                                  width: 5,
+                                  width: 3,
                                 ),
                                 CircleAvatar(
                                   maxRadius: 20,
@@ -243,6 +266,11 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                                       },
                                       icon: Icon(Icons.camera_alt_rounded)),
                                 ),
+                                IconButton(
+                                    onPressed: () {
+                                      uploadImage();
+                                    },
+                                    icon: Icon(Icons.file_upload_outlined)),
                               ],
                             ),
 

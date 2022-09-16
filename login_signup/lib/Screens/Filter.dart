@@ -131,19 +131,17 @@ class _FilterState extends State<Filter> {
               ],
             ),
             SizedBox(
-              height: 5,
+              height: 3,
             ),
-            SingleChildScrollView(
-              child: Container(
-                color: Colors.transparent,
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: new Column(
-                  children: <Widget>[
-                    _createSearchView(),
-                    _firstSearch ? _createListView() : _performSearch()
-                  ],
-                ),
+            Container(
+              color: Colors.transparent,
+              height: 50,
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: new Column(
+                children: <Widget>[
+                  _createSearchView(),
+                  _firstSearch ? _createListView() : _performSearch()
+                ],
               ),
             ),
             Row(
@@ -483,9 +481,12 @@ class _FilterState extends State<Filter> {
   Widget _createSearchView() {
     return new Container(
       decoration: BoxDecoration(
-          border: Border.all(width: 1.0),
+          border: Border.all(
+            width: 1.0,
+          ),
           borderRadius: BorderRadius.circular(5)),
       child: new TextField(
+        cursorHeight: 25,
         style: TextStyle(color: Colors.white),
         controller: _searchview,
         decoration: InputDecoration(),
@@ -501,7 +502,7 @@ class _FilterState extends State<Filter> {
           itemCount: _nebulae.length,
           itemBuilder: (BuildContext context, int index) {
             return new Card(
-              color: Colors.transparent,
+              color: Colors.white,
               child: new Container(
                 child: new Text("${_nebulae[index]}"),
               ),

@@ -216,28 +216,7 @@ class _LoginFormState extends State<LoginForm> {
                   ],
                 ),
               ),
-              // Container(
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     children: [
-              //       TextButton(
-              //         child: Text(
-              //           'Forgot Password ?',
-              //           style: TextStyle(
-              //               fontSize: 15,
-              //               fontWeight: FontWeight.bold,
-              //               color: Colors.white),
-              //         ),
-              //         onPressed: () {
-              //           Navigator.push(
-              //               context,
-              //               MaterialPageRoute(
-              //                   builder: (_) => ForgotPassword()));
-              //         },
-              //       )
-              //     ],
-              //   ),
-              // ),
+
               Container(
                 margin: EdgeInsets.only(top: 5, left: 21),
                 child: Row(
