@@ -27,6 +27,7 @@ class _LoginFormState extends State<LoginForm> {
   final _conUserId = TextEditingController();
   final _conPassword = TextEditingController();
   var dbHelper;
+  
 
   @override
   void initState() {
@@ -114,6 +115,7 @@ class _LoginFormState extends State<LoginForm> {
                 controller: _conUserId,
                 icon: Icons.person_outline,
                 hintName: 'Username',
+      
               ),
               SizedBox(height: 10.0),
               getTextFormField(
