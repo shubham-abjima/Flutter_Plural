@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
+
 import 'package:login_with_signup/Comm/comHelper.dart';
-import 'package:login_with_signup/Comm/genLoginSignupHeader.dart';
+
 import 'package:login_with_signup/Comm/genTextFormField.dart';
 import 'package:login_with_signup/DatabaseHandler/DbHelper.dart';
 import 'package:login_with_signup/Model/UserModel.dart';
@@ -11,27 +10,26 @@ import 'package:login_with_signup/Screens/HomePage.dart';
 import 'package:login_with_signup/Screens/SignupForm.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'HomeForm.dart';
-import 'package:getwidget/getwidget.dart';
-
 class LoginForm extends StatefulWidget {
   @override
   _LoginFormState createState() => _LoginFormState();
 }
 
 class _LoginFormState extends State<LoginForm> {
-  bool status1 = false;
+  bool _isChecked = false;
+
   Future<SharedPreferences> _pref = SharedPreferences.getInstance();
-  final _formKey = new GlobalKey<FormState>();
 
   final _conUserId = TextEditingController();
   final _conPassword = TextEditingController();
+
   var dbHelper;
-  
 
   @override
   void initState() {
     super.initState();
+    _loadUserEmailPassword();
+
     dbHelper = DbHelper();
   }
 
@@ -115,7 +113,6 @@ class _LoginFormState extends State<LoginForm> {
                 controller: _conUserId,
                 icon: Icons.person_outline,
                 hintName: 'Username',
-      
               ),
               SizedBox(height: 10.0),
               getTextFormField(
@@ -126,58 +123,44 @@ class _LoginFormState extends State<LoginForm> {
               ),
               SizedBox(height: 20),
               Container(
-                padding: EdgeInsets.only(left: 25),
+                padding: EdgeInsets.only(
+                  left: 30,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    FlutterSwitch(
-                      width: 50.0,
-                      height: 25.0,
-                      toggleSize: 20.0,
-                      toggleColor: Colors.white,
-                      padding: 0,
-                      // borderRadius: 50.0,
-
-                      toggleBorder: Border.all(
-                        color: Colors.white,
-                        width: 5.0,
-                      ),
-                      activeColor: Colors.green,
-
-                      value: status1,
-                      onToggle: (val) {
-                        setState(() {
-                          status1 = val;
-                        });
-                      },
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                    ),
                     SizedBox(
-                      width: 10,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "Remember Me",
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    )
+                        height: 24.0,
+                        width: 30.0,
+                        child: Theme(
+                          data: ThemeData(
+                              unselectedWidgetColor: Colors.green // Your color
+                              ),
+                          child: Switch(
+                              activeTrackColor: Colors.white,
+                              activeColor: Colors.green,
+                              value: _isChecked,
+                              onChanged: _handleRememberme),
+                        )),
+                    SizedBox(width: 20.0),
+                    Text("Remember Me",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                        ))
                   ],
                 ),
               ),
 
-              SizedBox(height: 7),
+              SizedBox(height: 10),
               SizedBox(
                 height: 50,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 10, left: 21),
+                      margin: EdgeInsets.only(top: 10, left: 22),
                       width: 120,
                       height: 50,
                       child: FlatButton(
@@ -196,21 +179,21 @@ class _LoginFormState extends State<LoginForm> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 10),
+                      padding: const EdgeInsets.only(right: 20, top: 10),
                       child: Row(
                         children: [
-                          TextButton(
-                            child: Text("Forgot Password ?",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white)),
-                            onPressed: () {
+                          InkWell(
+                            onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) => ForgotPassword()));
                             },
+                            child: Text("Forgot Password ?",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white)),
                           ),
                         ],
                       ),
@@ -220,29 +203,31 @@ class _LoginFormState extends State<LoginForm> {
               ),
 
               Container(
-                margin: EdgeInsets.only(top: 5, left: 21),
+                margin: EdgeInsets.only(top: 15, left: 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Does Not Have An Account ?',
+                    Text("Don't Have An Account ?",
                         style: TextStyle(
                           // fontSize: 15,
-                          fontWeight: FontWeight.bold,
+
                           color: Colors.black,
                         )),
-                    FlatButton(
-                      textColor: Colors.white,
+                    SizedBox(
+                      width: 8,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => SignupForm()));
+                      },
                       child: Text(
-                        'Signup',
+                        'SignUp',
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => SignupForm()));
-                      },
                     )
                   ],
                 ),
@@ -252,5 +237,40 @@ class _LoginFormState extends State<LoginForm> {
         ),
       ),
     );
+  }
+
+  void _handleRememberme(bool value) {
+    _isChecked = value;
+    SharedPreferences.getInstance().then(
+      (prefs) {
+        prefs.setBool("remember_me", value);
+        prefs.setString('UserName', _conUserId.text);
+        prefs.setString('password', _conPassword.text);
+      },
+    );
+    setState(() {
+      _isChecked = value;
+    });
+  }
+
+  void _loadUserEmailPassword() async {
+    try {
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
+      var _userName = _prefs.getString("UserName") ?? "";
+      var _password = _prefs.getString("password") ?? "";
+      var _rememberMe = _prefs.getBool("remember_me") ?? false;
+      print(_rememberMe);
+      print(_userName);
+      print(_password);
+      if (_rememberMe) {
+        setState(() {
+          _isChecked = true;
+        });
+        _conUserId.text = _userName ?? "";
+        _conPassword.text = _password ?? "";
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 }

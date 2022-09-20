@@ -36,7 +36,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
       var listUsers = getUsersData.map((i) => User.fromJSON(i)).toList();
       return listUsers;
     } else {
-      throw Exception('Failed to load users');
+      throw Exception('No Records Found');
     }
   }
 
@@ -61,8 +61,8 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                 ? Text("Pick Image")
                 : Image.file(
                     File(image.path).absolute,
-                    height: 100,
-                    width: 100,
+                    height: 10,
+                    width: 10,
                     fit: BoxFit.cover,
                   ),
           ));
@@ -133,76 +133,73 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                 DecoratedBox(
                   decoration: BoxDecoration(color: Colors.transparent),
                   child: DropdownButton(
+                      alignment: Alignment.center,
                       isDense: true,
                       iconEnabledColor: Color.fromARGB(255, 96, 8, 1),
                       dropdownColor: Color.fromARGB(255, 225, 223, 223),
                       value: selectedValue,
                       items: [
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
+                          child: InkWell(
+                            child: Text("Corp"),
+                          ),
                           value: 1,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Fairbanks"),
+                          child: InkWell(
+                            child: Text("CVR-AK-Anchorage"),
+                          ),
                           value: 2,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
+                          child: Text("CVR-AK-Fairbanks"),
                           value: 3,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
+                          child: Text("CVR-AL-Dothan"),
                           value: 4,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
+                          child: Text("CVR-AL-Fairhope"),
                           value: 5,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
+                          child: Text("CVR-AL-Hoover"),
                           value: 6,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
+                          child: Text("CVR-AL-Mobile"),
                           value: 7,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
+                          child: Text("CVR-AL-Mantgomery"),
                           value: 8,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
+                          child: Text("CVR-AL-Opelika"),
                           value: 9,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
+                          child: Text("CVR-AL-Trussville"),
                           value: 10,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
+                          child: Text("CVR-AZ-Gilbert"),
                           value: 11,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
+                          child: Text("CVR-AZ-Mesa"),
                           value: 12,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
+                          child: Text("CVR-AZ-Phoenix"),
                           value: 13,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
+                          child: Text("CVR-DC1-lrving Street"),
                           value: 14,
                         ),
-                        DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
-                          value: 15,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
-                          value: 16,
-                        ),
-                        DropdownMenuItem(child: Text("Others"), value: 17),
+                        DropdownMenuItem(child: Text("Others"), value: 15),
                       ],
                       onChanged: (value) {
                         setState(() {
@@ -234,7 +231,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Padding(
-                padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(5, 0, 7, 0),
                 child: ListView.separated(
                     itemBuilder: (context, index) {
                       var user = (snapshot.data as List<User>)[index];
@@ -263,21 +260,15 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                                   child: IconButton(
                                       onPressed: () {
                                         getImage();
+                                        // uploadImage();
                                       },
                                       icon: Icon(Icons.camera_alt_rounded)),
                                 ),
-                                IconButton(
-                                    onPressed: () {
-                                      uploadImage();
-                                    },
-                                    icon: Icon(Icons.file_upload_outlined)),
                               ],
                             ),
-
                             Text(
                               user.phone,
                             ),
-
                             Text(user.email
                                 // " " +
                                 // user.address.suite +
@@ -286,15 +277,6 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                                 // " " +
                                 // user.address.zipcode
                                 ),
-
-                            // SizedBox(height: 5),
-                            // Text(user.phone),
-                            // SizedBox(height: 5),
-                            // Text(user.website),
-                            // SizedBox(height: 5),
-                            // Text(user.company.name),
-                            // SizedBox(height: 5),
-                            // Text(user.company.catchPhrase),
                           ],
                         ),
                       );

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:login_with_signup/Screens/Filter.dart';
-import 'package:login_with_signup/Screens/HomeForm.dart';
+
 import 'package:login_with_signup/Screens/LoginForm.dart';
 import 'package:login_with_signup/Screens/Upload_file.dart';
 
@@ -35,101 +35,85 @@ class _MyHomePageState extends State<MyHomePage> {
               Icon(Icons.location_on, color: Color.fromARGB(255, 96, 8, 1)),
               DecoratedBox(
                 decoration: BoxDecoration(color: Colors.white),
-                child: GestureDetector(
-                  child: DropdownButton(
-                      isDense: true,
-                      iconEnabledColor: Color.fromARGB(255, 96, 8, 1),
-                      dropdownColor: Color.fromARGB(255, 225, 223, 223),
-                      value: selectedValue,
-                      items: [
-                        DropdownMenuItem(
-                          child: InkWell(
-                            child: Text("CVR-AK-Anchorage"),
-                            onTap: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (_) => UploadImageScreen()));
-                            },
-                          ),
-                          value: 1,
+                child: DropdownButton(
+                    alignment: Alignment.center,
+                    isDense: true,
+                    iconEnabledColor: Color.fromARGB(255, 96, 8, 1),
+                    dropdownColor: Color.fromARGB(255, 225, 223, 223),
+                    value: selectedValue,
+                    items: [
+                      DropdownMenuItem(
+                        child: InkWell(
+                          child: Text("Corp"),
                         ),
-                        DropdownMenuItem(
-                          child: InkWell(
-                            child: Text("CVR-AK-FairBanks"),
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => UploadImageScreen()));
-                            },
-                          ),
-                          value: 2,
-                        ),
-                        DropdownMenuItem(
+                        value: 1,
+                      ),
+                      DropdownMenuItem(
+                        child: InkWell(
                           child: Text("CVR-AK-Anchorage"),
-                          value: 3,
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => UploadImageScreen()));
+                          },
                         ),
-                        DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
-                          value: 4,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
-                          value: 5,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
-                          value: 6,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
-                          value: 7,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
-                          value: 8,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
-                          value: 9,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
-                          value: 10,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
-                          value: 11,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
-                          value: 12,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
-                          value: 13,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
-                          value: 14,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
-                          value: 15,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("CVR-AK-Anchorage"),
-                          value: 16,
-                        ),
-                        DropdownMenuItem(child: Text("Others"), value: 17),
-                      ],
-                      onChanged: (value) {
-                        setState(() {
-                          selectedValue = value;
-                        });
-                      }),
-                ),
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AK-Fairbanks"),
+                        value: 3,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AL-Dothan"),
+                        value: 4,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AL-Fairhope"),
+                        value: 5,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AL-Hoover"),
+                        value: 6,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AL-Mobile"),
+                        value: 7,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AL-Mantgomery"),
+                        value: 8,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AL-Opelika"),
+                        value: 9,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AL-Trussville"),
+                        value: 10,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AZ-Gilbert"),
+                        value: 11,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AZ-Mesa"),
+                        value: 12,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AZ-Phoenix"),
+                        value: 13,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-DC1-lrving Street"),
+                        value: 14,
+                      ),
+                      DropdownMenuItem(child: Text("Others"), value: 15),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        selectedValue = value;
+                      });
+                    }),
               ),
               Padding(padding: EdgeInsets.all(15)),
               Column(

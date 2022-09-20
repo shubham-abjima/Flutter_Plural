@@ -1,9 +1,5 @@
-import 'dart:ffi';
-
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:login_with_signup/Comm/genTextFormField.dart';
-import 'package:login_with_signup/Screens/HomeForm.dart';
+
 import 'package:login_with_signup/Screens/HomePage.dart';
 
 class Filter extends StatefulWidget {
@@ -14,6 +10,16 @@ class Filter extends StatefulWidget {
 }
 
 class _FilterState extends State<Filter> {
+  bool _todayPressed = false;
+  bool _daysPressed = false;
+  bool _monthPressed = false;
+  bool _male = false;
+  bool _female = false;
+  bool _all = false;
+  bool _startDate = false;
+  bool _endDate = false;
+  bool _custom = false;
+
   Map<String, String> selectedValueMap = Map();
   DateTimeRange _selectedDateRange;
 
@@ -36,12 +42,28 @@ class _FilterState extends State<Filter> {
     }
   }
 
+  void _today() async {
+    DateTime today = DateTime.now();
+  }
+
+  void _month() async {
+    DateTime pastMonth = DateTime.now().subtract(
+      Duration(days: 30),
+    );
+  }
+
+  void _days() async {
+    DateTime pastWeek = DateTime.now().subtract(
+      Duration(days: 7),
+    );
+  }
+
   var _searchview = new TextEditingController();
 
   bool _firstSearch = true;
   String _query = "";
 
-  List<String> _nebulae;
+  List<String> _searchlist;
   List<String> _filterList;
 
   @override
@@ -50,31 +72,29 @@ class _FilterState extends State<Filter> {
     selectedValueMap["server"] = null;
 
     super.initState();
-    _nebulae = new List<String>();
-    _nebulae = [
-      "Orion",
-      "Boomerang",
-      "Cat's Eye",
-      "Pelican",
-      "Ghost Head",
-      "Witch Head",
-      "Snake",
-      "Ant",
-      "Bernad 68",
-      "Flame",
-      "Eagle",
-      "Horse Head",
-      "Elephant's Trunk",
-      "Butterfly"
+    _searchlist = new List<String>();
+    _searchlist = [
+      "Corp",
+      "CVR-AK-Anchorage",
+      "CVR-AK-Fairbanks",
+      "CVR-AL-Dothan",
+      "CVR-AL-Fairhope",
+      "CVR-AL-Hoover",
+      "CVR-AL-Mobile",
+      "CVR-AL-Mantgomery",
+      "CVR-AL-Opelika",
+      "CVR-AL-Trussville",
+      "CVR-AZ-Gilbert",
+      "CVR-AZ-Mesa",
+      "CVR-AZ-Phoenix",
+      "CVR-DC1-lrving Street"
     ];
-    _nebulae.sort();
+    _searchlist.sort();
   }
 
-  _HomeState() {
-    //Register a closure to be called when the object changes.
+  _FilterState() {
     _searchview.addListener(() {
       if (_searchview.text.isEmpty) {
-        //Notify the framework that the internal state of this object has changed.
         setState(() {
           _firstSearch = true;
           _query = "";
@@ -136,7 +156,7 @@ class _FilterState extends State<Filter> {
             Container(
               color: Colors.transparent,
               height: 50,
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
               child: new Column(
                 children: <Widget>[
                   _createSearchView(),
@@ -162,51 +182,69 @@ class _FilterState extends State<Filter> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  FlatButton(
-                    color: Color.fromARGB(255, 225, 223, 223),
+                  MaterialButton(
+                    color: _todayPressed
+                        ? Color.fromARGB(255, 246, 96, 85)
+                        : Color.fromARGB(255, 225, 223, 223),
                     minWidth: 5,
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        _todayPressed = !_todayPressed;
+                        _today();
+                      });
+                    },
                     child: Text(
                       "TODAY",
                       style: TextStyle(fontSize: 12),
                     ),
-                    splashColor: Colors.redAccent,
                   ),
-                  FlatButton(
-                    color: Color.fromARGB(255, 225, 223, 223),
+                  MaterialButton(
+                    color: _daysPressed
+                        ? Color.fromARGB(255, 246, 96, 85)
+                        : Color.fromARGB(255, 225, 223, 223),
                     minWidth: 5,
                     onPressed: () {
-                      _show();
+                      setState(() {
+                        _daysPressed = !_daysPressed;
+                        _days();
+                      });
                     },
                     child: Text(
                       "7 DAYS",
                       style: TextStyle(fontSize: 12),
                     ),
-                    splashColor: Colors.redAccent,
                   ),
-                  FlatButton(
-                    color: Color.fromARGB(255, 225, 223, 223),
+                  MaterialButton(
+                    color: _monthPressed
+                        ? Color.fromARGB(255, 246, 96, 85)
+                        : Color.fromARGB(255, 225, 223, 223),
                     minWidth: 5,
                     onPressed: () {
-                      _show();
+                      setState(() {
+                        _monthPressed = !_monthPressed;
+                        _month();
+                      });
                     },
                     child: Text(
                       "LAST MONTH",
                       style: TextStyle(fontSize: 12),
                     ),
-                    splashColor: Colors.redAccent,
                   ),
-                  FlatButton(
-                    color: Color.fromARGB(255, 225, 223, 223),
+                  MaterialButton(
+                    color: _custom
+                        ? Color.fromARGB(255, 246, 96, 85)
+                        : Color.fromARGB(255, 225, 223, 223),
                     minWidth: 5,
                     onPressed: () {
-                      _show();
+                      setState(() {
+                        _custom = !_custom;
+                        _show();
+                      });
                     },
                     child: Text(
                       "CUSTOM",
                       style: TextStyle(fontSize: 12),
                     ),
-                    splashColor: Colors.redAccent,
                   )
                 ],
               ),
@@ -221,10 +259,15 @@ class _FilterState extends State<Filter> {
                 Container(
                   width: 150,
                   height: 30,
-                  child: FlatButton(
-                    color: Color.fromARGB(255, 225, 223, 223),
+                  child: MaterialButton(
+                    color: _startDate
+                        ? Color.fromARGB(255, 246, 96, 85)
+                        : Color.fromARGB(255, 225, 223, 223),
                     onPressed: () {
-                      _show();
+                      setState(() {
+                        _startDate = !_startDate;
+                        _show();
+                      });
                     },
                     child: Text(
                       "${_selectedDateRange?.start.toString().split(' ')[0]}",
@@ -237,10 +280,15 @@ class _FilterState extends State<Filter> {
                 Container(
                   width: 150,
                   height: 30,
-                  child: FlatButton(
-                    color: Color.fromARGB(255, 225, 223, 223),
+                  child: MaterialButton(
+                    color: _startDate
+                        ? Color.fromARGB(255, 246, 96, 85)
+                        : Color.fromARGB(255, 225, 223, 223),
                     onPressed: () {
-                      _show();
+                      setState(() {
+                        _endDate = !_endDate;
+                        _show();
+                      });
                     },
                     child: Text(
                         "${_selectedDateRange?.end.toString().split(' ')[0]}",
@@ -250,7 +298,7 @@ class _FilterState extends State<Filter> {
                 ),
 
                 Container(
-                  child: Icon(Icons.calendar_month_rounded),
+                  child: Icon(Icons.calendar_month_rounded, size: 30),
                 ),
               ],
             ),
@@ -344,33 +392,52 @@ class _FilterState extends State<Filter> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   RaisedButton.icon(
-                    icon: Icon(
-                      Icons.man_outlined,
-                      color: Colors.black,
-                    ), // Your icon here
+                    color: _male
+                        ? Color.fromARGB(255, 246, 96, 85)
+                        : Color.fromARGB(255, 225, 223, 223),
+                    icon: Icon(Icons.man_outlined,
+                        color: Colors.black), // Your icon here
                     label: Text(
                       "MALE",
                       style: TextStyle(color: Colors.black),
                     ), // Your text here
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        _male = !_male;
+                      });
+                    },
                   ),
                   RaisedButton.icon(
+                    color: _female
+                        ? Color.fromARGB(255, 246, 96, 85)
+                        : Color.fromARGB(255, 225, 223, 223),
                     icon: Icon(
                       Icons.woman_outlined,
-                      color: Colors.orange,
+                      color: Colors.green,
                     ), // Your icon here
                     label: Text(
                       "FEMALE",
                       style: TextStyle(color: Colors.black),
                     ), // Your text here
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        _female = !_female;
+                      });
+                    },
                   ),
                   RaisedButton(
+                    color: _all
+                        ? Color.fromARGB(255, 246, 96, 85)
+                        : Color.fromARGB(255, 225, 223, 223),
                     child: Text(
                       "ALL",
                       style: TextStyle(color: Colors.black),
                     ), // Your text here
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        _all = !_all;
+                      });
+                    },
                   ),
                 ],
               ),
@@ -456,7 +523,7 @@ class _FilterState extends State<Filter> {
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Row(mainAxisSize: MainAxisSize.max, children: [
-                  FlatButton(
+                  MaterialButton(
                     color: Colors.black,
                     onPressed: () {
                       Navigator.pushAndRemoveUntil(
@@ -482,7 +549,8 @@ class _FilterState extends State<Filter> {
     return new Container(
       decoration: BoxDecoration(
           border: Border.all(
-            width: 1.0,
+            color: Colors.white,
+            width: .9,
           ),
           borderRadius: BorderRadius.circular(5)),
       child: new TextField(
@@ -499,12 +567,12 @@ class _FilterState extends State<Filter> {
   Widget _createListView() {
     return new Flexible(
       child: new ListView.builder(
-          itemCount: _nebulae.length,
+          itemCount: _searchlist.length,
           itemBuilder: (BuildContext context, int index) {
             return new Card(
               color: Colors.white,
               child: new Container(
-                child: new Text("${_nebulae[index]}"),
+                child: new Text("${_searchlist[index]}"),
               ),
             );
           }),
@@ -514,8 +582,8 @@ class _FilterState extends State<Filter> {
   //Perform actual search
   Widget _performSearch() {
     _filterList = new List<String>();
-    for (int i = 0; i < _nebulae.length; i++) {
-      var item = _nebulae[i];
+    for (int i = 0; i < _searchlist.length; i++) {
+      var item = _searchlist[i];
 
       if (item.toLowerCase().contains(_query.toLowerCase())) {
         _filterList.add(item);
@@ -527,7 +595,7 @@ class _FilterState extends State<Filter> {
   //Create the Filtered ListView
   Widget _createFilteredListView() {
     return new Flexible(
-      child: new ListView.builder(
+      child: ListView.builder(
           itemCount: _filterList.length,
           itemBuilder: (BuildContext context, int index) {
             return new Card(

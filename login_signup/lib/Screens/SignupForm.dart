@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_with_signup/Comm/comHelper.dart';
-import 'package:login_with_signup/Comm/genLoginSignupHeader.dart';
+
 import 'package:login_with_signup/Comm/genTextFormField.dart';
 import 'package:login_with_signup/DatabaseHandler/DbHelper.dart';
 import 'package:login_with_signup/Model/UserModel.dart';
@@ -124,11 +124,11 @@ class _SignupFormState extends State<SignupForm> {
                     isObscureText: true,
                   ),
                   Container(
-                    margin: EdgeInsets.all(30.0),
+                    margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
                     width: double.infinity,
                     child: FlatButton(
                       child: Text(
-                        'Signup',
+                        'SignUp',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -143,28 +143,31 @@ class _SignupFormState extends State<SignupForm> {
                   ),
 
                   Container(
+                    margin: EdgeInsets.only(top: 10, bottom: 30),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          'You Have Account Already ?',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        Text("You Have Account Already ?",
+                            style: TextStyle(
+                              // fontSize: 15,
+
+                              color: Colors.black,
+                            )),
+                        SizedBox(
+                          width: 8,
                         ),
-                        FlatButton(
-                          textColor: Color.fromARGB(255, 79, 168, 85),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) => LoginForm()));
+                          },
                           child: Text(
-                            'Sign In',
+                            'Login',
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
-                          onPressed: () {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(builder: (_) => LoginForm()),
-                                (Route<dynamic> route) => false);
-                          },
                         )
                       ],
                     ),
