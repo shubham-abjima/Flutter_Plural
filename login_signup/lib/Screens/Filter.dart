@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:login_with_signup/Screens/HomePage.dart';
@@ -27,7 +28,7 @@ class _FilterState extends State<Filter> {
   void _show() async {
     final DateTimeRange result = await showDateRangePicker(
       context: context,
-      firstDate: DateTime(2022, 1, 1),
+      firstDate: DateTime(1974, 1, 1),
       lastDate: DateTime(2030, 12, 31),
       currentDate: DateTime.now(),
       saveText: 'Done',
@@ -87,7 +88,14 @@ class _FilterState extends State<Filter> {
       "CVR-AZ-Gilbert",
       "CVR-AZ-Mesa",
       "CVR-AZ-Phoenix",
-      "CVR-DC1-lrving Street"
+      "CVR-DC1-lrving Street",
+      "CVR-DC2-New Mexico Avenue",
+      "CVR-DC3-Providence",
+      "CVR-DE-Rehoboth",
+      "CVR-FL-Pembroke Pines",
+      "CVR-GA-Gwinnett",
+      "CVR-GA-Sandy Springs",
+      "CVR-GA-Camp Creek"
     ];
     _searchlist.sort();
   }
@@ -150,19 +158,85 @@ class _FilterState extends State<Filter> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 3,
-            ),
-            Container(
-              color: Colors.transparent,
-              height: 50,
-              margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
-              child: new Column(
-                children: <Widget>[
-                  _createSearchView(),
-                  _firstSearch ? _createListView() : _performSearch()
-                ],
-              ),
+            RawAutocomplete(
+              optionsBuilder: (TextEditingValue textEditingValue) {
+                if (textEditingValue.text == '') {
+                  return const Iterable<String>.empty();
+                } else {
+                  List<String> matches = <String>[];
+                  matches.addAll(_searchlist);
+
+                  matches.retainWhere((s) {
+                    return s
+                        .toLowerCase()
+                        .contains(textEditingValue.text.toLowerCase());
+                  });
+                  return matches;
+                }
+              },
+              onSelected: (String selection) {
+                print('You just selected $selection');
+              },
+              fieldViewBuilder: (BuildContext context,
+                  TextEditingController textEditingController,
+                  FocusNode focusNode,
+                  VoidCallback onFieldSubmitted) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    style: TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                      hintText: "Search Location",
+                      hintStyle: TextStyle(color: Colors.grey[300]),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 1.0,
+                      )),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                        // borderRadius: BorderRadius.all(Radius.elliptical(20.0)),
+                      ),
+                    ),
+                    controller: textEditingController,
+                    focusNode: focusNode,
+                    onSubmitted: (String value) {},
+                  ),
+                );
+              },
+              optionsViewBuilder: (BuildContext context,
+                  void Function(String) onSelected, Iterable<String> options) {
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 430),
+                  child: Material(
+                      color: Color.fromARGB(255, 214, 213, 213),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: options.map((opt) {
+                            return InkWell(
+                                onTap: () {
+                                  onSelected(opt);
+                                },
+                                child: Card(
+                                  shape: RoundedRectangleBorder(),
+                                  child: Container(
+                                    height: 50,
+                                    width: double.infinity,
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(
+                                      opt,
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  ),
+                                ));
+                          }).toList(),
+                        ),
+                      )),
+                );
+              },
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -464,11 +538,15 @@ class _FilterState extends State<Filter> {
                         color: Colors.transparent,
                       ),
                       child: DropdownButton(
+                        style: TextStyle(color: Colors.white),
                         alignment: Alignment.center,
-                        iconSize: 30,
-                        isDense: false,
-                        iconEnabledColor: Colors.black,
-                        dropdownColor: Color.fromARGB(255, 225, 223, 223),
+                        iconSize: 20,
+                        icon: Icon(
+                          Icons.arrow_downward,
+                          color: Colors.white,
+                        ),
+                        isDense: true,
+                        dropdownColor: Colors.grey,
                         value: selectedValue,
                         items: [
                           DropdownMenuItem(
@@ -510,8 +588,8 @@ class _FilterState extends State<Filter> {
                         height: 38,
                         width: 38,
                         child: Icon(
-                          Icons.sort,
-                          color: Colors.white,
+                          CupertinoIcons.sort_down,
+                          color: Colors.black,
                           size: 25,
                         )),
                   ]),
@@ -545,66 +623,67 @@ class _FilterState extends State<Filter> {
         )));
   }
 
-  Widget _createSearchView() {
-    return new Container(
-      decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.white,
-            width: .9,
-          ),
-          borderRadius: BorderRadius.circular(5)),
-      child: new TextField(
-        cursorHeight: 25,
-        style: TextStyle(color: Colors.white),
-        controller: _searchview,
-        decoration: InputDecoration(),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
+//   Widget _createSearchView() {
+//     return new Container(
+//       decoration: BoxDecoration(
+//           border: Border.all(
+//             color: Colors.white,
+//             width: .9,
+//           ),
+//           borderRadius: BorderRadius.circular(5)),
+//       child: new TextField(
+//         cursorHeight: 25,
+//         style: TextStyle(color: Colors.white),
+//         controller: _searchview,
+//         decoration: InputDecoration(),
+//         textAlign: TextAlign.center,
+//       ),
+//     );
+//   }
 
-  //Create a ListView widget
-  Widget _createListView() {
-    return new Flexible(
-      child: new ListView.builder(
-          itemCount: _searchlist.length,
-          itemBuilder: (BuildContext context, int index) {
-            return new Card(
-              color: Colors.white,
-              child: new Container(
-                child: new Text("${_searchlist[index]}"),
-              ),
-            );
-          }),
-    );
-  }
+//   //Create a ListView widget
+//   Widget _createListView() {
+//     return new Flexible(
+//       child: new ListView.builder(
+//           itemCount: _searchlist.length,
+//           itemBuilder: (BuildContext context, int index) {
+//             return new Card(
+//               color: Colors.white,
+//               child: new Container(
+//                 child: new Text("${_searchlist[index]}"),
+//               ),
+//             );
+//           }),
+//     );
+//   }
 
-  //Perform actual search
-  Widget _performSearch() {
-    _filterList = new List<String>();
-    for (int i = 0; i < _searchlist.length; i++) {
-      var item = _searchlist[i];
+//   //Perform actual search
+//   Widget _performSearch() {
+//     _filterList = new List<String>();
+//     for (int i = 0; i < _searchlist.length; i++) {
+//       var item = _searchlist[i];
 
-      if (item.toLowerCase().contains(_query.toLowerCase())) {
-        _filterList.add(item);
-      }
-    }
-    return _createFilteredListView();
-  }
+//       if (item.toLowerCase().contains(_query.toLowerCase())) {
+//         _filterList.add(item);
+//       }
+//     }
+//     return _createFilteredListView();
+//   }
 
-  //Create the Filtered ListView
-  Widget _createFilteredListView() {
-    return new Flexible(
-      child: ListView.builder(
-          itemCount: _filterList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return new Card(
-              color: Colors.white,
-              child: new Container(
-                child: new Text("${_filterList[index]}"),
-              ),
-            );
-          }),
-    );
-  }
+//   //Create the Filtered ListView
+//   Widget _createFilteredListView() {
+//     return new Flexible(
+//       child: ListView.builder(
+//           itemCount: _filterList.length,
+//           itemBuilder: (BuildContext context, int index) {
+//             return new Card(
+//               color: Colors.white,
+//               child: new Container(
+//                 child: new Text("${_filterList[index]}"),
+//               ),
+//             );
+//           }),
+//     );
+//   }
+// }
 }

@@ -1,4 +1,6 @@
 import 'package:animated_horizontal_calendar/animated_horizontal_calendar.dart';
+import 'package:calendar_agenda/calendar_agenda.dart';
+import 'package:calendar_appbar/calendar_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -136,66 +138,68 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: [
-          Container(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Text(
-                      "Calendar",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
-                      textDirection: TextDirection.ltr,
-                    ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    "Calendar",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+                    textDirection: TextDirection.ltr,
                   ),
-                  SizedBox(
-                    width: 175,
+                ),
+                SizedBox(
+                  width: 175,
+                ),
+                IconButton(
+                  icon: Icon(
+                    CupertinoIcons.refresh_circled,
+                    size: 30,
+                    color: Colors.black,
                   ),
-                  IconButton(
-                    icon: Icon(
-                      CupertinoIcons.refresh_circled,
-                      size: 30,
-                      color: Colors.black,
-                    ),
-                    onPressed: () => Navigator.push(
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => MyHomePage()),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.filter_alt_sharp,
+                    color: Colors.black,
+                    size: 28,
+                  ),
+                  onPressed: () => Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (_) => MyHomePage()),
-                    ),
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.filter_list_alt,
-                      color: Colors.black,
-                      size: 25,
-                    ),
-                    onPressed: () => Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (_) => Filter()),
-                        (Route<dynamic> route) => false),
-                  ),
-                ],
-              ),
+                      MaterialPageRoute(builder: (_) => Filter()),
+                      (Route<dynamic> route) => false),
+                ),
+              ],
             ),
           ),
           Container(
-            height: 82,
+            height: 75,
+            width: MediaQuery.of(context).size.width,
             child: AnimatedHorizontalCalendar(
-                tableCalenderButtonColor: Colors.redAccent,
+                tableCalenderButtonColor: Colors.red,
                 tableCalenderIcon: Icon(
                   Icons.calendar_today,
                   color: Colors.white,
                 ),
                 date: DateTime.now(),
+                fontSizeOfMonth: 15,
+                fontSizeOfWeek: 10,
+                colorOfWeek: Colors.black,
+                lastDate: DateTime.now().add(Duration(days: 365)),
                 textColor: Colors.black45,
                 backgroundColor: Colors.white,
                 tableCalenderThemeData: ThemeData.light().copyWith(
-                  primaryColor: Colors.green,
+                  primaryColor: Colors.red,
                   buttonTheme:
                       ButtonThemeData(textTheme: ButtonTextTheme.primary),
-                  colorScheme: ColorScheme.light(primary: Colors.redAccent)
+                  colorScheme: ColorScheme.light(primary: Colors.red)
                       .copyWith(secondary: Colors.red),
                 ),
                 selectedColor: Colors.redAccent,
