@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:animated_horizontal_calendar/utils/calender_utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -51,21 +53,6 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
 
     if (pickedFile != null) {
       image = File(pickedFile.path);
-
-      GestureDetector(
-          onTap: () {
-            getImage();
-          },
-          child: Container(
-            child: image == null
-                ? Text("Pick Image")
-                : Image.file(
-                    File(image.path).absolute,
-                    height: 10,
-                    width: 10,
-                    fit: BoxFit.cover,
-                  ),
-          ));
     } else {
       print('no image selected');
     }
@@ -95,11 +82,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
 
     print(response.stream.toString());
     if (response.statusCode == 200) {
-      GestureDetector(
-          onTap: () {
-            uploadImage();
-          },
-          child: Center(child: Text('Upload')));
+      Center(child: Text('Upload'));
     } else {
       print('failed');
       setState(() {
@@ -223,7 +206,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                   ],
                 ),
               ],
-            )
+            ),
           ],
         ),
         body: FutureBuilder<List<User>>(
@@ -236,50 +219,88 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                     itemBuilder: (context, index) {
                       var user = (snapshot.data as List<User>)[index];
                       return Container(
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.all(8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
+                          width: MediaQuery.of(context).size.width,
+                          child: ListTile(
+                            title: Text(
                               user.name,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Icon(Icons.man_outlined),
-                                SizedBox(
-                                  width: 3,
-                                ),
-                                CircleAvatar(
-                                  maxRadius: 20,
-                                  backgroundColor:
-                                      Color.fromARGB(255, 210, 208, 208),
-                                  child: IconButton(
-                                      onPressed: () {
-                                        getImage();
-                                        // uploadImage();
-                                      },
-                                      icon: Icon(Icons.camera_alt_rounded)),
-                                ),
-                              ],
-                            ),
-                            Text(
+                            subtitle: Text(
                               user.phone,
                             ),
-                            Text(user.email
-                                // " " +
-                                // user.address.suite +
-                                // " " +
-                                // user.address.city +
-                                // " " +
-                                // user.address.zipcode
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    getImage();
+                                  },
+                                  child: Icon(
+                                    CupertinoIcons.camera_circle_fill,
+                                    size: 40,
+                                  ),
                                 ),
-                          ],
-                        ),
-                      );
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                InkWell(
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.grey,
+                                      radius: 17,
+                                      child: Icon(
+                                        Icons.upload,
+                                        color: Colors.white,
+                                        size: 25,
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      uploadImage();
+                                    }),
+                              ],
+                            ),
+                          ));
+                      // Column(
+                      //   crossAxisAlignment: CrossAxisAlignment.start,
+                      //   children: <Widget>[
+                      //     Text(
+                      //       user.name,
+                      //       style: TextStyle(
+                      //           fontWeight: FontWeight.bold, fontSize: 20),
+                      //     ),
+                      //     Row(
+                      //       mainAxisAlignment: MainAxisAlignment.end,
+                      //       children: [
+                      //         Icon(Icons.man_outlined),
+                      //         SizedBox(
+                      //           width: 3,
+                      //         ),
+                      //         CircleAvatar(
+                      //           maxRadius: 20,
+                      //           backgroundColor:
+                      //               Color.fromARGB(255, 210, 208, 208),
+                      //           child: IconButton(
+                      //               onPressed: () {
+                      //                 getImage();
+                      //                 // uploadImage();
+                      //               },
+                      //               icon: Icon(Icons.camera_alt_rounded)),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //     Text(
+                      //       user.phone,
+                      //     ),
+                      //     Text(user.email
+                      //         // " " +
+                      //         // user.address.suite +
+                      //         // " " +
+                      //         // user.address.city +
+                      //         // " " +
+                      //         // user.address.zipcode
+                      //         ),
+                      //   ],
+                      // ),
                     },
                     separatorBuilder: (context, index) {
                       return Divider();

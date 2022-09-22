@@ -113,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                     onChanged: (value) {
                       setState(() {
-                        selectedValue = value;
+                        value = selectedValue;
                       });
                     }),
               ),

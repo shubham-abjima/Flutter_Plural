@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_architecture/data/exceptions/App_exception.dart';
 import 'package:flutter_architecture/data/network/BaseApiServices.dart';
 import 'package:http/http.dart' as http;
@@ -34,6 +35,7 @@ class NetApiServices extends BaseApiServices {
     return responseJson;
   }
 
+  @visibleForTesting
   dynamic returnResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:

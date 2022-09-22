@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           primarySwatch: Colors.grey,
         ),
-        initialRoute: RoutesName.splashScreen,
+        initialRoute: RoutesName.login,
         onGenerateRoute: Routes.generateRoute,
       ),
     );
