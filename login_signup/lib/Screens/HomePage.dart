@@ -1,6 +1,5 @@
 import 'package:animated_horizontal_calendar/animated_horizontal_calendar.dart';
-import 'package:calendar_agenda/calendar_agenda.dart';
-import 'package:calendar_appbar/calendar_appbar.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +17,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int selectedValue = 1;
+  String _chosenValue = "Corp";
   var selectedDate;
 
   var value;
@@ -34,90 +34,65 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[
           Row(
             children: [
-              Icon(Icons.location_on, color: Color.fromARGB(255, 96, 8, 1)),
-              DecoratedBox(
-                decoration: BoxDecoration(color: Colors.white),
-                child: DropdownButton(
-                    alignment: Alignment.center,
-                    isDense: true,
-                    iconEnabledColor: Color.fromARGB(255, 96, 8, 1),
-                    dropdownColor: Color.fromARGB(255, 225, 223, 223),
-                    value: selectedValue,
-                    items: [
-                      DropdownMenuItem(
-                        child: InkWell(
-                          child: Text("Corp"),
-                        ),
-                        value: 1,
-                      ),
-                      DropdownMenuItem(
-                        child: InkWell(
-                          child: Text("CVR-AK-Anchorage"),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => UploadImageScreen()));
-                          },
-                        ),
-                      ),
-                      DropdownMenuItem(
-                        child: Text("CVR-AK-Fairbanks"),
-                        value: 3,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("CVR-AL-Dothan"),
-                        value: 4,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("CVR-AL-Fairhope"),
-                        value: 5,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("CVR-AL-Hoover"),
-                        value: 6,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("CVR-AL-Mobile"),
-                        value: 7,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("CVR-AL-Mantgomery"),
-                        value: 8,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("CVR-AL-Opelika"),
-                        value: 9,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("CVR-AL-Trussville"),
-                        value: 10,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("CVR-AZ-Gilbert"),
-                        value: 11,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("CVR-AZ-Mesa"),
-                        value: 12,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("CVR-AZ-Phoenix"),
-                        value: 13,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("CVR-DC1-lrving Street"),
-                        value: 14,
-                      ),
-                      DropdownMenuItem(child: Text("Others"), value: 15),
-                    ],
-                    onChanged: (value) {
-                      setState(() {
-                        value = selectedValue;
-                      });
-                    }),
+              Icon(Icons.location_on, color: Colors.green),
+              DropdownButton<String>(
+                dropdownColor: Color.fromARGB(255, 216, 215, 215),
+                alignment: Alignment.center,
+                value: _chosenValue,
+
+                icon: Icon(
+                  Icons.keyboard_arrow_down,
+                  color: Colors.green,
+                ),
+                //elevation: 5,
+                style: TextStyle(color: Colors.black),
+
+                items: <String>[
+                  "Corp",
+                  "CVR-AK-Anchorage",
+                  "CVR-AK-Fairbanks",
+                  "CVR-AL-Dothan",
+                  "CVR-AL-Fairhope",
+                  "CVR-AL-Hoover",
+                  "CVR-AL-Mobile",
+                  "CVR-AL-Mantgomery",
+                  "CVR-AL-Opelika",
+                  "CVR-AL-Trussville",
+                  "CVR-AZ-Gilbert",
+                  "CVR-AZ-Mesa",
+                  "CVR-AZ-Phoenix",
+                  "CVR-DC1-lrving Street",
+                  "CVR-DC2-New Mexico Avenue",
+                  "CVR-DC3-Providence",
+                  "CVR-DE-Rehoboth",
+                  "CVR-FL-Pembroke Pines",
+                  "CVR-GA-Gwinnett",
+                  "CVR-GA-Sandy Springs",
+                  "CVR-GA-Camp Creek"
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_chosenvalue) => UploadImageScreen()));
+                    },
+                    value: value,
+                    child: Text(
+                      value,
+                    ),
+                  );
+                }).toList(),
+
+                onChanged: (String value) {
+                  setState(() {
+                    UploadImageScreen();
+                  });
+                },
               ),
-              Padding(padding: EdgeInsets.all(15)),
+              SizedBox(
+                width: 20,
+              ),
               Column(
                 children: [
                   IconButton(

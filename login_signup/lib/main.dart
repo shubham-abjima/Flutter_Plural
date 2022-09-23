@@ -30,7 +30,7 @@ class Splash2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return SplashScreen(
         seconds: 3,
-        navigateAfterSeconds: LoginForm(),
+        navigateAfterSeconds: new LoginForm(),
         image: new Image.asset(
           'assets/images/CVR.jpg',
           fit: BoxFit.cover,
