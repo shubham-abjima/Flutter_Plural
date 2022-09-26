@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:login_with_signup/Screens/Appointment.dart';
 import 'package:login_with_signup/Screens/HomePage.dart';
 import 'package:login_with_signup/Screens/LoginForm.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -23,6 +24,7 @@ class UploadImageScreen extends StatefulWidget {
 class _UploadImageScreenState extends State<UploadImageScreen> {
   File selectedImage;
   var resJson;
+  var i = 10;
 
   Future<List<User>> listUsers;
   onUploadImage() async {
@@ -39,6 +41,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
         filename: selectedImage.path.split('/').last,
       ),
     );
+
     request.headers.addAll(headers);
     print("request: " + request.toString());
     var res = await request.send();
@@ -90,6 +93,10 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
   }
 
   int selectedValue = 1;
+  String _chosenValue = "Corp";
+  var selectedDate;
+
+  var value;
   bool showSpinner = false;
 
   // Future getImage() async {
@@ -156,78 +163,96 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
           ),
           actions: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(Icons.location_on, color: Color.fromARGB(255, 96, 8, 1)),
+                Icon(Icons.location_on, color: Colors.green),
                 DecoratedBox(
                   decoration: BoxDecoration(color: Colors.transparent),
                   child: DropdownButton(
                       alignment: Alignment.center,
                       isDense: true,
-                      iconEnabledColor: Color.fromARGB(255, 96, 8, 1),
+                      icon: Icon(Icons.keyboard_arrow_down_outlined),
+                      iconEnabledColor: Colors.green,
                       dropdownColor: Color.fromARGB(255, 225, 223, 223),
                       value: selectedValue,
                       items: [
                         DropdownMenuItem(
                           child: InkWell(
-                            child: Text("Corp"),
+                            child: Text("Corp", style: TextStyle(fontSize: 13)),
                           ),
                           value: 1,
                         ),
                         DropdownMenuItem(
                           child: InkWell(
-                            child: Text("CVR-AK-Anchorage"),
+                            child: Text("CVR-AK-Anchorage",
+                                style: TextStyle(fontSize: 13)),
                           ),
                           value: 2,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Fairbanks"),
+                          child: Text("CVR-AK-Fairbanks",
+                              style: TextStyle(fontSize: 13)),
                           value: 3,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AL-Dothan"),
+                          child: Text("CVR-AL-Dothan",
+                              style: TextStyle(fontSize: 13)),
                           value: 4,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AL-Fairhope"),
+                          child: Text("CVR-AL-Fairhope",
+                              style: TextStyle(fontSize: 13)),
                           value: 5,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AL-Hoover"),
+                          child: Text("CVR-AL-Hoover",
+                              style: TextStyle(fontSize: 13)),
                           value: 6,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AL-Mobile"),
+                          child: Text("CVR-AL-Mobile",
+                              style: TextStyle(fontSize: 13)),
                           value: 7,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AL-Mantgomery"),
+                          child: Text("CVR-AL-Mantgomery",
+                              style: TextStyle(fontSize: 13)),
                           value: 8,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AL-Opelika"),
+                          child: Text("CVR-AL-Opelika",
+                              style: TextStyle(fontSize: 13)),
                           value: 9,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AL-Trussville"),
+                          child: Text("CVR-AL-Trussville",
+                              style: TextStyle(fontSize: 13)),
                           value: 10,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AZ-Gilbert"),
+                          child: Text("CVR-AZ-Gilbert",
+                              style: TextStyle(fontSize: 13)),
                           value: 11,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AZ-Mesa"),
+                          child: Text("CVR-AZ-Mesa",
+                              style: TextStyle(fontSize: 13)),
                           value: 12,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AZ-Phoenix"),
+                          child: Text("CVR-AZ-Phoenix",
+                              style: TextStyle(fontSize: 13)),
                           value: 13,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-DC1-lrving Street"),
+                          child: Text("CVR-DC1-lrving Street",
+                              style: TextStyle(fontSize: 13)),
                           value: 14,
                         ),
-                        DropdownMenuItem(child: Text("Others"), value: 15),
+                        DropdownMenuItem(
+                            child:
+                                Text("Others", style: TextStyle(fontSize: 13)),
+                            value: 15),
                       ],
                       onChanged: (value) {
                         setState(() {
@@ -235,7 +260,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                         });
                       }),
                 ),
-                Padding(padding: EdgeInsets.all(15)),
+                Padding(padding: EdgeInsets.all(20)),
                 Column(
                   children: [
                     IconButton(
@@ -266,6 +291,12 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                       return Container(
                           width: MediaQuery.of(context).size.width,
                           child: ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => Appointment()));
+                            },
                             title: Text(
                               user.name,
                               style: TextStyle(
@@ -277,14 +308,22 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                             trailing: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
+                                Icon(
+                                  Icons.female_outlined,
+                                  color: Colors.orange,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
                                 selectedImage == null
                                     ? InkWell(
                                         onTap: getImage,
                                         child: CircleAvatar(
-                                          backgroundColor: Colors.grey,
+                                          backgroundColor: Color.fromARGB(
+                                              255, 203, 202, 202),
                                           radius: 18,
                                           child: Icon(
-                                            Icons.add_a_photo,
+                                            Icons.camera_alt_outlined,
                                             color: Colors.black,
                                             size: 25,
                                           ),
@@ -292,11 +331,12 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                                       )
                                     : Image.file(selectedImage),
                                 SizedBox(
-                                  width: 10,
+                                  width: 5,
                                 ),
                                 InkWell(
                                   child: CircleAvatar(
-                                    backgroundColor: Colors.grey,
+                                    backgroundColor:
+                                        Color.fromARGB(255, 203, 202, 202),
                                     radius: 17,
                                     child: Icon(
                                       Icons.cloud_upload_outlined,

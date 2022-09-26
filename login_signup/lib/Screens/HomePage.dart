@@ -35,64 +35,108 @@ class _MyHomePageState extends State<MyHomePage> {
           Row(
             children: [
               Icon(Icons.location_on, color: Colors.green),
-              DropdownButton<String>(
-                dropdownColor: Color.fromARGB(255, 216, 215, 215),
-                alignment: Alignment.center,
-                value: _chosenValue,
-
-                icon: Icon(
-                  Icons.keyboard_arrow_down,
-                  color: Colors.green,
-                ),
-                //elevation: 5,
-                style: TextStyle(color: Colors.black),
-
-                items: <String>[
-                  "Corp",
-                  "CVR-AK-Anchorage",
-                  "CVR-AK-Fairbanks",
-                  "CVR-AL-Dothan",
-                  "CVR-AL-Fairhope",
-                  "CVR-AL-Hoover",
-                  "CVR-AL-Mobile",
-                  "CVR-AL-Mantgomery",
-                  "CVR-AL-Opelika",
-                  "CVR-AL-Trussville",
-                  "CVR-AZ-Gilbert",
-                  "CVR-AZ-Mesa",
-                  "CVR-AZ-Phoenix",
-                  "CVR-DC1-lrving Street",
-                  "CVR-DC2-New Mexico Avenue",
-                  "CVR-DC3-Providence",
-                  "CVR-DE-Rehoboth",
-                  "CVR-FL-Pembroke Pines",
-                  "CVR-GA-Gwinnett",
-                  "CVR-GA-Sandy Springs",
-                  "CVR-GA-Camp Creek"
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_chosenvalue) => UploadImageScreen()));
-                    },
-                    value: value,
-                    child: Text(
-                      value,
-                    ),
-                  );
-                }).toList(),
-
-                onChanged: (String value) {
-                  setState(() {
-                    UploadImageScreen();
-                  });
-                },
+              DecoratedBox(
+                decoration: BoxDecoration(color: Colors.white),
+                child: DropdownButton(
+                    alignment: Alignment.center,
+                    icon: Icon(Icons.keyboard_arrow_down_outlined),
+                    isDense: true,
+                    iconEnabledColor: Colors.green,
+                    dropdownColor: Color.fromARGB(255, 225, 223, 223),
+                    value: selectedValue,
+                    items: [
+                      DropdownMenuItem(
+                        child: InkWell(
+                          child: Text(
+                            "Corp",
+                            style: TextStyle(fontSize: 13),
+                          ),
+                        ),
+                        value: 1,
+                      ),
+                      DropdownMenuItem(
+                        child: InkWell(
+                          child: Text("CVR-AK-Anchorage",
+                              style: TextStyle(fontSize: 13)),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => UploadImageScreen()));
+                          },
+                        ),
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AK-Fairbanks",
+                            style: TextStyle(fontSize: 13)),
+                        value: 3,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AL-Dothan",
+                            style: TextStyle(fontSize: 13)),
+                        value: 4,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AL-Fairhope",
+                            style: TextStyle(fontSize: 13)),
+                        value: 5,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AL-Hoover",
+                            style: TextStyle(fontSize: 13)),
+                        value: 6,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AL-Mobile",
+                            style: TextStyle(fontSize: 13)),
+                        value: 7,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AL-Mantgomery",
+                            style: TextStyle(fontSize: 13)),
+                        value: 8,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AL-Opelika",
+                            style: TextStyle(fontSize: 13)),
+                        value: 9,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AL-Trussville",
+                            style: TextStyle(fontSize: 13)),
+                        value: 10,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AZ-Gilbert",
+                            style: TextStyle(fontSize: 13)),
+                        value: 11,
+                      ),
+                      DropdownMenuItem(
+                        child:
+                            Text("CVR-AZ-Mesa", style: TextStyle(fontSize: 13)),
+                        value: 12,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-AZ-Phoenix",
+                            style: TextStyle(fontSize: 13)),
+                        value: 13,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("CVR-DC1-lrving Street",
+                            style: TextStyle(fontSize: 13)),
+                        value: 14,
+                      ),
+                      DropdownMenuItem(
+                          child: Text("Others", style: TextStyle(fontSize: 13)),
+                          value: 15),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        value = selectedValue;
+                      });
+                    }),
               ),
-              SizedBox(
-                width: 20,
-              ),
+              Padding(padding: EdgeInsets.all(20)),
               Column(
                 children: [
                   IconButton(
@@ -146,11 +190,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.black,
                     size: 28,
                   ),
-                  onPressed: () => Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (_) => Filter()),
-                      (Route<dynamic> route) => false),
-                ),
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => Filter()),
+                  ),
+                )
               ],
             ),
           ),

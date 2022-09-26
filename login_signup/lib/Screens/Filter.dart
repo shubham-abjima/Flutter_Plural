@@ -395,6 +395,7 @@ class _FilterState extends State<Filter> {
                 child: TextField(
                   style: TextStyle(color: Colors.white),
                   textAlign: TextAlign.center,
+                  
                   onChanged: (value) {},
                   decoration: InputDecoration(
                     hintText: 'First Name',
