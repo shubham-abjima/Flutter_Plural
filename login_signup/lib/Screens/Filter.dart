@@ -142,7 +142,7 @@ class _FilterState extends State<Filter> {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/blur.jpg"),
-              fit: BoxFit.none,
+              fit: BoxFit.cover,
             ),
           ),
           child: Column(children: [
@@ -258,7 +258,7 @@ class _FilterState extends State<Filter> {
                 children: <Widget>[
                   MaterialButton(
                     color: _todayPressed
-                        ? Color.fromARGB(255, 246, 96, 85)
+                        ? Colors.green
                         : Color.fromARGB(255, 225, 223, 223),
                     minWidth: 5,
                     onPressed: () {
@@ -274,7 +274,7 @@ class _FilterState extends State<Filter> {
                   ),
                   MaterialButton(
                     color: _daysPressed
-                        ? Color.fromARGB(255, 246, 96, 85)
+                        ? Colors.green
                         : Color.fromARGB(255, 225, 223, 223),
                     minWidth: 5,
                     onPressed: () {
@@ -290,7 +290,7 @@ class _FilterState extends State<Filter> {
                   ),
                   MaterialButton(
                     color: _monthPressed
-                        ? Color.fromARGB(255, 246, 96, 85)
+                        ? Colors.green
                         : Color.fromARGB(255, 225, 223, 223),
                     minWidth: 5,
                     onPressed: () {
@@ -306,7 +306,7 @@ class _FilterState extends State<Filter> {
                   ),
                   MaterialButton(
                     color: _custom
-                        ? Color.fromARGB(255, 246, 96, 85)
+                        ? Colors.green
                         : Color.fromARGB(255, 225, 223, 223),
                     minWidth: 5,
                     onPressed: () {
@@ -335,7 +335,7 @@ class _FilterState extends State<Filter> {
                   height: 30,
                   child: MaterialButton(
                     color: _startDate
-                        ? Color.fromARGB(255, 246, 96, 85)
+                        ? Colors.green
                         : Color.fromARGB(255, 225, 223, 223),
                     onPressed: () {
                       setState(() {
@@ -356,7 +356,7 @@ class _FilterState extends State<Filter> {
                   height: 30,
                   child: MaterialButton(
                     color: _startDate
-                        ? Color.fromARGB(255, 246, 96, 85)
+                        ? Colors.green
                         : Color.fromARGB(255, 225, 223, 223),
                     onPressed: () {
                       setState(() {
@@ -395,7 +395,6 @@ class _FilterState extends State<Filter> {
                 child: TextField(
                   style: TextStyle(color: Colors.white),
                   textAlign: TextAlign.center,
-                  
                   onChanged: (value) {},
                   decoration: InputDecoration(
                     hintText: 'First Name',
@@ -468,7 +467,7 @@ class _FilterState extends State<Filter> {
                 children: [
                   RaisedButton.icon(
                     color: _male
-                        ? Color.fromARGB(255, 246, 96, 85)
+                        ? Colors.green
                         : Color.fromARGB(255, 225, 223, 223),
                     icon: Icon(Icons.man_outlined,
                         color: Colors.black), // Your icon here
@@ -484,11 +483,11 @@ class _FilterState extends State<Filter> {
                   ),
                   RaisedButton.icon(
                     color: _female
-                        ? Color.fromARGB(255, 246, 96, 85)
+                        ? Colors.green
                         : Color.fromARGB(255, 225, 223, 223),
                     icon: Icon(
                       Icons.woman_outlined,
-                      color: Colors.green,
+                      color: Colors.orange,
                     ), // Your icon here
                     label: Text(
                       "FEMALE",
@@ -502,7 +501,7 @@ class _FilterState extends State<Filter> {
                   ),
                   RaisedButton(
                     color: _all
-                        ? Color.fromARGB(255, 246, 96, 85)
+                        ? Colors.green
                         : Color.fromARGB(255, 225, 223, 223),
                     child: Text(
                       "ALL",
@@ -543,7 +542,7 @@ class _FilterState extends State<Filter> {
                         alignment: Alignment.center,
                         iconSize: 20,
                         icon: Icon(
-                          Icons.arrow_downward,
+                          Icons.keyboard_arrow_down_outlined,
                           color: Colors.white,
                         ),
                         isDense: true,
@@ -623,68 +622,4 @@ class _FilterState extends State<Filter> {
           ]),
         )));
   }
-
-//   Widget _createSearchView() {
-//     return new Container(
-//       decoration: BoxDecoration(
-//           border: Border.all(
-//             color: Colors.white,
-//             width: .9,
-//           ),
-//           borderRadius: BorderRadius.circular(5)),
-//       child: new TextField(
-//         cursorHeight: 25,
-//         style: TextStyle(color: Colors.white),
-//         controller: _searchview,
-//         decoration: InputDecoration(),
-//         textAlign: TextAlign.center,
-//       ),
-//     );
-//   }
-
-//   //Create a ListView widget
-//   Widget _createListView() {
-//     return new Flexible(
-//       child: new ListView.builder(
-//           itemCount: _searchlist.length,
-//           itemBuilder: (BuildContext context, int index) {
-//             return new Card(
-//               color: Colors.white,
-//               child: new Container(
-//                 child: new Text("${_searchlist[index]}"),
-//               ),
-//             );
-//           }),
-//     );
-//   }
-
-//   //Perform actual search
-//   Widget _performSearch() {
-//     _filterList = new List<String>();
-//     for (int i = 0; i < _searchlist.length; i++) {
-//       var item = _searchlist[i];
-
-//       if (item.toLowerCase().contains(_query.toLowerCase())) {
-//         _filterList.add(item);
-//       }
-//     }
-//     return _createFilteredListView();
-//   }
-
-//   //Create the Filtered ListView
-//   Widget _createFilteredListView() {
-//     return new Flexible(
-//       child: ListView.builder(
-//           itemCount: _filterList.length,
-//           itemBuilder: (BuildContext context, int index) {
-//             return new Card(
-//               color: Colors.white,
-//               child: new Container(
-//                 child: new Text("${_filterList[index]}"),
-//               ),
-//             );
-//           }),
-//     );
-//   }
-// }
 }

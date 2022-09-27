@@ -22,56 +22,61 @@ class UploadImageScreen extends StatefulWidget {
 }
 
 class _UploadImageScreenState extends State<UploadImageScreen> {
-  File selectedImage;
+  File image;
   var resJson;
+
   var i = 10;
 
-  Future<List<User>> listUsers;
-  onUploadImage() async {
-    var request = http.MultipartRequest(
-      'POST',
-      Uri.parse("https://fakestoreapi.com/products"),
-    );
-    Map<String, String> headers = {"Content-type": "multipart/form-data"};
-    request.files.add(
-      http.MultipartFile(
-        'image',
-        selectedImage.readAsBytes().asStream(),
-        selectedImage.lengthSync(),
-        filename: selectedImage.path.split('/').last,
-      ),
-    );
+  Future getImage() async {
+    final pickedFile = await ImagePicker.pickImage(
+        maxWidth: 30,
+        maxHeight: 30,
+        source: ImageSource.gallery,
+        imageQuality: 80);
 
-    request.headers.addAll(headers);
-    print("request: " + request.toString());
-    var res = await request.send();
-    print(res.stream.toString());
-    if (res.statusCode == 200) {
-      Center(child: Text('Upload'));
+    if (pickedFile != null) {
+      image = File(pickedFile.path);
+      setState(() {});
     } else {
-      print('failed');
-      setState(() {
-        showSpinner = true;
-      });
+      print('no image selected');
     }
-    http.Response response = await http.Response.fromStream(res);
-    setState(() {
-      resJson = jsonDecode(response.body);
-    });
   }
 
-  Future getImage() async {
-    var image = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-      maxHeight: 35,
-      maxWidth: 35,
-    );
-
+  Future<void> uploadImage() async {
     setState(() {
-      selectedImage = File(
-        image.path,
-      );
+      showSpinner = true;
     });
+
+    var stream = new http.ByteStream(image.openRead());
+    stream.cast();
+
+    var length = await image.length();
+
+    var uri = Uri.parse('https://fakestoreapi.com/products');
+
+    var request = new http.MultipartRequest('POST', uri);
+
+    request.fields['title'] = "Static title";
+
+    var multiport = new http.MultipartFile('image', stream, length);
+
+    request.files.add(multiport);
+
+    var response = await request.send();
+
+    print(response.stream.toString());
+    if (response.statusCode == 200) {
+      setState(() {
+        showSpinner = false;
+      });
+      print('Image uploaded');
+    } else {
+      print('failed');
+
+      setState(() {
+        showSpinner = false;
+      });
+    }
   }
 
   @override
@@ -93,55 +98,8 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
   }
 
   int selectedValue = 1;
-  String _chosenValue = "Corp";
-  var selectedDate;
 
-  var value;
   bool showSpinner = false;
-
-  // Future getImage() async {
-  //   final pickedFile = await ImagePicker.pickImage(
-  //       source: ImageSource.gallery, imageQuality: 80);
-
-  //   if (pickedFile != null) {
-  //     image = File(pickedFile.path);
-  //   } else {
-  //     print('no image selected');
-  //   }
-  // }
-
-  // Future<void> uploadImage() async {
-  //   setState(() {
-  //     showSpinner = true;
-  //   });
-
-  //   var stream = new http.ByteStream(image.openRead());
-  //   stream.cast();
-
-  //   var length = await image.length();
-
-  //   var uri = Uri.parse('https://fakestoreapi.com/products');
-
-  //   var request = new http.MultipartRequest('POST', uri);
-
-  //   request.fields['title'] = "Static title";
-
-  //   var multiport = new http.MultipartFile('image', stream, length);
-
-  //   request.files.add(multiport);
-
-  //   var response = await request.send();
-
-  //   print(response.stream.toString());
-  //   if (response.statusCode == 200) {
-  //     Center(child: Text('Upload'));
-  //   } else {
-  //     print('failed');
-  //     setState(() {
-  //       showSpinner = true;
-  //     });
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -315,7 +273,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                                 SizedBox(
                                   width: 5,
                                 ),
-                                selectedImage == null
+                                image == null
                                     ? InkWell(
                                         onTap: getImage,
                                         child: CircleAvatar(
@@ -329,7 +287,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                                           ),
                                         ),
                                       )
-                                    : Image.file(selectedImage),
+                                    : Image.file(image),
                                 SizedBox(
                                   width: 5,
                                 ),
@@ -344,7 +302,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                                       size: 25,
                                     ),
                                   ),
-                                  onTap: onUploadImage,
+                                  onTap: uploadImage,
                                 ),
                               ],
                             ),
@@ -394,7 +352,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                     separatorBuilder: (context, index) {
                       return Divider();
                     },
-                    itemCount: (snapshot.data as List<User>).length),
+                    itemCount: (snapshot.data).length),
               );
             } else if (snapshot.hasError) {
               return Center(
@@ -402,7 +360,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
               );
             }
             return SplashScreen(
-                seconds: 2,
+                seconds: 5,
                 useLoader: true,
                 loaderColor: Color.fromARGB(255, 1, 53, 96));
           },

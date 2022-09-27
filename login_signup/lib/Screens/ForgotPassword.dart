@@ -130,7 +130,7 @@ class _HomeFormState extends State<ForgotPassword> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/images/blur.jpg"),
-                fit: BoxFit.none,
+                fit: BoxFit.cover,
               ),
             ),
             child: Center(
@@ -158,10 +158,12 @@ class _HomeFormState extends State<ForgotPassword> {
                   //     hintName: 'User ID'),
                   SizedBox(height: 10.0),
                   getTextFormField(
-                      controller: _conUserName,
-                      icon: Icons.person_outline,
-                      inputType: TextInputType.name,
-                      hintName: 'User Name'),
+                    controller: _conUserName,
+                    icon: Icons.person_outline,
+                    inputType: TextInputType.name,
+                    hintName: 'User Name',
+                  ),
+
                   SizedBox(height: 10.0),
                   getTextFormField(
                       controller: _conEmail,

@@ -72,7 +72,7 @@ class _SignupFormState extends State<SignupForm> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/images/blur.jpg"),
-                fit: BoxFit.none,
+                fit: BoxFit.cover,
               ),
             ),
             child: Center(
@@ -94,6 +94,7 @@ class _SignupFormState extends State<SignupForm> {
                   SizedBox(height: 20.0),
                   // genLoginSignupHeader('SignUp'),
                   getTextFormField(
+                    
                       controller: _conUserId,
                       icon: Icons.person,
                       hintName: 'User ID'),

@@ -202,7 +202,7 @@ class _MyHomePageState extends State<MyHomePage> {
             height: 75,
             width: MediaQuery.of(context).size.width,
             child: AnimatedHorizontalCalendar(
-                tableCalenderButtonColor: Colors.red,
+                tableCalenderButtonColor: Colors.green,
                 tableCalenderIcon: Icon(
                   Icons.calendar_today,
                   color: Colors.white,
@@ -215,13 +215,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 textColor: Colors.black45,
                 backgroundColor: Colors.white,
                 tableCalenderThemeData: ThemeData.light().copyWith(
-                  primaryColor: Colors.red,
+                  primaryColor: Colors.green,
                   buttonTheme:
                       ButtonThemeData(textTheme: ButtonTextTheme.primary),
-                  colorScheme: ColorScheme.light(primary: Colors.red)
-                      .copyWith(secondary: Colors.red),
+                  colorScheme: ColorScheme.light(primary: Colors.green)
+                      .copyWith(secondary: Colors.green),
                 ),
-                selectedColor: Colors.redAccent,
+                selectedColor: Colors.green,
                 onDateSelected: (date) {
                   selectedDate = date;
                 }),

@@ -24,6 +24,7 @@ class getTextFormField extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: TextFormField(
         cursorColor: Colors.white,
+        style: TextStyle(color: Colors.white),
         controller: controller,
         obscureText: isObscureText,
         enabled: isEnable,
@@ -51,11 +52,14 @@ class getTextFormField extends StatelessWidget {
             color: Colors.white,
           ),
           labelText: hintName,
+          labelStyle: TextStyle(color: Colors.white),
+
           // hintText: hintName,
-          focusColor: Colors.white,
 
           // labelText: hintName,
+
           fillColor: Colors.transparent,
+
           filled: true,
         ),
       ),

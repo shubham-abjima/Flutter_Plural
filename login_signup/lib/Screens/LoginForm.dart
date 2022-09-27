@@ -89,7 +89,7 @@ class _LoginFormState extends State<LoginForm> {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/blur.jpg"),
-              fit: BoxFit.none,
+              fit: BoxFit.cover,
             ),
           ),
           child: Column(
@@ -113,6 +113,7 @@ class _LoginFormState extends State<LoginForm> {
                 controller: _conUserId,
                 icon: Icons.person_outline,
                 hintName: 'Username',
+                
               ),
               SizedBox(height: 10.0),
               getTextFormField(
