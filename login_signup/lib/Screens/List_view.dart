@@ -10,7 +10,6 @@ class ListSearch extends StatefulWidget {
 class _ListSearchState extends State<ListSearch> {
   @override
   Widget build(BuildContext context) {
-    TextEditingController _textController = TextEditingController();
     List<String> mainDataList = [
       "Corp",
       "CVR-AK-Anchorage",
@@ -29,15 +28,5 @@ class _ListSearchState extends State<ListSearch> {
     ];
 
     // Copy Main List into New List.
-    List<String> newDataList = List.from(mainDataList);
-
-    onItemChanged(String value) {
-      setState(() {
-        newDataList = mainDataList
-            .where(
-                (string) => string.toLowerCase().contains(value.toLowerCase()))
-            .toList();
-      });
-    }
   }
 }

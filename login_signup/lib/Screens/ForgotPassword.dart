@@ -122,110 +122,106 @@ class _HomeFormState extends State<ForgotPassword> {
       ),
       body: Form(
         key: _formKey,
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/blur.jpg"),
-                fit: BoxFit.cover,
-              ),
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/blur.jpg"),
+              fit: BoxFit.cover,
             ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "assets/images/333.png",
-                    height: 200.0,
-                    width: 200.0,
-                  ),
-                  TextButton(
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/images/333.png",
+                  height: 200.0,
+                  width: 200.0,
+                ),
+                Text(
+                  "EasyPic",
+                  style: TextStyle(color: Colors.white, fontSize: 30),
+                ),
+                // genLoginSignupHeader("Forgot Password ?"),
+
+                //Update
+                // getTextFormField(
+                //     controller: _conUserId,
+                //     isEnable: true,
+                //     icon: Icons.person,
+                //     hintName: 'User ID'),
+                SizedBox(height: 10.0),
+                getTextFormField(
+                  controller: _conUserName,
+                  icon: Icons.person_outline,
+                  inputType: TextInputType.name,
+                  hintName: 'User Name',
+                ),
+
+                SizedBox(height: 10.0),
+                getTextFormField(
+                    controller: _conEmail,
+                    icon: Icons.email,
+                    inputType: TextInputType.emailAddress,
+                    hintName: 'Email'),
+                SizedBox(height: 10.0),
+
+                getTextFormField(
+                  controller: _conPassword,
+                  icon: Icons.lock,
+                  hintName: 'Password',
+                  isObscureText: true,
+                ),
+                SizedBox(height: 10.0),
+                Container(
+                  margin: EdgeInsets.all(30.0),
+                  width: double.infinity,
+                  child: FlatButton(
                     child: Text(
-                      "EasyPic",
-                      style: TextStyle(color: Colors.white, fontSize: 30),
+                      'Update',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
                     ),
+                    onPressed: update,
                   ),
-                  // genLoginSignupHeader("Forgot Password ?"),
-
-                  //Update
-                  // getTextFormField(
-                  //     controller: _conUserId,
-                  //     isEnable: true,
-                  //     icon: Icons.person,
-                  //     hintName: 'User ID'),
-                  SizedBox(height: 10.0),
-                  getTextFormField(
-                    controller: _conUserName,
-                    icon: Icons.person_outline,
-                    inputType: TextInputType.name,
-                    hintName: 'User Name',
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 79, 168, 85),
+                    borderRadius: BorderRadius.circular(30.0),
                   ),
+                ),
 
-                  SizedBox(height: 10.0),
-                  getTextFormField(
-                      controller: _conEmail,
-                      icon: Icons.email,
-                      inputType: TextInputType.emailAddress,
-                      hintName: 'Email'),
-                  SizedBox(height: 10.0),
-                  getTextFormField(
-                    controller: _conPassword,
-                    icon: Icons.lock,
-                    hintName: 'Password',
-                    isObscureText: true,
-                  ),
-                  SizedBox(height: 10.0),
-                  Container(
-                    margin: EdgeInsets.all(30.0),
-                    width: double.infinity,
-                    child: FlatButton(
-                      child: Text(
-                        'Update',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      onPressed: update,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 79, 168, 85),
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                  ),
+                //Delete
 
-                  //Delete
+                // getTextFormField(
+                //     controller: _conDelUserId,
+                //     isEnable: true,
+                //     icon: Icons.person,
+                //     hintName: 'User ID'),
+                // SizedBox(height: 10.0),
 
-                  // getTextFormField(
-                  //     controller: _conDelUserId,
-                  //     isEnable: true,
-                  //     icon: Icons.person,
-                  //     hintName: 'User ID'),
-                  // SizedBox(height: 10.0),
-
-                  // Container(
-                  //   margin: EdgeInsets.all(30.0),
-                  //   width: double.infinity,
-                  //   child: FlatButton(
-                  //     child: Text(
-                  //       'Delete',
-                  //       style: TextStyle(
-                  //           color: Colors.white,
-                  //           fontSize: 20,
-                  //           fontWeight: FontWeight.bold),
-                  //     ),
-                  //     onPressed: delete,
-                  //   ),
-                  //   decoration: BoxDecoration(
-                  //     color: Colors.red,
-                  //     borderRadius: BorderRadius.circular(30.0),
-                  //   ),
-                  // ),
-                ],
-              ),
+                // Container(
+                //   margin: EdgeInsets.all(30.0),
+                //   width: double.infinity,
+                //   child: FlatButton(
+                //     child: Text(
+                //       'Delete',
+                //       style: TextStyle(
+                //           color: Colors.white,
+                //           fontSize: 20,
+                //           fontWeight: FontWeight.bold),
+                //     ),
+                //     onPressed: delete,
+                //   ),
+                //   decoration: BoxDecoration(
+                //     color: Colors.red,
+                //     borderRadius: BorderRadius.circular(30.0),
+                //   ),
+                // ),
+              ],
             ),
           ),
         ),

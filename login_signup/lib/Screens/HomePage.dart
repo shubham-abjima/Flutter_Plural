@@ -17,7 +17,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int selectedValue = 1;
-  String _chosenValue = "Corp";
+
   var selectedDate;
 
   var value;
@@ -34,12 +34,19 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[
           Row(
             children: [
-              Icon(Icons.location_on, color: Colors.green),
+              Icon(
+                Icons.location_on,
+                color: Colors.green,
+              ),
               DecoratedBox(
-                decoration: BoxDecoration(color: Colors.white),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
                 child: DropdownButton(
                     alignment: Alignment.center,
-                    icon: Icon(Icons.keyboard_arrow_down_outlined),
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_outlined,
+                    ),
                     isDense: true,
                     iconEnabledColor: Colors.green,
                     dropdownColor: Color.fromARGB(255, 225, 223, 223),
@@ -67,67 +74,160 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       DropdownMenuItem(
-                        child: Text("CVR-AK-Fairbanks",
-                            style: TextStyle(fontSize: 13)),
+                        child: InkWell(
+                          child: Text("CVR-AK-Fairbanks",
+                              style: TextStyle(fontSize: 13)),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => UploadImageScreen()));
+                          },
+                        ),
                         value: 3,
                       ),
                       DropdownMenuItem(
-                        child: Text("CVR-AL-Dothan",
-                            style: TextStyle(fontSize: 13)),
+                        child: InkWell(
+                            child: Text("CVR-AL-Dothan",
+                                style: TextStyle(fontSize: 13)),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => UploadImageScreen()));
+                            }),
                         value: 4,
                       ),
                       DropdownMenuItem(
-                        child: Text("CVR-AL-Fairhope",
-                            style: TextStyle(fontSize: 13)),
+                        child: InkWell(
+                            child: Text("CVR-AL-Fairhope",
+                                style: TextStyle(fontSize: 13)),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => UploadImageScreen()));
+                            }),
                         value: 5,
                       ),
                       DropdownMenuItem(
-                        child: Text("CVR-AL-Hoover",
-                            style: TextStyle(fontSize: 13)),
+                        child: InkWell(
+                            child: Text("CVR-AL-Hoover",
+                                style: TextStyle(fontSize: 13)),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => UploadImageScreen()));
+                            }),
                         value: 6,
                       ),
                       DropdownMenuItem(
-                        child: Text("CVR-AL-Mobile",
-                            style: TextStyle(fontSize: 13)),
+                        child: InkWell(
+                            child: Text("CVR-AL-Mobile",
+                                style: TextStyle(fontSize: 13)),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => UploadImageScreen()));
+                            }),
                         value: 7,
                       ),
                       DropdownMenuItem(
-                        child: Text("CVR-AL-Mantgomery",
-                            style: TextStyle(fontSize: 13)),
+                        child: InkWell(
+                            child: Text("CVR-AL-Mantgomery",
+                                style: TextStyle(fontSize: 13)),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => UploadImageScreen()));
+                            }),
                         value: 8,
                       ),
                       DropdownMenuItem(
-                        child: Text("CVR-AL-Opelika",
-                            style: TextStyle(fontSize: 13)),
+                        child: InkWell(
+                            child: Text("CVR-AL-Opelika",
+                                style: TextStyle(fontSize: 13)),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => UploadImageScreen()));
+                            }),
                         value: 9,
                       ),
                       DropdownMenuItem(
-                        child: Text("CVR-AL-Trussville",
-                            style: TextStyle(fontSize: 13)),
+                        child: InkWell(
+                            child: Text("CVR-AL-Trussville",
+                                style: TextStyle(fontSize: 13)),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => UploadImageScreen()));
+                            }),
                         value: 10,
                       ),
                       DropdownMenuItem(
-                        child: Text("CVR-AZ-Gilbert",
-                            style: TextStyle(fontSize: 13)),
+                        child: InkWell(
+                            child: Text("CVR-AZ-Gilbert",
+                                style: TextStyle(fontSize: 13)),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => UploadImageScreen()));
+                            }),
                         value: 11,
                       ),
                       DropdownMenuItem(
-                        child:
-                            Text("CVR-AZ-Mesa", style: TextStyle(fontSize: 13)),
+                        child: InkWell(
+                            child: Text("CVR-AZ-Mesa",
+                                style: TextStyle(fontSize: 13)),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => UploadImageScreen()));
+                            }),
                         value: 12,
                       ),
                       DropdownMenuItem(
-                        child: Text("CVR-AZ-Phoenix",
-                            style: TextStyle(fontSize: 13)),
+                        child: InkWell(
+                            child: Text("CVR-AZ-Phoenix",
+                                style: TextStyle(fontSize: 13)),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => UploadImageScreen()));
+                            }),
                         value: 13,
                       ),
                       DropdownMenuItem(
-                        child: Text("CVR-DC1-lrving Street",
-                            style: TextStyle(fontSize: 13)),
+                        child: InkWell(
+                            child: Text("CVR-DC1-lrving Street",
+                                style: TextStyle(fontSize: 13)),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => UploadImageScreen()));
+                            }),
                         value: 14,
                       ),
                       DropdownMenuItem(
-                          child: Text("Others", style: TextStyle(fontSize: 13)),
+                          child: InkWell(
+                              child: Text("Others",
+                                  style: TextStyle(fontSize: 13)),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => UploadImageScreen()));
+                              }),
                           value: 15),
                     ],
                     onChanged: (value) {

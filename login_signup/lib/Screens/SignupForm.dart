@@ -42,7 +42,7 @@ class _SignupFormState extends State<SignupForm> {
 
         UserModel uModel = UserModel(uid, uname, email, passwd);
         await dbHelper.saveData(uModel).then((userData) {
-          alertDialog(context, "Successfully Saved");
+          alertDialog(context, "Successfully Created");
 
           Navigator.push(
               context, MaterialPageRoute(builder: (_) => LoginForm()));
@@ -65,116 +65,110 @@ class _SignupFormState extends State<SignupForm> {
       ),
       body: Form(
         key: _formKey,
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/blur.jpg"),
-                fit: BoxFit.cover,
-              ),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/blur.jpg"),
+              fit: BoxFit.cover,
             ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(height: 30.0),
-                  Image.asset(
-                    "assets/images/333.png",
-                    height: 200.0,
-                    width: 200.0,
-                  ),
-                  TextButton(
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: 30.0),
+                Image.asset(
+                  "assets/images/333.png",
+                  height: 200.0,
+                  width: 200.0,
+                ),
+                Text(
+                  "EasyPic",
+                  style: TextStyle(color: Colors.white, fontSize: 30),
+                ),
+                SizedBox(height: 20.0),
+                // genLoginSignupHeader('SignUp'),
+                getTextFormField(
+                    controller: _conUserId,
+                    icon: Icons.person,
+                    hintName: 'User ID'),
+                SizedBox(height: 10.0),
+                getTextFormField(
+                    controller: _conUserName,
+                    icon: Icons.person_outline,
+                    inputType: TextInputType.name,
+                    hintName: 'User Name'),
+                SizedBox(height: 10.0),
+                getTextFormField(
+                    controller: _conEmail,
+                    icon: Icons.email,
+                    inputType: TextInputType.emailAddress,
+                    hintName: 'Email'),
+                SizedBox(height: 10.0),
+                getTextFormField(
+                  controller: _conPassword,
+                  icon: Icons.key_sharp,
+                  hintName: 'Password',
+                  isObscureText: true,
+                ),
+                SizedBox(height: 10.0),
+                getTextFormField(
+                  controller: _conCPassword,
+                  icon: Icons.key_sharp,
+                  hintName: 'Confirm Password',
+                  isObscureText: true,
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
+                  width: double.infinity,
+                  child: FlatButton(
                     child: Text(
-                      "EasyPic",
-                      style: TextStyle(color: Colors.white, fontSize: 30),
+                      'SignUp',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
                     ),
+                    onPressed: signUp,
                   ),
-                  SizedBox(height: 20.0),
-                  // genLoginSignupHeader('SignUp'),
-                  getTextFormField(
-                    
-                      controller: _conUserId,
-                      icon: Icons.person,
-                      hintName: 'User ID'),
-                  SizedBox(height: 10.0),
-                  getTextFormField(
-                      controller: _conUserName,
-                      icon: Icons.person_outline,
-                      inputType: TextInputType.name,
-                      hintName: 'User Name'),
-                  SizedBox(height: 10.0),
-                  getTextFormField(
-                      controller: _conEmail,
-                      icon: Icons.email,
-                      inputType: TextInputType.emailAddress,
-                      hintName: 'Email'),
-                  SizedBox(height: 10.0),
-                  getTextFormField(
-                    controller: _conPassword,
-                    icon: Icons.key_sharp,
-                    hintName: 'Password',
-                    isObscureText: true,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 79, 168, 85),
+                    borderRadius: BorderRadius.circular(25.0),
                   ),
-                  SizedBox(height: 10.0),
-                  getTextFormField(
-                    controller: _conCPassword,
-                    icon: Icons.key_sharp,
-                    hintName: 'Confirm Password',
-                    isObscureText: true,
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
-                    width: double.infinity,
-                    child: FlatButton(
-                      child: Text(
-                        'SignUp',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
+                ),
+
+                Container(
+                  margin: EdgeInsets.only(top: 10, bottom: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("You Have Account Already ?",
+                          style: TextStyle(
+                            // fontSize: 15,
+
+                            color: Colors.black,
+                          )),
+                      SizedBox(
+                        width: 8,
                       ),
-                      onPressed: signUp,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 79, 168, 85),
-                      borderRadius: BorderRadius.circular(25.0),
-                    ),
-                  ),
-
-                  Container(
-                    margin: EdgeInsets.only(top: 10, bottom: 30),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("You Have Account Already ?",
-                            style: TextStyle(
-                              // fontSize: 15,
-
-                              color: Colors.black,
-                            )),
-                        SizedBox(
-                          width: 8,
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => LoginForm()));
+                        },
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
                         ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (_) => LoginForm()));
-                          },
-                          child: Text(
-                            'Login',
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

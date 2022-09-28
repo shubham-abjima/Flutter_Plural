@@ -81,17 +81,16 @@ class _LoginFormState extends State<LoginForm> {
         ),
         title: Text("Center For Vein Restoration"),
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/blur.jpg"),
-              fit: BoxFit.cover,
-            ),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/blur.jpg"),
+            fit: BoxFit.cover,
           ),
+        ),
+        child: SingleChildScrollView(
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -101,11 +100,9 @@ class _LoginFormState extends State<LoginForm> {
                 height: 200.0,
                 width: 200.0,
               ),
-              TextButton(
-                child: Text(
-                  "EasyPic",
-                  style: TextStyle(color: Colors.white, fontSize: 30),
-                ),
+              Text(
+                "EasyPic",
+                style: TextStyle(color: Colors.white, fontSize: 30),
               ),
               SizedBox(height: 20.0),
               // genLoginSignupHeader("LogIn"),
@@ -113,7 +110,6 @@ class _LoginFormState extends State<LoginForm> {
                 controller: _conUserId,
                 icon: Icons.person_outline,
                 hintName: 'Username',
-                
               ),
               SizedBox(height: 10.0),
               getTextFormField(

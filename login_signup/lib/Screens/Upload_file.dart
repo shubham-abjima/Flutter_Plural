@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:animated_horizontal_calendar/utils/calender_utils.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:login_with_signup/Screens/Appointment.dart';
+import 'package:login_with_signup/Screens/Capture_images.dart';
 import 'package:login_with_signup/Screens/HomePage.dart';
 import 'package:login_with_signup/Screens/LoginForm.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -69,9 +69,9 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
       setState(() {
         showSpinner = false;
       });
-      print('Image uploaded');
+      print('Image Uploaded');
     } else {
-      print('failed');
+      print('Failed');
 
       setState(() {
         showSpinner = false;
@@ -136,7 +136,10 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                       items: [
                         DropdownMenuItem(
                           child: InkWell(
-                            child: Text("Corp", style: TextStyle(fontSize: 13)),
+                            child: Text(
+                              "Corp",
+                              style: TextStyle(fontSize: 13),
+                            ),
                           ),
                           value: 1,
                         ),
@@ -144,77 +147,174 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                           child: InkWell(
                             child: Text("CVR-AK-Anchorage",
                                 style: TextStyle(fontSize: 13)),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => UploadImageScreen()));
+                            },
                           ),
-                          value: 2,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AK-Fairbanks",
-                              style: TextStyle(fontSize: 13)),
+                          child: InkWell(
+                            child: Text("CVR-AK-Fairbanks",
+                                style: TextStyle(fontSize: 13)),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => UploadImageScreen()));
+                            },
+                          ),
                           value: 3,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AL-Dothan",
-                              style: TextStyle(fontSize: 13)),
+                          child: InkWell(
+                              child: Text("CVR-AL-Dothan",
+                                  style: TextStyle(fontSize: 13)),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => UploadImageScreen()));
+                              }),
                           value: 4,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AL-Fairhope",
-                              style: TextStyle(fontSize: 13)),
+                          child: InkWell(
+                              child: Text("CVR-AL-Fairhope",
+                                  style: TextStyle(fontSize: 13)),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => UploadImageScreen()));
+                              }),
                           value: 5,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AL-Hoover",
-                              style: TextStyle(fontSize: 13)),
+                          child: InkWell(
+                              child: Text("CVR-AL-Hoover",
+                                  style: TextStyle(fontSize: 13)),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => UploadImageScreen()));
+                              }),
                           value: 6,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AL-Mobile",
-                              style: TextStyle(fontSize: 13)),
+                          child: InkWell(
+                              child: Text("CVR-AL-Mobile",
+                                  style: TextStyle(fontSize: 13)),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => UploadImageScreen()));
+                              }),
                           value: 7,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AL-Mantgomery",
-                              style: TextStyle(fontSize: 13)),
+                          child: InkWell(
+                              child: Text("CVR-AL-Mantgomery",
+                                  style: TextStyle(fontSize: 13)),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => UploadImageScreen()));
+                              }),
                           value: 8,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AL-Opelika",
-                              style: TextStyle(fontSize: 13)),
+                          child: InkWell(
+                              child: Text("CVR-AL-Opelika",
+                                  style: TextStyle(fontSize: 13)),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => UploadImageScreen()));
+                              }),
                           value: 9,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AL-Trussville",
-                              style: TextStyle(fontSize: 13)),
+                          child: InkWell(
+                              child: Text("CVR-AL-Trussville",
+                                  style: TextStyle(fontSize: 13)),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => UploadImageScreen()));
+                              }),
                           value: 10,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AZ-Gilbert",
-                              style: TextStyle(fontSize: 13)),
+                          child: InkWell(
+                              child: Text("CVR-AZ-Gilbert",
+                                  style: TextStyle(fontSize: 13)),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => UploadImageScreen()));
+                              }),
                           value: 11,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AZ-Mesa",
-                              style: TextStyle(fontSize: 13)),
+                          child: InkWell(
+                              child: Text("CVR-AZ-Mesa",
+                                  style: TextStyle(fontSize: 13)),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => UploadImageScreen()));
+                              }),
                           value: 12,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-AZ-Phoenix",
-                              style: TextStyle(fontSize: 13)),
+                          child: InkWell(
+                              child: Text("CVR-AZ-Phoenix",
+                                  style: TextStyle(fontSize: 13)),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => UploadImageScreen()));
+                              }),
                           value: 13,
                         ),
                         DropdownMenuItem(
-                          child: Text("CVR-DC1-lrving Street",
-                              style: TextStyle(fontSize: 13)),
+                          child: InkWell(
+                              child: Text("CVR-DC1-lrving Street",
+                                  style: TextStyle(fontSize: 13)),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => UploadImageScreen()));
+                              }),
                           value: 14,
                         ),
                         DropdownMenuItem(
-                            child:
-                                Text("Others", style: TextStyle(fontSize: 13)),
+                            child: InkWell(
+                                child: Text("Others",
+                                    style: TextStyle(fontSize: 13)),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => UploadImageScreen()));
+                                }),
                             value: 15),
                       ],
                       onChanged: (value) {
                         setState(() {
-                          selectedValue = value;
+                          value = selectedValue;
                         });
                       }),
                 ),
@@ -275,7 +375,13 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                                 ),
                                 image == null
                                     ? InkWell(
-                                        onTap: getImage,
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      captureImages()));
+                                        },
                                         child: CircleAvatar(
                                           backgroundColor: Color.fromARGB(
                                               255, 203, 202, 202),
