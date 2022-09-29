@@ -1,9 +1,8 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+
 import 'package:login_with_signup/Screens/Appointment.dart';
 import 'package:login_with_signup/Screens/Capture_images.dart';
 import 'package:login_with_signup/Screens/HomePage.dart';
@@ -22,63 +21,6 @@ class UploadImageScreen extends StatefulWidget {
 }
 
 class _UploadImageScreenState extends State<UploadImageScreen> {
-  File image;
-  var resJson;
-
-  var i = 10;
-
-  Future getImage() async {
-    final pickedFile = await ImagePicker.pickImage(
-        maxWidth: 30,
-        maxHeight: 30,
-        source: ImageSource.gallery,
-        imageQuality: 80);
-
-    if (pickedFile != null) {
-      image = File(pickedFile.path);
-      setState(() {});
-    } else {
-      print('no image selected');
-    }
-  }
-
-  Future<void> uploadImage() async {
-    setState(() {
-      showSpinner = true;
-    });
-
-    var stream = new http.ByteStream(image.openRead());
-    stream.cast();
-
-    var length = await image.length();
-
-    var uri = Uri.parse('https://fakestoreapi.com/products');
-
-    var request = new http.MultipartRequest('POST', uri);
-
-    request.fields['title'] = "Static title";
-
-    var multiport = new http.MultipartFile('image', stream, length);
-
-    request.files.add(multiport);
-
-    var response = await request.send();
-
-    print(response.stream.toString());
-    if (response.statusCode == 200) {
-      setState(() {
-        showSpinner = false;
-      });
-      print('Image Uploaded');
-    } else {
-      print('Failed');
-
-      setState(() {
-        showSpinner = false;
-      });
-    }
-  }
-
   @override
   void initState() {
     super.initState();
@@ -366,50 +308,33 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                             trailing: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(
-                                  Icons.female_outlined,
-                                  color: Colors.orange,
+                                Container(
+                                  child: Icon(
+                                    Icons.female_outlined,
+                                    color: Colors.orange,
+                                  ),
                                 ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                image == null
-                                    ? InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (_) =>
-                                                      captureImages()));
-                                        },
-                                        child: CircleAvatar(
-                                          backgroundColor: Color.fromARGB(
-                                              255, 203, 202, 202),
-                                          radius: 18,
-                                          child: Icon(
-                                            Icons.camera_alt_outlined,
-                                            color: Colors.black,
-                                            size: 25,
-                                          ),
-                                        ),
-                                      )
-                                    : Image.file(image),
                                 SizedBox(
                                   width: 5,
                                 ),
                                 InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => captureImages()));
+                                  },
                                   child: CircleAvatar(
                                     backgroundColor:
                                         Color.fromARGB(255, 203, 202, 202),
-                                    radius: 17,
+                                    radius: 18,
                                     child: Icon(
-                                      Icons.cloud_upload_outlined,
+                                      Icons.camera_alt_outlined,
                                       color: Colors.black,
                                       size: 25,
                                     ),
                                   ),
-                                  onTap: uploadImage,
-                                ),
+                                )
                               ],
                             ),
                           ));

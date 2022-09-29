@@ -50,7 +50,7 @@ class Appointment extends StatelessWidget {
                 "Full Name",
                 style: TextStyle(color: Colors.grey),
               ),
-              Text("Jessica Ward"),
+           
               SizedBox(
                 height: 10,
               ),

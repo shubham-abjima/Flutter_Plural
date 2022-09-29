@@ -52,6 +52,7 @@ dependencies:
   flutter_typeahead: ^2.0.0
   platform: ^3.1.0
   fluttertoast: ^8.0.9
+  flushbar: ^1.10.4
 
  
 
