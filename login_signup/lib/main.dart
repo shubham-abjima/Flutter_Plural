@@ -10,18 +10,28 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  static final ValueNotifier<ThemeMode> themeNotifier =
+      ValueNotifier(ThemeMode.light);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Login with Signup',
-      theme: ThemeData(
-        useMaterial3: true,
-        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
-        primarySwatch: Colors.grey,
-      ),
-      home: Splash2(),
-    );
+    return ValueListenableBuilder(
+        valueListenable: themeNotifier,
+        builder: (_, ThemeMode currentMode, __) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Login with Signup',
+            theme: ThemeData(
+              useMaterial3: true,
+              textTheme:
+                  GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+              primarySwatch: Colors.grey,
+            ),
+            darkTheme: ThemeData.dark(),
+            themeMode: currentMode,
+            home: LoginForm(),
+          );
+        });
   }
 }
 

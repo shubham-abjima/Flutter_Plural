@@ -1,8 +1,9 @@
+import 'package:firstapp/View/widgets/register_from.dart';
 import 'package:firstapp/routes/route_manager.dart';
 import 'package:flutter/material.dart';
 
-import '../misc/constants.dart';
-import '../widgets/register_from.dart';
+import '../../misc/constants.dart';
+
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key}) : super(key: key);

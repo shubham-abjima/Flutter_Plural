@@ -8,6 +8,7 @@ import 'package:login_with_signup/Model/UserModel.dart';
 import 'package:login_with_signup/Screens/ForgotPassword.dart';
 import 'package:login_with_signup/Screens/HomePage.dart';
 import 'package:login_with_signup/Screens/SignupForm.dart';
+import 'package:login_with_signup/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginForm extends StatefulWidget {
@@ -73,6 +74,18 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              icon: Icon(MyApp.themeNotifier.value == ThemeMode.light
+                  ? Icons.dark_mode_sharp
+                  : Icons.light_mode_sharp),
+              onPressed: () {
+                MyApp.themeNotifier.value =
+                    MyApp.themeNotifier.value == ThemeMode.light
+                        ? ThemeMode.dark
+                        : ThemeMode.light;
+              })
+        ],
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Image.asset(

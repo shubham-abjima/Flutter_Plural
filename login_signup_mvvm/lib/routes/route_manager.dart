@@ -1,14 +1,15 @@
 // ignore: avoid_web_libraries_in_flutter, unused_import
 // import 'dart:js';
 
-import 'package:firstapp/pages/first_app_home.dart';
-import 'package:firstapp/pages/loading_page.dart';
+
 // ignore: unnecessary_import
-import 'package:flutter/cupertino.dart';
+import 'package:firstapp/View/Screens/first_app_home.dart';
+import 'package:firstapp/View/Screens/loading_page.dart';
+import 'package:firstapp/View/Screens/login_page.dart';
+import 'package:firstapp/View/Screens/register_page.dart';
+
 import 'package:flutter/material.dart';
 
-import '../pages/login_page.dart';
-import '../pages/register_page.dart';
 
 class RouteManager {
   static const String loadingPage = '/';

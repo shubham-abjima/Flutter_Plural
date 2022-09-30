@@ -1,5 +1,6 @@
+import 'package:firstapp/View/widgets/dialogs.dart';
 import 'package:firstapp/routes/route_manager.dart';
-import 'package:firstapp/widgets/dialogs.dart';
+
 import 'package:flutter/cupertino.dart';
 
 class UserViewModel with ChangeNotifier {

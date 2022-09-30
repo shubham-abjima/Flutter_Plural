@@ -16,17 +16,17 @@ InputDecoration formDecoration(String labelText, IconData iconData) {
   );
 }
 
-const enabledBorder = UnderlineInputBorder(
+const enabledBorder = OutlineInputBorder(
     borderRadius: BorderRadius.all(
       Radius.circular(15),
     ),
     borderSide: BorderSide(width: 1, color: Colors.indigoAccent));
 
-const focusedBorder = UnderlineInputBorder(
+const focusedBorder = OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(10)),
     borderSide: BorderSide(width: 2, color: Colors.indigoAccent));
 
-const errorBorder = UnderlineInputBorder(
+const errorBorder = OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(10)),
     borderSide: BorderSide(width: 2, color: Colors.red));
 
@@ -71,26 +71,14 @@ class SizedBoxH30 extends StatelessWidget {
 }
 
 //text styles
-const TextStyle style16Indigo = TextStyle(
-    fontFamily: "Montserrat",
-    fontSize: 16,
-    color: Colors.indigo,
-    fontWeight: FontWeight.w200);
+const TextStyle style16Indigo =
+    TextStyle(fontSize: 16, color: Colors.indigo, fontWeight: FontWeight.bold);
 
-const TextStyle style16White = TextStyle(
-    fontFamily: "Montserrat",
-    fontSize: 16,
-    color: Colors.white,
-    fontWeight: FontWeight.w200);
+const TextStyle style16White =
+    TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold);
 
-const TextStyle style16Black = TextStyle(
-    fontSize: 16,
-    color: Colors.black,
-    fontWeight: FontWeight.w300);
+const TextStyle style16Black =
+    TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.w300);
 
-
-const TextStyle titleStyleIndigo = TextStyle(
-    fontFamily: "Montserrat",
-    color: Colors.indigo,
-    fontSize: 36,
-    fontWeight: FontWeight.w300);
+const TextStyle titleStyleIndigo =
+    TextStyle(color: Colors.indigo, fontSize: 36, fontWeight: FontWeight.w300);

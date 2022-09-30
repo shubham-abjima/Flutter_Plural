@@ -39,9 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.green,
               ),
               DecoratedBox(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                ),
+                decoration: BoxDecoration(),
                 child: DropdownButton(
                     alignment: Alignment.center,
                     icon: Icon(
@@ -49,7 +47,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     isDense: true,
                     iconEnabledColor: Colors.green,
-                    dropdownColor: Color.fromARGB(255, 225, 223, 223),
                     value: selectedValue,
                     items: [
                       DropdownMenuItem(
@@ -236,13 +233,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       });
                     }),
               ),
-              Padding(padding: EdgeInsets.all(20)),
+              Padding(padding: EdgeInsets.symmetric(horizontal: 25)),
               Column(
                 children: [
                   IconButton(
                     icon: Icon(
                       Icons.power_settings_new_rounded,
-                      color: Colors.black,
                     ),
                     onPressed: () => Navigator.pushAndRemoveUntil(
                         context,
@@ -255,79 +251,82 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    "Calendar",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
-                    textDirection: TextDirection.ltr,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      "Calendar",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+                      textDirection: TextDirection.ltr,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: 175,
-                ),
-                IconButton(
-                  icon: Icon(
-                    CupertinoIcons.refresh_circled,
-                    size: 30,
-                    color: Colors.black,
+                  SizedBox(
+                    width: 175,
                   ),
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => MyHomePage()),
+                  IconButton(
+                    icon: Icon(
+                      CupertinoIcons.refresh_circled,
+                      size: 30,
+                    ),
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => MyHomePage()),
+                    ),
                   ),
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.filter_alt_sharp,
-                    color: Colors.black,
-                    size: 28,
-                  ),
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => Filter()),
-                  ),
-                )
-              ],
+                  IconButton(
+                    icon: Icon(
+                      Icons.filter_alt_sharp,
+                      size: 28,
+                    ),
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => Filter()),
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-          Container(
-            height: 75,
-            width: MediaQuery.of(context).size.width,
-            child: AnimatedHorizontalCalendar(
-                tableCalenderButtonColor: Colors.green,
-                tableCalenderIcon: Icon(
-                  Icons.calendar_today,
-                  color: Colors.white,
-                ),
-                date: DateTime.now(),
-                fontSizeOfMonth: 15,
-                fontSizeOfWeek: 10,
-                colorOfWeek: Colors.black,
-                lastDate: DateTime.now().add(Duration(days: 365)),
-                textColor: Colors.black45,
-                backgroundColor: Colors.white,
-                tableCalenderThemeData: ThemeData.light().copyWith(
-                  primaryColor: Colors.green,
-                  buttonTheme:
-                      ButtonThemeData(textTheme: ButtonTextTheme.primary),
-                  colorScheme: ColorScheme.light(primary: Colors.green)
-                      .copyWith(secondary: Colors.green),
-                ),
-                selectedColor: Colors.green,
-                onDateSelected: (date) {
-                  selectedDate = date;
-                }),
-          ),
-          Text("No Records Found")
-        ],
+            Container(
+              color: Colors.white,
+              height: 75,
+              width: MediaQuery.of(context).size.width,
+              child: AnimatedHorizontalCalendar(
+                  tableCalenderButtonColor: Colors.green,
+                  tableCalenderIcon: Icon(
+                    Icons.calendar_today,
+                    color: Colors.white,
+                  ),
+                  date: DateTime.now(),
+                  fontSizeOfMonth: 15,
+                  fontSizeOfWeek: 10,
+                  colorOfWeek: Colors.black,
+                  lastDate: DateTime.now().add(Duration(days: 365)),
+                  textColor: Colors.black45,
+                  backgroundColor: Colors.white,
+                  tableCalenderThemeData: ThemeData.light().copyWith(
+                    primaryColor: Colors.green,
+                    buttonTheme:
+                        ButtonThemeData(textTheme: ButtonTextTheme.primary),
+                    colorScheme: ColorScheme.light(primary: Colors.green)
+                        .copyWith(secondary: Colors.green),
+                  ),
+                  selectedColor: Colors.green,
+                  onDateSelected: (date) {
+                    selectedDate = date;
+                  }),
+            ),
+            SizedBox(height: 20),
+            Text("No Records Found")
+          ],
+        ),
       ),
     );
   }

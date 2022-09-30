@@ -16,7 +16,7 @@ class _FirstAppHomeState extends State<FirstAppHome> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "first app",
+          "First App",
           style: style16White,
         ),
         actions: [

@@ -1,10 +1,11 @@
 import 'dart:async';
 
+import 'package:firstapp/View/widgets/app_progress_indicator.dart';
 import 'package:firstapp/misc/constants.dart';
 import 'package:firstapp/routes/route_manager.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/app_progress_indicator.dart';
+
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class _LoadingPageState extends State<LoadingPage> {
     Timer(
         //set time in seconds
         const Duration(seconds: 5), () {
-          //go to login page after 5 seconds of the loading page
+      //go to login page after 5 seconds of the loading page
       Navigator.popAndPushNamed(context, RouteManager.loginPage);
     });
     super.initState();
@@ -36,7 +37,7 @@ class _LoadingPageState extends State<LoadingPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
           Text(
-            "first app",
+            "First App",
             style: titleStyleIndigo,
           ),
           SizedBoxH20(),

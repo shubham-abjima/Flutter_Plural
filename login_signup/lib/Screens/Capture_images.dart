@@ -150,7 +150,6 @@ class _captureImagesState extends State<captureImages> {
                       children: [
                         Text(
                           "APPOINTMENT DATE",
-                          style: TextStyle(color: Colors.black),
                         ),
                       ],
                     ),
@@ -190,27 +189,24 @@ class _captureImagesState extends State<captureImages> {
                   thickness: 1,
                   color: Colors.black,
                 ),
-                Container(
-                  width: 60,
-                  height: 50,
-                  color: Color.fromARGB(255, 211, 210, 210),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      image == null
-                          ? InkWell(
-                              child: Icon(
-                                Icons.photo_camera_outlined,
-                                size: 30,
-                              ),
-                              onTap: getImage)
-                          : Image.file(image),
-                      Text(
-                        ("ADD IMAGE"),
-                        style: TextStyle(fontSize: 10),
-                      )
-                    ],
-                  ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    image == null
+                        ? InkWell(
+                            child: Icon(
+                              Icons.photo_camera_outlined,
+                              size: 30,
+                            ),
+                            onTap: getImage)
+                        : Image.file(image),
+                    Text(
+                      ("ADD IMAGE"),
+                      style: TextStyle(
+                        fontSize: 10,
+                      ),
+                    )
+                  ],
                 ),
                 SizedBox(
                   height: 10,
@@ -233,27 +229,22 @@ class _captureImagesState extends State<captureImages> {
                   thickness: 1,
                   color: Colors.black,
                 ),
-                Container(
-                  width: 60,
-                  height: 50,
-                  color: Color.fromARGB(255, 211, 210, 210),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      image == null
-                          ? InkWell(
-                              child: Icon(
-                                Icons.photo_camera_outlined,
-                                size: 30,
-                              ),
-                              onTap: getImage)
-                          : Image.file(image),
-                      Text(
-                        ("ADD IMAGE"),
-                        style: TextStyle(fontSize: 10),
-                      )
-                    ],
-                  ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    image == null
+                        ? InkWell(
+                            child: Icon(
+                              Icons.photo_camera_outlined,
+                              size: 30,
+                            ),
+                            onTap: getImage)
+                        : Image.file(image),
+                    Text(
+                      ("ADD IMAGE"),
+                      style: TextStyle(fontSize: 10),
+                    )
+                  ],
                 ),
                 SizedBox(
                   height: 12,
@@ -276,27 +267,22 @@ class _captureImagesState extends State<captureImages> {
                   thickness: 1,
                   color: Colors.black,
                 ),
-                Container(
-                  width: 60,
-                  height: 50,
-                  color: Color.fromARGB(255, 211, 210, 210),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      image == null
-                          ? InkWell(
-                              child: Icon(
-                                Icons.photo_camera_outlined,
-                                size: 30,
-                              ),
-                              onTap: getImage)
-                          : Image.file(image),
-                      Text(
-                        ("ADD IMAGE"),
-                        style: TextStyle(fontSize: 10),
-                      )
-                    ],
-                  ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    image == null
+                        ? InkWell(
+                            child: Icon(
+                              Icons.photo_camera_outlined,
+                              size: 30,
+                            ),
+                            onTap: getImage)
+                        : Image.file(image),
+                    Text(
+                      ("ADD IMAGE"),
+                      style: TextStyle(fontSize: 10),
+                    )
+                  ],
                 ),
                 SizedBox(
                   height: 12,
@@ -319,27 +305,22 @@ class _captureImagesState extends State<captureImages> {
                   thickness: 1,
                   color: Colors.black,
                 ),
-                Container(
-                  width: 60,
-                  height: 50,
-                  color: Color.fromARGB(255, 211, 210, 210),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      image == null
-                          ? InkWell(
-                              child: Icon(
-                                Icons.photo_camera_outlined,
-                                size: 30,
-                              ),
-                              onTap: getImage)
-                          : Image.file(image),
-                      Text(
-                        ("ADD IMAGE"),
-                        style: TextStyle(fontSize: 10),
-                      )
-                    ],
-                  ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    image == null
+                        ? InkWell(
+                            child: Icon(
+                              Icons.photo_camera_outlined,
+                              size: 30,
+                            ),
+                            onTap: getImage)
+                        : Image.file(image),
+                    Text(
+                      ("ADD IMAGE"),
+                      style: TextStyle(fontSize: 10),
+                    )
+                  ],
                 ),
                 SizedBox(
                   height: 12,

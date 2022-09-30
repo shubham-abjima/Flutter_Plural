@@ -1,13 +1,13 @@
 String? validateName(String? value) {
   if (value == null || value.isEmpty) {
-    return 'name required!';
+    return 'Name Required!';
   }
   return null;
 }
 
 String? validateEmail(String? value) {
   if (value == null || value.isEmpty) {
-    return 'email address required!';
+    return 'Email Address Required!';
   } else if (!RegExp(
           r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
       .hasMatch(value)) {
@@ -18,7 +18,7 @@ String? validateEmail(String? value) {
 
 String? validatePassword(String? value) {
   if (value == null || value.isEmpty) {
-    return 'password required!';
+    return 'Password Required!';
   } else if (!RegExp(
           r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})')
       .hasMatch(value)) {
@@ -29,7 +29,7 @@ String? validatePassword(String? value) {
 
 String? validateConfirmPassword(String? value) {
   if (value == null || value.isEmpty) {
-    return 'please retype password';
+    return 'Please Retype Password';
   }
   return null;
 }

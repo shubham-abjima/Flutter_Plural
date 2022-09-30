@@ -1,11 +1,10 @@
+import 'package:firstapp/misc/constants.dart';
+import 'package:firstapp/misc/validators.dart';
 import 'package:firstapp/routes/route_manager.dart';
 import 'package:firstapp/view_models/user_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../misc/constants.dart';
-import '../misc/validators.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -93,6 +92,7 @@ class _LoginFormState extends State<LoginForm> {
                         password: passwordController.text.trim());
                   }),
               const SizedBoxH20(),
+
               CupertinoButton(
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                   color: Colors.white,

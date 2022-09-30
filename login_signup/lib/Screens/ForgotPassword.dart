@@ -110,8 +110,9 @@ class _HomeFormState extends State<ForgotPassword> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
-        title: Text('Center For Vein Restoration',
-            style: TextStyle(color: Color.fromARGB(255, 1, 53, 96))),
+        title: Text(
+          'Center For Vein Restoration',
+        ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.pushAndRemoveUntil(

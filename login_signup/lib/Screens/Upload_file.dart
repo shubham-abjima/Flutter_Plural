@@ -73,7 +73,6 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                       isDense: true,
                       icon: Icon(Icons.keyboard_arrow_down_outlined),
                       iconEnabledColor: Colors.green,
-                      dropdownColor: Color.fromARGB(255, 225, 223, 223),
                       value: selectedValue,
                       items: [
                         DropdownMenuItem(
@@ -260,13 +259,14 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                         });
                       }),
                 ),
-                Padding(padding: EdgeInsets.all(20)),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25),
+                ),
                 Column(
                   children: [
                     IconButton(
                       icon: Icon(
                         Icons.power_settings_new_rounded,
-                        color: Colors.black,
                       ),
                       onPressed: () => Navigator.pushAndRemoveUntil(
                           context,
@@ -330,7 +330,6 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                                     radius: 18,
                                     child: Icon(
                                       Icons.camera_alt_outlined,
-                                      color: Colors.black,
                                       size: 25,
                                     ),
                                   ),

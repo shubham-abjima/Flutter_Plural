@@ -1,10 +1,11 @@
 import 'package:firstapp/misc/constants.dart';
+import 'package:firstapp/misc/validators.dart';
+import 'package:firstapp/view_models/user_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../misc/validators.dart';
-import '../view_models/user_view_model.dart';
+
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key? key}) : super(key: key);
