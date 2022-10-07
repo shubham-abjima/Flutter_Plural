@@ -79,6 +79,7 @@ class _SignupFormState extends State<SignupForm> {
                 SizedBox(height: 30.0),
                 Image.asset(
                   "assets/images/333.png",
+                  color: Colors.white,
                   height: 200.0,
                   width: 200.0,
                 ),

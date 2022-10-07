@@ -5,31 +5,26 @@ import 'package:login_with_signup/Screens/User.dart';
 import 'package:http/http.dart' as http;
 
 Future<List<User>> listUsers;
-Future<List<User>> fetchUsers() async {
-  final response = await http.get('https://jsonplaceholder.typicode.com/users');
-  if (response.statusCode == 200) {
-    var getUsersData = json.decode(response.body) as List;
-    var listUsers = getUsersData.map((i) => User.fromJSON(i)).toList();
-    return listUsers;
-  } else {
-    throw Exception('No Records Found');
-  }
-}
 
 class Appointment extends StatelessWidget {
   const Appointment({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Future<List<User>> fetchUsers() async {
-      final response =
-          await http.get('https://jsonplaceholder.typicode.com/users');
-      if (response.statusCode == 200) {
-        var getUsersData = json.decode(response.body) as List;
-        var listUsers = getUsersData.map((i) => User.fromJSON(i)).toList();
-        return listUsers;
+    List<User> postList = [];
+
+    Future<List<User>> getPostApi() async {
+      String url = 'https://jsonplaceholder.typicode.com/posts';
+      final resposne = await http.get(Uri.parse(url));
+      var data = jsonDecode(resposne.body.toString());
+      if (resposne.statusCode == 200) {
+        postList.clear();
+        for (Map i in data) {
+          postList.add(User.fromJSON(i));
+        }
+        return postList;
       } else {
-        throw Exception('No Records Found');
+        return postList;
       }
     }
 
@@ -50,7 +45,6 @@ class Appointment extends StatelessWidget {
                 "Full Name",
                 style: TextStyle(color: Colors.grey),
               ),
-           
               SizedBox(
                 height: 10,
               ),

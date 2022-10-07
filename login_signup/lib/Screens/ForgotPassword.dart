@@ -138,6 +138,7 @@ class _HomeFormState extends State<ForgotPassword> {
               children: [
                 Image.asset(
                   "assets/images/333.png",
+                  color: Colors.white,
                   height: 200.0,
                   width: 200.0,
                 ),

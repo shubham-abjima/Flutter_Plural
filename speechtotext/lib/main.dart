@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
       ),
       title: 'Flutter Demo',
-      home: LoginScreen(),
+      home: const LoginScreen(),
     );
   }
 }

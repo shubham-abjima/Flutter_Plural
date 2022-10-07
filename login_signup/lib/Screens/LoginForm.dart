@@ -76,7 +76,7 @@ class _LoginFormState extends State<LoginForm> {
       appBar: AppBar(
         actions: [
           IconButton(
-              icon: Icon(MyApp.themeNotifier.value == ThemeMode.light
+              icon: Icon(MyApp.themeNotifier?.value == ThemeMode.light
                   ? Icons.dark_mode_sharp
                   : Icons.light_mode_sharp),
               onPressed: () {
@@ -110,6 +110,7 @@ class _LoginFormState extends State<LoginForm> {
               SizedBox(height: 30.0),
               Image.asset(
                 "assets/images/333.png",
+                color: Colors.white,
                 height: 200.0,
                 width: 200.0,
               ),
@@ -118,7 +119,6 @@ class _LoginFormState extends State<LoginForm> {
                 style: TextStyle(color: Colors.white, fontSize: 30),
               ),
               SizedBox(height: 20.0),
-              // genLoginSignupHeader("LogIn"),
               getTextFormField(
                 controller: _conUserId,
                 icon: Icons.person_outline,
@@ -161,7 +161,6 @@ class _LoginFormState extends State<LoginForm> {
                   ],
                 ),
               ),
-
               SizedBox(height: 10),
               SizedBox(
                 height: 50,
@@ -211,7 +210,6 @@ class _LoginFormState extends State<LoginForm> {
                   ],
                 ),
               ),
-
               Container(
                 margin: EdgeInsets.only(top: 15, left: 0),
                 child: Row(

@@ -12,7 +12,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  SpeechToText _speechToText = SpeechToText();
+  final SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
   String _lastWords = '';
 
@@ -113,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
           repeatPauseDuration: const Duration(milliseconds: 100),
           repeat: true,
           child: FloatingActionButton(
-            backgroundColor: Color.fromARGB(255, 57, 56, 56),
+            backgroundColor: const Color.fromARGB(255, 57, 56, 56),
             onPressed:
                 // If not yet listening for speech start, otherwise stop
                 _speechToText.isNotListening ? _startListening : _stopListening,

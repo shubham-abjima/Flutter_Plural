@@ -279,17 +279,17 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
             ),
           ],
         ),
-        body: FutureBuilder<List<User>>(
+        body: FutureBuilder(
           future: listUsers,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Padding(
                 padding: const EdgeInsets.fromLTRB(5, 0, 7, 0),
-                child: ListView.separated(
-                    itemBuilder: (context, index) {
-                      var user = (snapshot.data as List<User>)[index];
-                      return Container(
-                          width: MediaQuery.of(context).size.width,
+                child: Expanded(
+                  child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        var user = (snapshot.data as List<User>)[index];
+                        return Card(
                           child: ListTile(
                             onTap: () {
                               Navigator.push(
@@ -333,56 +333,14 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                                       size: 25,
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
-                          ));
-                      // Column(
-                      //   crossAxisAlignment: CrossAxisAlignment.start,
-                      //   children: <Widget>[
-                      //     Text(
-                      //       user.name,
-                      //       style: TextStyle(
-                      //           fontWeight: FontWeight.bold, fontSize: 20),
-                      //     ),
-                      //     Row(
-                      //       mainAxisAlignment: MainAxisAlignment.end,
-                      //       children: [
-                      //         Icon(Icons.man_outlined),
-                      //         SizedBox(
-                      //           width: 3,
-                      //         ),
-                      //         CircleAvatar(
-                      //           maxRadius: 20,
-                      //           backgroundColor:
-                      //               Color.fromARGB(255, 210, 208, 208),
-                      //           child: IconButton(
-                      //               onPressed: () {
-                      //                 getImage();
-                      //                 // uploadImage();
-                      //               },
-                      //               icon: Icon(Icons.camera_alt_rounded)),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //     Text(
-                      //       user.phone,
-                      //     ),
-                      //     Text(user.email
-                      //         // " " +
-                      //         // user.address.suite +
-                      //         // " " +
-                      //         // user.address.city +
-                      //         // " " +
-                      //         // user.address.zipcode
-                      //         ),
-                      //   ],
-                      // ),
-                    },
-                    separatorBuilder: (context, index) {
-                      return Divider();
-                    },
-                    itemCount: (snapshot.data).length),
+                          ),
+                        );
+                      },
+                      itemCount: (snapshot.data).length),
+                ),
               );
             } else if (snapshot.hasError) {
               return Center(
@@ -399,46 +357,3 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
     );
   }
 }
-// Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           crossAxisAlignment: CrossAxisAlignment.center,
-//           children: [
-//             GestureDetector(
-//               onTap: () {
-//                 getImage();
-//               },
-//               child: Container(
-//                 child: image == null
-//                     ? Center(
-//                         child: TextButton(
-//                           child: Text("Pick Image"),
-//                         ),
-//                       )
-//                     : Container(
-//                         child: Center(
-//                           child: Image.file(
-//                             File(image.path).absolute,
-//                             height: 100,
-//                             width: 100,
-//                             fit: BoxFit.cover,
-//                           ),
-//                         ),
-//                       ),
-//               ),
-//             ),
-//             SizedBox(
-//               height: 150,
-//             ),
-//             GestureDetector(
-//               onTap: () {
-//                 uploadImage();
-//               },
-//               child: Container(
-//                 height: 50,
-//                 width: 200,
-//                 color: Colors.green,
-//                 child: Center(child: Text('Upload')),
-//               ),
-//             )
-//           ],
-//         ),
