@@ -7,6 +7,7 @@ import 'package:login_with_signup/Screens/Filter.dart';
 
 import 'package:login_with_signup/Screens/LoginForm.dart';
 import 'package:login_with_signup/Screens/Upload_file.dart';
+import 'package:login_with_signup/main.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key key}) : super(key: key);
@@ -27,9 +28,14 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Image.asset(
-            "assets/images/123.png",
-          ),
+          child: MyApp.themeNotifier.value == ThemeMode.dark
+              ? Image.asset(
+                  "assets/images/123.png",
+                  color: Colors.white,
+                )
+              : Image.asset(
+                  "assets/images/123.png",
+                ),
         ),
         actions: <Widget>[
           Row(

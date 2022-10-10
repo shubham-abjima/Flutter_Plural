@@ -84,13 +84,19 @@ class _LoginFormState extends State<LoginForm> {
                     MyApp.themeNotifier.value == ThemeMode.light
                         ? ThemeMode.dark
                         : ThemeMode.light;
+                print("Theme Changed");
               })
         ],
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Image.asset(
-            "assets/images/123.png",
-          ),
+          child: MyApp.themeNotifier.value == ThemeMode.dark
+              ? Image.asset(
+                  "assets/images/123.png",
+                  color: Colors.white,
+                )
+              : Image.asset(
+                  "assets/images/123.png",
+                ),
         ),
         title: Text("Center For Vein Restoration"),
       ),

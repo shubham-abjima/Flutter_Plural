@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,7 @@ import 'package:login_with_signup/Screens/Appointment.dart';
 import 'package:login_with_signup/Screens/Capture_images.dart';
 import 'package:login_with_signup/Screens/HomePage.dart';
 import 'package:login_with_signup/Screens/LoginForm.dart';
+import 'package:login_with_signup/main.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:splashscreen/splashscreen.dart';
 
@@ -52,9 +54,14 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
           leading: Padding(
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
-              child: Image.asset(
-                "assets/images/123.png",
-              ),
+              child: MyApp.themeNotifier.value == ThemeMode.dark
+                  ? Image.asset(
+                      "assets/images/123.png",
+                      color: Colors.white,
+                    )
+                  : Image.asset(
+                      "assets/images/123.png",
+                    ),
               onTap: () {
                 Navigator.push(
                     context, MaterialPageRoute(builder: (_) => MyHomePage()));
@@ -289,54 +296,75 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                   child: ListView.builder(
                       itemBuilder: (context, index) {
                         var user = (snapshot.data as List<User>)[index];
-                        return Card(
-                          child: ListTile(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => Appointment()));
-                            },
-                            title: Text(
-                              user.name,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
-                            subtitle: Text(
-                              user.phone,
-                            ),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  child: Icon(
-                                    Icons.female_outlined,
-                                    color: Colors.orange,
+                        return Column(
+                          children: [
+                            Card(
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Appointment()));
+                                },
+                                child: ListTile(
+                                  title: Text(
+                                    user.name,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20),
+                                  ),
+                                  subtitle: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        user.phone,
+                                      ),
+                                      Text(user.email),
+                                    ],
+                                  ),
+                                  trailing: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Container(
+                                        child: user.phone.startsWith("1") ||
+                                                user.phone.startsWith("0")
+                                            ? Icon(
+                                                Icons.female_outlined,
+                                                color: Colors.orange,
+                                              )
+                                            : Icon(
+                                                Icons.male,
+                                                color: Colors.black,
+                                              ),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      captureImages()));
+                                        },
+                                        child: CircleAvatar(
+                                          backgroundColor: Color.fromARGB(
+                                              255, 203, 202, 202),
+                                          radius: 18,
+                                          child: Icon(
+                                            Icons.camera_alt_outlined,
+                                            size: 25,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (_) => captureImages()));
-                                  },
-                                  child: CircleAvatar(
-                                    backgroundColor:
-                                        Color.fromARGB(255, 203, 202, 202),
-                                    radius: 18,
-                                    child: Icon(
-                                      Icons.camera_alt_outlined,
-                                      size: 25,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
+                          ],
                         );
                       },
                       itemCount: (snapshot.data).length),
@@ -346,11 +374,12 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
               return Center(
                 child: Text("${snapshot.error}"),
               );
+            } else {
+              return SplashScreen(
+                  seconds: 5,
+                  useLoader: true,
+                  loaderColor: Color.fromARGB(255, 1, 53, 96));
             }
-            return SplashScreen(
-                seconds: 5,
-                useLoader: true,
-                loaderColor: Color.fromARGB(255, 1, 53, 96));
           },
         ),
       ),
