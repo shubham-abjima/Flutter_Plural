@@ -1,7 +1,7 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:voicetotext/drawer.dart';
+
 import 'package:voicetotext/main.dart';
 import 'package:voicetotext/speech_api.dart';
 import 'package:voicetotext/substring_highlights.dart';
@@ -36,7 +36,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        drawer: MyDrawer(),
         body: SingleChildScrollView(
           reverse: true,
           padding: const EdgeInsets.all(30).copyWith(bottom: 150),

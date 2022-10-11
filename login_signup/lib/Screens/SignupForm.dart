@@ -66,6 +66,7 @@ class _SignupFormState extends State<SignupForm> {
         key: _formKey,
         child: Container(
           width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/blur.jpg"),

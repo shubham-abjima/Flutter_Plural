@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_with_signup/Screens/HomePage.dart';
 
 import 'package:splashscreen/splashscreen.dart';
 
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
             ),
             darkTheme: ThemeData.dark(),
             themeMode: currentMode,
-            home: LoginForm(),
+            home: Splash2(),
           );
         });
   }
@@ -40,7 +41,7 @@ class Splash2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return SplashScreen(
         seconds: 3,
-        navigateAfterSeconds: new LoginForm(),
+        navigateAfterSeconds: new MyHomePage(),
         image: new Image.asset(
           'assets/images/CVR.jpg',
           fit: BoxFit.cover,

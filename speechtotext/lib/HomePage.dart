@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 padding: EdgeInsets.all(15),
                 child: Container(
-                  child: Text(
+                  child: const Text(
                     'Recognized Words:',
                     style: TextStyle(fontSize: 25.0),
                   ),
@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Container(
-                    padding: EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(15),
                     child: Text(
                       // If listening is active show the recognized words
                       _speechToText.isListening
@@ -109,8 +109,8 @@ class _MyHomePageState extends State<MyHomePage> {
           animate: _speechEnabled,
           glowColor: Color.fromARGB(255, 57, 56, 56),
           endRadius: 50,
-          duration: const Duration(microseconds: 2000),
-          repeatPauseDuration: const Duration(milliseconds: 100),
+          duration: const Duration(microseconds: 200),
+          repeatPauseDuration: const Duration(milliseconds: 2),
           repeat: true,
           child: FloatingActionButton(
             backgroundColor: const Color.fromARGB(255, 57, 56, 56),
