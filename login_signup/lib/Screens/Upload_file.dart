@@ -1,18 +1,18 @@
 import 'dart:convert';
 
-import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 import 'package:login_with_signup/Screens/Appointment.dart';
 import 'package:login_with_signup/Screens/Capture_images.dart';
+import 'package:login_with_signup/Screens/Dropdown_button.dart';
 import 'package:login_with_signup/Screens/HomePage.dart';
 import 'package:login_with_signup/Screens/LoginForm.dart';
 import 'package:login_with_signup/main.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+
 import 'package:splashscreen/splashscreen.dart';
 
-import 'User.dart';
+import '../Model/User.dart';
 
 class UploadImageScreen extends StatefulWidget {
   const UploadImageScreen({Key key, this.title}) : super(key: key);
@@ -52,221 +52,30 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.location_on, color: Colors.green),
-            DecoratedBox(
-              decoration: BoxDecoration(color: Colors.transparent),
-              child: DropdownButton(
-                  alignment: Alignment.center,
-                  isDense: true,
-                  icon: Icon(Icons.keyboard_arrow_down_outlined),
-                  iconEnabledColor: Colors.green,
-                  value: selectedValue,
-                  items: [
-                    DropdownMenuItem(
-                      child: InkWell(
-                        child: Text(
-                          "Corp",
-                          style: TextStyle(fontSize: 13),
-                        ),
-                      ),
-                      value: 1,
-                    ),
-                    DropdownMenuItem(
-                      child: InkWell(
-                        child: Text("CVR-AK-Anchorage",
-                            style: TextStyle(fontSize: 13)),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => UploadImageScreen()));
-                        },
-                      ),
-                    ),
-                    DropdownMenuItem(
-                      child: InkWell(
-                        child: Text("CVR-AK-Fairbanks",
-                            style: TextStyle(fontSize: 13)),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => UploadImageScreen()));
-                        },
-                      ),
-                      value: 3,
-                    ),
-                    DropdownMenuItem(
-                      child: InkWell(
-                          child: Text("CVR-AL-Dothan",
-                              style: TextStyle(fontSize: 13)),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => UploadImageScreen()));
-                          }),
-                      value: 4,
-                    ),
-                    DropdownMenuItem(
-                      child: InkWell(
-                          child: Text("CVR-AL-Fairhope",
-                              style: TextStyle(fontSize: 13)),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => UploadImageScreen()));
-                          }),
-                      value: 5,
-                    ),
-                    DropdownMenuItem(
-                      child: InkWell(
-                          child: Text("CVR-AL-Hoover",
-                              style: TextStyle(fontSize: 13)),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => UploadImageScreen()));
-                          }),
-                      value: 6,
-                    ),
-                    DropdownMenuItem(
-                      child: InkWell(
-                          child: Text("CVR-AL-Mobile",
-                              style: TextStyle(fontSize: 13)),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => UploadImageScreen()));
-                          }),
-                      value: 7,
-                    ),
-                    DropdownMenuItem(
-                      child: InkWell(
-                          child: Text("CVR-AL-Mantgomery",
-                              style: TextStyle(fontSize: 13)),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => UploadImageScreen()));
-                          }),
-                      value: 8,
-                    ),
-                    DropdownMenuItem(
-                      child: InkWell(
-                          child: Text("CVR-AL-Opelika",
-                              style: TextStyle(fontSize: 13)),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => UploadImageScreen()));
-                          }),
-                      value: 9,
-                    ),
-                    DropdownMenuItem(
-                      child: InkWell(
-                          child: Text("CVR-AL-Trussville",
-                              style: TextStyle(fontSize: 13)),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => UploadImageScreen()));
-                          }),
-                      value: 10,
-                    ),
-                    DropdownMenuItem(
-                      child: InkWell(
-                          child: Text("CVR-AZ-Gilbert",
-                              style: TextStyle(fontSize: 13)),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => UploadImageScreen()));
-                          }),
-                      value: 11,
-                    ),
-                    DropdownMenuItem(
-                      child: InkWell(
-                          child: Text("CVR-AZ-Mesa",
-                              style: TextStyle(fontSize: 13)),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => UploadImageScreen()));
-                          }),
-                      value: 12,
-                    ),
-                    DropdownMenuItem(
-                      child: InkWell(
-                          child: Text("CVR-AZ-Phoenix",
-                              style: TextStyle(fontSize: 13)),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => UploadImageScreen()));
-                          }),
-                      value: 13,
-                    ),
-                    DropdownMenuItem(
-                      child: InkWell(
-                          child: Text("CVR-DC1-lrving Street",
-                              style: TextStyle(fontSize: 13)),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => UploadImageScreen()));
-                          }),
-                      value: 14,
-                    ),
-                    DropdownMenuItem(
-                        child: InkWell(
-                            child:
-                                Text("Others", style: TextStyle(fontSize: 13)),
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => UploadImageScreen()));
-                            }),
-                        value: 15),
-                  ],
-                  onChanged: (value) {
-                    setState(() {
-                      value = selectedValue;
-                    });
-                  }),
+            Icon(
+              Icons.location_on,
+              color: Colors.green,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25),
+              padding: const EdgeInsets.all(16.0),
+              child:
+                  DecoratedBox(decoration: BoxDecoration(), child: DropDown()),
             ),
           ],
         ),
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: InkWell(
-            child: MyApp.themeNotifier.value == ThemeMode.dark
-                ? Image.asset(
-                    "assets/images/123.png",
-                    color: Colors.white,
-                  )
-                : Image.asset(
-                    "assets/images/123.png",
-                  ),
-            onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => MyHomePage()));
-            },
-          ),
+        leading: IconButton(
+          icon: MyApp.themeNotifier.value == ThemeMode.dark
+              ? Image.asset(
+                  "assets/images/123.png",
+                  color: Colors.white,
+                )
+              : Image.asset(
+                  "assets/images/123.png",
+                ),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => MyHomePage()));
+          },
         ),
         actions: <Widget>[
           Padding(

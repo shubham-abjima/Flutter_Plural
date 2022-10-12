@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:login_with_signup/Screens/Appointment.dart';
 import 'package:http/http.dart' as http;
 
-import 'User.dart';
+import '../Model/User.dart';
 
 class captureImages extends StatefulWidget {
   const captureImages({Key key}) : super(key: key);
@@ -22,8 +22,8 @@ class _captureImagesState extends State<captureImages> {
 
   Future getImage() async {
     final pickedFile = await ImagePicker.pickImage(
-        maxWidth: 50,
-        maxHeight: 35,
+        maxWidth: 70,
+        maxHeight: 70,
         source: ImageSource.gallery,
         imageQuality: 80);
 
@@ -104,37 +104,6 @@ class _captureImagesState extends State<captureImages> {
         title: Text("CAPTURE IMAGES"),
         centerTitle: true,
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Color.fromARGB(255, 211, 210, 210),
-        child: Container(
-          height: 60,
-          padding: EdgeInsets.only(
-            left: 15,
-          ),
-          child: new Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              RaisedButton(
-                color: Colors.grey,
-
-                onPressed: () {
-                  uploadImage();
-                },
-                child:
-
-                    // Your icon here
-                    InkWell(
-                  child: Text(
-                    "SAVE",
-                    style: TextStyle(color: Colors.black),
-                    textAlign: TextAlign.center,
-                  ),
-                ), // Your text here
-              ),
-            ],
-          ),
-        ),
-      ),
       body: FutureBuilder<List<User>>(
         future: listUsers,
         // ignore: missing_return
@@ -142,6 +111,8 @@ class _captureImagesState extends State<captureImages> {
           if (snapshot.hasData) {
             var user = (snapshot.data)[6];
             return Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -332,6 +303,37 @@ class _captureImagesState extends State<captureImages> {
             );
           }
         },
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: Color.fromARGB(255, 211, 210, 210),
+        child: Container(
+          height: 60,
+          padding: EdgeInsets.only(
+            left: 15,
+          ),
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              RaisedButton(
+                color: Colors.grey,
+
+                onPressed: () {
+                  uploadImage();
+                },
+                child:
+
+                    // Your icon here
+                    InkWell(
+                  child: Text(
+                    "SAVE",
+                    style: TextStyle(color: Colors.black),
+                    textAlign: TextAlign.center,
+                  ),
+                ), // Your text here
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

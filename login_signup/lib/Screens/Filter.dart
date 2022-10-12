@@ -1,3 +1,4 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,13 +27,23 @@ class _FilterState extends State<Filter> {
 
   // This function will be triggered when the floating button is pressed
   void _show() async {
+    final themeData = Theme.of(context);
     final DateTimeRange result = await showDateRangePicker(
-      context: context,
-      firstDate: DateTime(1974, 1, 1),
-      lastDate: DateTime(2030, 12, 31),
-      currentDate: DateTime.now(),
-      saveText: 'Done',
-    );
+        context: context,
+        firstDate: DateTime(1974, 1, 1),
+        lastDate: DateTime(2030, 12, 31),
+        currentDate: DateTime.now(),
+        saveText: 'Done',
+        builder: (context, Widget child) => Theme(
+              data: themeData.copyWith(
+                  appBarTheme: themeData.appBarTheme.copyWith(
+                      backgroundColor: Colors.green,
+                      iconTheme: themeData.appBarTheme.iconTheme
+                          ?.copyWith(color: Colors.white)),
+                  colorScheme: ColorScheme.light(
+                      onPrimary: Colors.white, primary: Colors.green)),
+              child: child,
+            ));
 
     if (result != null) {
       // Rebuild the UI
@@ -116,7 +127,6 @@ class _FilterState extends State<Filter> {
     });
   }
 
-  @override
   int selectedValue = 1;
   var selectedDate;
   Widget build(BuildContext context) {
@@ -265,22 +275,27 @@ class _FilterState extends State<Filter> {
                   height: 30,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      MaterialButton(
-                        color: _todayPressed
-                            ? Colors.green
-                            : Color.fromARGB(255, 225, 223, 223),
-                        minWidth: 5,
-                        onPressed: () {
-                          setState(() {
-                            _todayPressed = !_todayPressed;
-                            _today();
-                          });
-                        },
-                        child: Text(
-                          "TODAY",
-                          style: TextStyle(fontSize: 12, color: Colors.black),
-                        ),
+                    children: [
+                      Row(
+                        children: [
+                          MaterialButton(
+                            color: !_todayPressed
+                                ? Colors.green
+                                : Color.fromARGB(255, 225, 223, 223),
+                            minWidth: 5,
+                            onPressed: () {
+                              setState(() {
+                                _todayPressed = !_todayPressed;
+                                _today();
+                              });
+                            },
+                            child: Text(
+                              "TODAY",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.black),
+                            ),
+                          ),
+                        ],
                       ),
                       MaterialButton(
                         color: _daysPressed
@@ -329,7 +344,7 @@ class _FilterState extends State<Filter> {
                           "CUSTOM",
                           style: TextStyle(fontSize: 12, color: Colors.black),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -621,19 +636,41 @@ class _FilterState extends State<Filter> {
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Row(mainAxisSize: MainAxisSize.max, children: [
-                      MaterialButton(
-                        color: Colors.black,
-                        onPressed: () {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(builder: (_) => MyHomePage()),
-                              (Route<dynamic> route) => false);
-                        },
-                        child: Text(
-                          "FILTER",
-                          style: TextStyle(color: Colors.white, fontSize: 15),
-                        ),
-                      )
+                      _todayPressed ||
+                              _daysPressed ||
+                              _monthPressed ||
+                              _male ||
+                              _female ||
+                              _all ||
+                              _startDate ||
+                              _endDate ||
+                              _custom
+                          ? MaterialButton(
+                              color: Colors.black,
+                              onPressed: () {
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => MyHomePage()),
+                                    (Route<dynamic> route) => false);
+                              },
+                              child: Text(
+                                "FILTER",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              ),
+                            )
+                          : MaterialButton(
+                              color: Colors.black,
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                "FILTER",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              ),
+                            )
                     ]),
                   ),
                   height: 50,

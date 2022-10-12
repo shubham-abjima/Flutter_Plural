@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_with_signup/Screens/HomePage.dart';
+import 'package:login_with_signup/Screens/Splash_screen.dart';
 
 import 'package:splashscreen/splashscreen.dart';
 
@@ -26,28 +27,11 @@ class MyApp extends StatelessWidget {
               useMaterial3: true,
               textTheme:
                   GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
-              primarySwatch: Colors.grey,
             ),
             darkTheme: ThemeData.dark(),
             themeMode: currentMode,
-            home: Splash2(),
+            home: Splash(),
           );
         });
-  }
-}
-
-class Splash2 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SplashScreen(
-        seconds: 3,
-        navigateAfterSeconds: new MyHomePage(),
-        image: new Image.asset(
-          'assets/images/CVR.jpg',
-          fit: BoxFit.cover,
-        ),
-        photoSize: 150.0,
-        useLoader: true,
-        loaderColor: Colors.green);
   }
 }

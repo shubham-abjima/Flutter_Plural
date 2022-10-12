@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:login_with_signup/Screens/User.dart';
+import 'package:login_with_signup/Model/User.dart';
 
 Future<List<User>> listUsers;
 
