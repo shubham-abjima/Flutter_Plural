@@ -7,6 +7,8 @@ import 'package:image_picker/image_picker.dart';
 
 import 'package:login_with_signup/Screens/Appointment.dart';
 import 'package:http/http.dart' as http;
+import 'package:login_with_signup/Screens/Upload_file.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 import '../Model/User.dart';
 
@@ -104,206 +106,215 @@ class _captureImagesState extends State<captureImages> {
         title: Text("CAPTURE IMAGES"),
         centerTitle: true,
       ),
-      body: FutureBuilder<List<User>>(
-        future: listUsers,
-        // ignore: missing_return
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            var user = (snapshot.data)[6];
-            return Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(user.name),
-                        ],
-                      ),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        width: 100,
-                        child: Column(
+      body: FutureBuilder(
+          future: listUsers,
+          // ignore: missing_return
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              var user = (snapshot.data as List<User>)[5];
+              return Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(user.name),
+                          ],
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          width: 100,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                user.phone,
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              user.phone,
+                              "ANTERIOR VIEW",
                               style: TextStyle(color: Colors.grey),
                             ),
                           ],
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "ANTERIOR VIEW",
-                            style: TextStyle(color: Colors.grey),
+                      ],
+                    ),
+                    Divider(
+                      thickness: 1,
+                      color: Colors.black,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        image == null
+                            ? InkWell(
+                                child: Icon(
+                                  Icons.photo_camera_outlined,
+                                  size: 30,
+                                ),
+                                onTap: getImage)
+                            : Image.file(image),
+                        Text(
+                          ("ADD IMAGE"),
+                          style: TextStyle(
+                            fontSize: 10,
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    thickness: 1,
-                    color: Colors.black,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      image == null
-                          ? InkWell(
-                              child: Icon(
-                                Icons.photo_camera_outlined,
-                                size: 30,
-                              ),
-                              onTap: getImage)
-                          : Image.file(image),
-                      Text(
-                        ("ADD IMAGE"),
-                        style: TextStyle(
-                          fontSize: 10,
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "POSTERIOR VIEW",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ],
                         ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "POSTERIOR VIEW",
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    thickness: 1,
-                    color: Colors.black,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      image == null
-                          ? InkWell(
-                              child: Icon(
-                                Icons.photo_camera_outlined,
-                                size: 30,
-                              ),
-                              onTap: getImage)
-                          : Image.file(image),
-                      Text(
-                        ("ADD IMAGE"),
-                        style: TextStyle(fontSize: 10),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "LEFT VIEW",
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    thickness: 1,
-                    color: Colors.black,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      image == null
-                          ? InkWell(
-                              child: Icon(
-                                Icons.photo_camera_outlined,
-                                size: 30,
-                              ),
-                              onTap: getImage)
-                          : Image.file(image),
-                      Text(
-                        ("ADD IMAGE"),
-                        style: TextStyle(fontSize: 10),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "RIGHT VIEW",
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    thickness: 1,
-                    color: Colors.black,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      image == null
-                          ? InkWell(
-                              child: Icon(
-                                Icons.photo_camera_outlined,
-                                size: 30,
-                              ),
-                              onTap: getImage)
-                          : Image.file(image),
-                      Text(
-                        ("ADD IMAGE"),
-                        style: TextStyle(fontSize: 10),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                ],
-              ),
-            );
-          }
-        },
-      ),
+                      ],
+                    ),
+                    Divider(
+                      thickness: 1,
+                      color: Colors.black,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        image == null
+                            ? InkWell(
+                                child: Icon(
+                                  Icons.photo_camera_outlined,
+                                  size: 30,
+                                ),
+                                onTap: getImage)
+                            : Image.file(image),
+                        Text(
+                          ("ADD IMAGE"),
+                          style: TextStyle(fontSize: 10),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "LEFT VIEW",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      thickness: 1,
+                      color: Colors.black,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        image == null
+                            ? InkWell(
+                                child: Icon(
+                                  Icons.photo_camera_outlined,
+                                  size: 30,
+                                ),
+                                onTap: getImage)
+                            : Image.file(image),
+                        Text(
+                          ("ADD IMAGE"),
+                          style: TextStyle(fontSize: 10),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "RIGHT VIEW",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      thickness: 1,
+                      color: Colors.black,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        image == null
+                            ? InkWell(
+                                child: Icon(
+                                  Icons.photo_camera_outlined,
+                                  size: 30,
+                                ),
+                                onTap: getImage)
+                            : Image.file(image),
+                        Text(
+                          ("ADD IMAGE"),
+                          style: TextStyle(fontSize: 10),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                  ],
+                ),
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text("${snapshot.error}"),
+              );
+            } else {
+              return SplashScreen(
+                  navigateAfterSeconds: UploadImageScreen(),
+                  seconds: 5,
+                  useLoader: true,
+                  loaderColor: Colors.green);
+            }
+          }),
       bottomNavigationBar: BottomAppBar(
         color: Color.fromARGB(255, 211, 210, 210),
         child: Container(

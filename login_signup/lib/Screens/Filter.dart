@@ -1,8 +1,8 @@
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:login_with_signup/Screens/HomePage.dart';
+import 'package:login_with_signup/utils/routes_name.dart';
 
 class Filter extends StatefulWidget {
   const Filter({Key key}) : super(key: key);
@@ -139,10 +139,8 @@ class _FilterState extends State<Filter> {
           ),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (_) => MyHomePage()),
-                (Route<dynamic> route) => false),
+            onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                context, RouteName.HomePage, (Route<dynamic> route) => false),
           ),
         ),
         body: SingleChildScrollView(

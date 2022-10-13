@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_with_signup/Screens/LoginForm.dart';
+
+import 'package:login_with_signup/utils/routes_name.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 class Splash extends StatelessWidget {
@@ -7,7 +8,7 @@ class Splash extends StatelessWidget {
   Widget build(BuildContext context) {
     return SplashScreen(
         seconds: 3,
-        navigateAfterSeconds: new LoginForm(),
+        navigateAfterSeconds: RouteName.LoginForm,
         image: new Image.asset(
           'assets/images/CVR.jpg',
           fit: BoxFit.cover,

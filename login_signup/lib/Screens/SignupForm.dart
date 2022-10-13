@@ -5,6 +5,7 @@ import 'package:login_with_signup/Comm/genTextFormField.dart';
 import 'package:login_with_signup/DatabaseHandler/DbHelper.dart';
 import 'package:login_with_signup/Model/UserModel.dart';
 import 'package:login_with_signup/Screens/LoginForm.dart';
+import 'package:login_with_signup/utils/routes_name.dart';
 
 class SignupForm extends StatefulWidget {
   @override
@@ -44,8 +45,7 @@ class _SignupFormState extends State<SignupForm> {
         await dbHelper.saveData(uModel).then((userData) {
           alertDialog(context, "Successfully Created");
 
-          Navigator.push(
-              context, MaterialPageRoute(builder: (_) => LoginForm()));
+          Navigator.pushNamed(context, RouteName.LoginForm);
         }).catchError((error) {
           print(error);
           alertDialog(context, "Error: Data Save Fail");
@@ -155,8 +155,7 @@ class _SignupFormState extends State<SignupForm> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (_) => LoginForm()));
+                          Navigator.pushNamed(context, RouteName.LoginForm);
                         },
                         child: Text(
                           'Login',

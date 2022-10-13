@@ -9,6 +9,7 @@ import 'package:login_with_signup/Screens/Filter.dart';
 import 'package:login_with_signup/Screens/LoginForm.dart';
 
 import 'package:login_with_signup/main.dart';
+import 'package:login_with_signup/utils/routes_name.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key key}) : super(key: key);
@@ -58,10 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   icon: Icon(
                     Icons.power_settings_new_rounded,
                   ),
-                  onPressed: () => Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (_) => LoginForm()),
-                      (Route<dynamic> route) => false),
+                  onPressed: () => Navigator.pushNamedAndRemoveUntil(context,
+                      RouteName.LoginForm, (Route<dynamic> route) => false),
                 ),
               )
             ]),
@@ -87,15 +86,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         IconButton(
-                          icon: Icon(
-                            CupertinoIcons.refresh_circled,
-                            size: 30,
-                          ),
-                          onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (_) => MyHomePage()),
-                          ),
-                        ),
+                            icon: Icon(
+                              CupertinoIcons.refresh_circled,
+                              size: 30,
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, RouteName.HomePage);
+                            }),
                         Filter == 1
                             ? MaterialButton(
                                 color: Colors.orange,
@@ -117,15 +114,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                 child: Text("Clear"),
                               ),
                         IconButton(
-                          icon: Icon(
-                            Icons.filter_alt_sharp,
-                            size: 28,
-                          ),
-                          onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (_) => Filter()),
-                          ),
-                        )
+                            icon: Icon(
+                              Icons.filter_alt_sharp,
+                              size: 28,
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, RouteName.Filter);
+                            })
                       ],
                     ),
                   ),

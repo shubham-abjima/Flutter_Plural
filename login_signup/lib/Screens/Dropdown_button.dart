@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:login_with_signup/Screens/Upload_file.dart';
+import 'package:login_with_signup/utils/routes_name.dart';
 
 class DropDown extends StatefulWidget {
   const DropDown({Key key}) : super(key: key);
@@ -23,11 +24,9 @@ class _DropDownState extends State<DropDown> {
         items: [
           DropdownMenuItem(
             child: InkWell(
-              child: Container(
-                child: Text(
-                  "Corp",
-                  style: TextStyle(fontSize: 13),
-                ),
+              child: Text(
+                "Corp",
+                style: TextStyle(fontSize: 13),
               ),
             ),
             value: 1,
@@ -38,8 +37,7 @@ class _DropDownState extends State<DropDown> {
                   child:
                       Text("CVR-AK-Anchorage", style: TextStyle(fontSize: 13))),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => UploadImageScreen()));
+                Navigator.pushNamed(context, RouteName.Upload_file);
               },
             ),
           ),
@@ -47,8 +45,7 @@ class _DropDownState extends State<DropDown> {
             child: InkWell(
               child: Text("CVR-AK-Fairbanks", style: TextStyle(fontSize: 13)),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => UploadImageScreen()));
+                Navigator.pushNamed(context, RouteName.Upload_file);
               },
             ),
             value: 3,
@@ -57,8 +54,7 @@ class _DropDownState extends State<DropDown> {
             child: InkWell(
                 child: Text("CVR-AL-Dothan", style: TextStyle(fontSize: 13)),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => UploadImageScreen()));
+                  Navigator.pushNamed(context, RouteName.Upload_file);
                 }),
             value: 4,
           ),
@@ -66,8 +62,7 @@ class _DropDownState extends State<DropDown> {
             child: InkWell(
                 child: Text("CVR-AL-Fairhope", style: TextStyle(fontSize: 13)),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => UploadImageScreen()));
+                  Navigator.pushNamed(context, RouteName.Upload_file);
                 }),
             value: 5,
           ),
@@ -75,8 +70,7 @@ class _DropDownState extends State<DropDown> {
             child: InkWell(
                 child: Text("CVR-AL-Hoover", style: TextStyle(fontSize: 13)),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => UploadImageScreen()));
+                  Navigator.pushNamed(context, RouteName.Upload_file);
                 }),
             value: 6,
           ),
@@ -84,8 +78,7 @@ class _DropDownState extends State<DropDown> {
             child: InkWell(
                 child: Text("CVR-AL-Mobile", style: TextStyle(fontSize: 13)),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => UploadImageScreen()));
+                  Navigator.pushNamed(context, RouteName.Upload_file);
                 }),
             value: 7,
           ),
@@ -94,8 +87,7 @@ class _DropDownState extends State<DropDown> {
                 child:
                     Text("CVR-AL-Mantgomery", style: TextStyle(fontSize: 13)),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => UploadImageScreen()));
+                  Navigator.pushNamed(context, RouteName.Upload_file);
                 }),
             value: 8,
           ),
@@ -103,8 +95,7 @@ class _DropDownState extends State<DropDown> {
             child: InkWell(
                 child: Text("CVR-AL-Opelika", style: TextStyle(fontSize: 13)),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => UploadImageScreen()));
+                  Navigator.pushNamed(context, RouteName.Upload_file);
                 }),
             value: 9,
           ),
@@ -113,8 +104,7 @@ class _DropDownState extends State<DropDown> {
                 child:
                     Text("CVR-AL-Trussville", style: TextStyle(fontSize: 13)),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => UploadImageScreen()));
+                  Navigator.pushNamed(context, RouteName.Upload_file);
                 }),
             value: 10,
           ),
@@ -122,8 +112,7 @@ class _DropDownState extends State<DropDown> {
             child: InkWell(
                 child: Text("CVR-AZ-Gilbert", style: TextStyle(fontSize: 13)),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => UploadImageScreen()));
+                  Navigator.pushNamed(context, RouteName.Upload_file);
                 }),
             value: 11,
           ),
@@ -131,8 +120,7 @@ class _DropDownState extends State<DropDown> {
             child: InkWell(
                 child: Text("CVR-AZ-Mesa", style: TextStyle(fontSize: 13)),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => UploadImageScreen()));
+                  Navigator.pushNamed(context, RouteName.Upload_file);
                 }),
             value: 12,
           ),
@@ -140,8 +128,7 @@ class _DropDownState extends State<DropDown> {
             child: InkWell(
                 child: Text("CVR-AZ-Phoenix", style: TextStyle(fontSize: 13)),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => UploadImageScreen()));
+                  Navigator.pushNamed(context, RouteName.Upload_file);
                 }),
             value: 13,
           ),
@@ -150,8 +137,7 @@ class _DropDownState extends State<DropDown> {
                 child: Text("CVR-DC1-lrving Street",
                     style: TextStyle(fontSize: 13)),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => UploadImageScreen()));
+                  Navigator.pushNamed(context, RouteName.Upload_file);
                 }),
             value: 14,
           ),
@@ -159,8 +145,7 @@ class _DropDownState extends State<DropDown> {
               child: InkWell(
                   child: Text("Others", style: TextStyle(fontSize: 13)),
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => UploadImageScreen()));
+                    Navigator.pushNamed(context, RouteName.Upload_file);
                   }),
               value: 15),
         ],

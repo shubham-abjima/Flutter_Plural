@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:login_with_signup/Screens/HomePage.dart';
-import 'package:login_with_signup/Screens/Splash_screen.dart';
 
-import 'package:splashscreen/splashscreen.dart';
-
-import 'Screens/LoginForm.dart';
+import 'package:login_with_signup/utils/Routes.dart';
+import 'package:login_with_signup/utils/routes_name.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,13 +21,15 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Login with Signup',
             theme: ThemeData(
+              primarySwatch: Colors.grey,
               useMaterial3: true,
-              textTheme:
-                  GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
+              // textTheme:
+              //     GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
             ),
             darkTheme: ThemeData.dark(),
             themeMode: currentMode,
-            home: Splash(),
+            initialRoute: RouteName.Splash_screen,
+            onGenerateRoute: Routes.generateRoute,
           );
         });
   }

@@ -4,11 +4,12 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 import 'package:login_with_signup/Screens/Appointment.dart';
-import 'package:login_with_signup/Screens/Capture_images.dart';
+
 import 'package:login_with_signup/Screens/Dropdown_button.dart';
-import 'package:login_with_signup/Screens/HomePage.dart';
+
 import 'package:login_with_signup/Screens/LoginForm.dart';
 import 'package:login_with_signup/main.dart';
+import 'package:login_with_signup/utils/routes_name.dart';
 
 import 'package:splashscreen/splashscreen.dart';
 
@@ -73,8 +74,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                   "assets/images/123.png",
                 ),
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (_) => MyHomePage()));
+            Navigator.pushNamed(context, RouteName.HomePage);
           },
         ),
         actions: <Widget>[
@@ -84,10 +84,8 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
               icon: Icon(
                 Icons.power_settings_new_rounded,
               ),
-              onPressed: () => Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (_) => LoginForm()),
-                  (Route<dynamic> route) => false),
+              onPressed: () => Navigator.pushNamedAndRemoveUntil(context,
+                  RouteName.LoginForm, (Route<dynamic> route) => false),
             ),
           ),
         ],
@@ -99,74 +97,66 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
             return Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    var user = (snapshot.data as List<User>)[index];
-                    return Card(
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Appointment()));
-                        },
-                        child: ListTile(
-                          title: Text(
-                            user.name,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20),
-                          ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                user.phone,
-                              ),
-                              Text(user.email),
-                            ],
-                          ),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                child: user.phone.startsWith("1") ||
-                                        user.phone.startsWith("0")
-                                    ? Icon(
-                                        Icons.woman_outlined,
-                                        color: Colors.orange,
-                                      )
-                                    : Icon(
-                                        Icons.man,
-                                        color: Colors.black,
-                                      ),
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) => captureImages()));
-                                },
-                                child: CircleAvatar(
-                                  backgroundColor:
-                                      Color.fromARGB(255, 203, 202, 202),
-                                  radius: 18,
-                                  child: Icon(
-                                    Icons.camera_alt_outlined,
-                                    size: 25,
-                                  ),
+              child: Expanded(
+                child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      var user = (snapshot.data as List<User>)[index];
+                      return Card(
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, RouteName.Appointment);
+                          },
+                          child: ListTile(
+                            title: Text(
+                              user.name,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  user.phone,
                                 ),
-                              ),
-                            ],
+                                Text(user.email),
+                              ],
+                            ),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  child: user.phone.startsWith("1") ||
+                                          user.phone.startsWith("0")
+                                      ? Icon(
+                                          Icons.woman_outlined,
+                                          color: Colors.orange,
+                                        )
+                                      : Icon(
+                                          Icons.man,
+                                          color: Colors.black,
+                                        ),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                CircleAvatar(
+                                  backgroundColor: Colors.grey,
+                                  child: IconButton(
+                                      color: Colors.black,
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, RouteName.Capture_images);
+                                      },
+                                      icon: Icon(Icons.camera_alt_outlined)),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                  itemCount: (snapshot.data).length),
+                      );
+                    },
+                    itemCount: (snapshot.data).length),
+              ),
             );
           } else if (snapshot.hasError) {
             return Center(
@@ -177,7 +167,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                 navigateAfterSeconds: UploadImageScreen(),
                 seconds: 5,
                 useLoader: true,
-                loaderColor: Color.fromARGB(255, 1, 53, 96));
+                loaderColor: Colors.green);
           }
         },
       ),

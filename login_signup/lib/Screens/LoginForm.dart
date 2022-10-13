@@ -9,6 +9,7 @@ import 'package:login_with_signup/Screens/ForgotPassword.dart';
 import 'package:login_with_signup/Screens/HomePage.dart';
 import 'package:login_with_signup/Screens/SignupForm.dart';
 import 'package:login_with_signup/main.dart';
+import 'package:login_with_signup/utils/routes_name.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginForm extends StatefulWidget {
@@ -46,10 +47,8 @@ class _LoginFormState extends State<LoginForm> {
       await dbHelper.getLoginUser(uid, passwd).then((userData) {
         if (userData != null) {
           setSP(userData).whenComplete(() {
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (_) => MyHomePage()),
-                (Route<dynamic> route) => false);
+            Navigator.pushNamedAndRemoveUntil(
+                context, RouteName.HomePage, (Route<dynamic> route) => false);
           });
         } else {
           alertDialog(context, "Error: User Not Found");
@@ -199,10 +198,8 @@ class _LoginFormState extends State<LoginForm> {
                         children: [
                           InkWell(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => ForgotPassword()));
+                              Navigator.pushNamed(
+                                  context, RouteName.ForgotPassword);
                             },
                             child: Text("Forgot Password ?",
                                 style: TextStyle(
@@ -232,8 +229,7 @@ class _LoginFormState extends State<LoginForm> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => SignupForm()));
+                        Navigator.pushNamed(context, RouteName.SignupForm);
                       },
                       child: Text(
                         'SignUp',

@@ -9,4 +9,5 @@ class RouteName {
   static const String Appointment = "Appointment";
   static const String LoginForm = "LoginForm";
   static const String Splash_screen = "Splash_screen";
+  static const String Upload_file = "Upload_file";
 }

@@ -5,6 +5,7 @@ import 'package:login_with_signup/Comm/genTextFormField.dart';
 import 'package:login_with_signup/DatabaseHandler/DbHelper.dart';
 import 'package:login_with_signup/Model/UserModel.dart';
 import 'package:login_with_signup/Screens/LoginForm.dart';
+import 'package:login_with_signup/utils/routes_name.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -81,10 +82,9 @@ class _HomeFormState extends State<ForgotPassword> {
         alertDialog(context, "Successfully Deleted");
 
         updateSP(null, false).whenComplete(() {
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (_) => LoginForm()),
-              (Route<dynamic> route) => false);
+          onPressed:
+          () => Navigator.pushNamedAndRemoveUntil(
+              context, RouteName.LoginForm, (Route<dynamic> route) => false);
         });
       }
     });
