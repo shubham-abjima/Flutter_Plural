@@ -38,6 +38,60 @@ class _captureImagesState extends State<captureImages> {
     }
   }
 
+  File image1;
+
+  Future getImage1() async {
+    final pickedFile = await ImagePicker.pickImage(
+        maxWidth: 70,
+        maxHeight: 70,
+        source: ImageSource.gallery,
+        imageQuality: 80);
+
+    if (pickedFile != null) {
+      image1 = File(pickedFile.path);
+
+      setState(() {});
+    } else {
+      print('No Image Selected');
+    }
+  }
+
+  File image2;
+
+  Future getImage2() async {
+    final pickedFile = await ImagePicker.pickImage(
+        maxWidth: 70,
+        maxHeight: 70,
+        source: ImageSource.gallery,
+        imageQuality: 80);
+
+    if (pickedFile != null) {
+      image2 = File(pickedFile.path);
+
+      setState(() {});
+    } else {
+      print('No Image Selected');
+    }
+  }
+
+  File image3;
+
+  Future getImage3() async {
+    final pickedFile = await ImagePicker.pickImage(
+        maxWidth: 70,
+        maxHeight: 70,
+        source: ImageSource.gallery,
+        imageQuality: 80);
+
+    if (pickedFile != null) {
+      image3 = File(pickedFile.path);
+
+      setState(() {});
+    } else {
+      print('No Image Selected');
+    }
+  }
+
   Future<void> uploadImage() async {
     setState(() {
       showSpinner = true;
@@ -207,14 +261,14 @@ class _captureImagesState extends State<captureImages> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        image == null
+                        image1 == null
                             ? InkWell(
                                 child: Icon(
                                   Icons.photo_camera_outlined,
                                   size: 30,
                                 ),
-                                onTap: getImage)
-                            : Image.file(image),
+                                onTap: getImage1)
+                            : Image.file(image1),
                         Text(
                           ("ADD IMAGE"),
                           style: TextStyle(fontSize: 10),
@@ -245,14 +299,14 @@ class _captureImagesState extends State<captureImages> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        image == null
+                        image2 == null
                             ? InkWell(
                                 child: Icon(
                                   Icons.photo_camera_outlined,
                                   size: 30,
                                 ),
-                                onTap: getImage)
-                            : Image.file(image),
+                                onTap: getImage2)
+                            : Image.file(image2),
                         Text(
                           ("ADD IMAGE"),
                           style: TextStyle(fontSize: 10),
@@ -283,14 +337,14 @@ class _captureImagesState extends State<captureImages> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        image == null
+                        image3 == null
                             ? InkWell(
                                 child: Icon(
                                   Icons.photo_camera_outlined,
                                   size: 30,
                                 ),
-                                onTap: getImage)
-                            : Image.file(image),
+                                onTap: getImage3)
+                            : Image.file(image3),
                         Text(
                           ("ADD IMAGE"),
                           style: TextStyle(fontSize: 10),
